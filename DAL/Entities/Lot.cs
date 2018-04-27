@@ -12,7 +12,8 @@ namespace DAL.Entities
         public string Description { get; set; }
         public byte[] Img { get; set; }
         public double Price { get; set; }
-        public int TradeDuration { get; set; }
+        public DateTime? StartTrade { get; set; }//Date when admin/moderetor put lot at auction 
+        public DateTime TradeDuration { get; set; }//Date of end auction
         public virtual ICollection<Category> Categories { get; set; }
         public string UserId { get; set; }
         public virtual User User { get; set; }
