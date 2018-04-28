@@ -13,9 +13,11 @@ namespace BLL.DTO
         public string Description { get; set; }
         public byte[] Img { get; set; }
         public double Price { get; set; }
-        public int TradeDuration { get; set; }
+        public DateTime TradeDuration { get; set; }
+        public DateTime? StartTrade{ get; set;}
         public ICollection<CategoryDTO> Categories { get; set; }
         public UserDTO User { get; set; }
+        public UserDTO WinUser { get; set; }
 
         public LotDTO()
         {

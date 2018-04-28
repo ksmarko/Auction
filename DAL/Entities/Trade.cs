@@ -16,11 +16,11 @@ namespace DAL.Entities
         public int LotId { get; set; }
 
         //<UserId, UserPrice>
-        public virtual IDictionary<int, double> Rates { get; set; }
+        public virtual IDictionary<double, string> Rates { get; set; }
 
         public Trade()
         {
-            Rates = new Dictionary<int, double>();
+            Rates = new Dictionary<double, string>();
         }
     }
 }

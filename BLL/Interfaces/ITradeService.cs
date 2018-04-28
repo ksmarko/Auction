@@ -9,8 +9,10 @@ namespace BLL.Interfaces
 {
     public interface ITradeService
     {
-        //functional for trades (add, stop etc.)
-
+        void StartTrade(LotDTO entity);
+        void Rate(TradeDTO lot, UserDTO user, double price);
+        void EndTrade(TradeDTO entity);
+        
         void Dispose();
     }
 }

@@ -12,11 +12,11 @@ namespace BLL.DTO
         public LotDTO Lot { get; set; }
 
         //<UserId, UserPrice>
-        public IDictionary<int, double> Rates { get; set; }
+        public IDictionary<double, string> Rates { get; set; }
 
         public TradeDTO()
         {
-            Rates = new Dictionary<int, double>();
+            Rates = new Dictionary<double, string>();
         }
 
         public override string ToString()
