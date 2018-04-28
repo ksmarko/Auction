@@ -43,7 +43,7 @@ namespace BLL.Services
             Database.Save();
         }
 
-        public void RemoveLotCategory(LotDTO lot, CategoryDTO category)
+        public void RemoveLotFromCategory(LotDTO lot, CategoryDTO category)
         {
             Lot workLot = Mapper.Map<LotDTO, Lot>(lot);
             Category workCategory = Mapper.Map<CategoryDTO, Category>(category);
@@ -58,7 +58,7 @@ namespace BLL.Services
             Database.Save();
         }
 
-        public void AddLotCategory(LotDTO lot, CategoryDTO category)
+        public void AddLotToCategory(LotDTO lot, CategoryDTO category)
         {
             Lot workLot = Mapper.Map<LotDTO, Lot>(lot);
             Category workCategory = Mapper.Map<CategoryDTO, Category>(category);

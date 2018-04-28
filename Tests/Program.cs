@@ -16,6 +16,7 @@ namespace Tests
     {
         public override void Load()
         {
+            Bind<ILotService>().To<LotService>();
             Bind<IUserManager>().To<UserManager>();
         }
     }

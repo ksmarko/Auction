@@ -14,8 +14,8 @@ namespace BLL.Interfaces
         void CreateLot(LotDTO entity);
         void RemoveLot(LotDTO entity);
         //function RemoveLotCategory and AddLotCategor use to work with category that lot contein
-        void RemoveLotCategory(LotDTO lot, CategoryDTO category);
-        void AddLotCategory(LotDTO lot, CategoryDTO category);
+        void RemoveLotFromCategory(LotDTO lot, CategoryDTO category);
+        void AddLotToCategory(LotDTO lot, CategoryDTO category);
         void Dispose();
     }
 }
