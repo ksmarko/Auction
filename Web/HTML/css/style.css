@@ -1884,6 +1884,7 @@ div.pagerInput {
 }
 
 #fullsize_description {
+	color: gray;
 	position:relative;
     font-size: 10pt;
     border: 1px solid rgb(230, 230, 230); 

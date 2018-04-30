@@ -193,19 +193,19 @@ modal_multisearch=document.getElementById('modal_multisearch');
 <form method=POST enctype="multipart/form-data" name="mylot" id="aform">
 <input type=hidden name=s value="b08e4aee8844d776d8f617d82bc712b8a9d27638">
 <script src='../www.google.com/recaptcha/api.js'></script><br>
-Придумайте логин:<br><br><input type=text style="width:75%;max-width:450px;" onchange="check_login()" size=60 name="user_login" id="user_login" value=""><br>
+<b>Придумайте логин:</b><br><br><input type=text style="width:75%;max-width:450px;" onchange="check_login()" size=60 name="user_login" id="user_login" value=""><br>
 <div style="color:red;font-weight:600;display:none" id='lch_error'>Логин должен состоять из букв латинского алфавита и цифр, и иметь длину от 5 до 14 символов</div>
 <div style="color:red;font-weight:600;display:none" id='lche_error'>Пользователь с данным логином уже зарегистрирован. Придумайте другой логин</div>
 <font color=gray>* от 5 до 14 символов, только латинсий алфавит и цыфры</font><br><br>
-Укажите Email:<br><br><input type=text style="width:75%;max-width:450px;" name="email" onchange="check_email()" id="user_email" value="">
+<b>Укажите Email:</b><br><br><input type=text style="width:75%;max-width:450px;" name="email" onchange="check_email()" id="user_email" value="">
 <br><div style="color:red;font-weight:600;display:none" id='ech_error'>Неправильный адрес email</div>
 <br>
-Придумайте пароль:<br><br><input type=password style="width:75%;max-width:450px;margin-left: 50px;" name="pass" id="pass" onchange="check_pass()" value="" class=pass><a href="#?" onclick="showPass()" style="position:relative;right:60px;color:gray;"><small>показать</small></a>
+<b>Придумайте пароль:</b><br><br><input type=password style="width:75%;max-width:450px;margin-left: 50px;" name="pass" id="pass" onchange="check_pass()" value="" class=pass><a href="#?" onclick="showPass()" style="position:relative;right:60px;color:gray;"><small>показать</small></a>
 <div style="color:red;font-weight:600;display:none" id='pchv_error'>Придумайте другой пароль, введенный пароль слишком прост и ненадежен. Также убедитесь, что пароль не содержит логин или email</div>
 <div style="color:red;font-weight:600;display:none" id='pch_error'>Пароль должен иметь длину от 6 символов и состоять из букв и цифр</div>
 
 <br><br>
-Повторите пароль:<br><br><input type=password id='pass2' onchange="check_pass2()" style="width:75%;max-width:450px;margin-left: 50px;" name="pass2" value="" class=pass><a href="#?" onclick="showPass()" style="position:relative;right:60px;color:gray;"><small>показать</small></a>
+<b>Повторите пароль:</b><br><br><input type=password id='pass2' onchange="check_pass2()" style="width:75%;max-width:450px;margin-left: 50px;" name="pass2" value="" class=pass><a href="#?" onclick="showPass()" style="position:relative;right:60px;color:gray;"><small>показать</small></a>
 <br><div style="color:red;font-weight:600;display:none" id='ppch_error'>Введенные пароли не совпадают</div>
 <br><br>
 <button type="submit" class="green_button g-recaptcha" data-sitekey="6LfMZzsUAAAAAPWBkRaMIyOh0uS9skAnpvThaHv0" data-callback="onSubmit">Отправить</button>
