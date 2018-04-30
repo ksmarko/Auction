@@ -9,10 +9,12 @@ namespace BLL.Interfaces
 {
     public interface ITradeService
     {
-        void StartTrade(LotDTO entity);
-        void Rate(TradeDTO lot, UserDTO user, double price);
-        void EndTrade(TradeDTO entity);
-        
+        void StartTrade(int lotId);
+        void Rate(int lotId, string userId, double price);
+        IEnumerable<TradeDTO> GetAllTrade();
+        TradeDTO GetTrade(int tradeId);
+        //IEnumerable<UserDTO> GetUserInRate(int tradeId);
+        TradeDTO GetTradeByLot(int lotId);
         void Dispose();
     }
 }

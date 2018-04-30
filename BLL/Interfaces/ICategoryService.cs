@@ -10,8 +10,10 @@ namespace BLL.Interfaces
     public interface ICategoryService
     {
         void CreateCategory(CategoryDTO entity);
-        void RemoveCategory(CategoryDTO entity);
+        void RemoveCategory(int categoryId);
         void EditCategory(CategoryDTO entity);
+        IEnumerable<CategoryDTO> GetAllCategory();
+        CategoryDTO GetCategory(int categoryId);
         void Dispose();
     }
 }

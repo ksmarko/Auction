@@ -39,7 +39,7 @@ namespace DAL.Repositories
             }
         }
 
-        public IRepository<Category> Categories
+        public IRepository<Category> Categorys
         {
             get
             {

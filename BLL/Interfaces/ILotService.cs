@@ -12,10 +12,12 @@ namespace BLL.Interfaces
         //functional for lots (create, edit, remove etc) and categories (add category, add lot to category and so)
         void EditLot(LotDTO entity);
         void CreateLot(LotDTO entity);
-        void RemoveLot(LotDTO entity);
+        void RemoveLot(int lotId);
+        IEnumerable<LotDTO> GetAll();
+        LotDTO GetLot(int LotId);
         //function RemoveLotCategory and AddLotCategor use to work with category that lot contein
-        void RemoveLotFromCategory(LotDTO lot, CategoryDTO category);
-        void AddLotToCategory(LotDTO lot, CategoryDTO category);
+        void RemoveLotFromCategory(int lotId, int categoryId);
+        void AddLotToCategory(int lotId, int categoryId);
         void Dispose();
     }
 }

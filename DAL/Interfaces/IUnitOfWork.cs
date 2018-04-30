@@ -9,7 +9,7 @@ namespace DAL.Interfaces
     {
         IRepository<Lot> Lots { get; }
         IRepository<Trade> Trades { get; }
-        IRepository<Category> Categories { get; }
+        IRepository<Category> Categorys { get; }
         IUserRepository Users { get; }
         void Save();
     }

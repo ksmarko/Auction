@@ -10,14 +10,10 @@ namespace BLL.DTO
     {
         public int Id { get; set; }
         public LotDTO Lot { get; set; }
-
-        //<UserId, UserPrice>
-        public IDictionary<double, string> Rates { get; set; }
-
-        public TradeDTO()
-        {
-            Rates = new Dictionary<double, string>();
-        }
+        public DateTime StartTrade { get; set; }
+        public UserDTO WinUser { get; set; }
+        public string LastRateUserId { get; set; }
+        public double LastPrice { get; set; }
 
         public override string ToString()
         {

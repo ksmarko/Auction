@@ -14,13 +14,8 @@ namespace DAL.Entities
 
         public virtual Lot Lot { get; set; }
         public int LotId { get; set; }
-
-        //<UserId, UserPrice>
-        public virtual IDictionary<double, string> Rates { get; set; }
-
-        public Trade()
-        {
-            Rates = new Dictionary<double, string>();
-        }
+        public DateTime StartTrade { get; set; }
+        public string LastRateUserId { get; set; }
+        public double LastPrice { get; set; }
     }
 }
