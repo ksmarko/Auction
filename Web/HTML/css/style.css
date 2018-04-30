@@ -1345,7 +1345,7 @@ h2 {
 ul { list-style: none; } 
 
 input[type=text],[type=password] {
-	height:20px;
+	height:30px;
 	border:1px solid #d0d0d0;
 	background-color:#FFF;
 	border-radius:4px;
@@ -1973,7 +1973,7 @@ div.pagerInput {
 	background-image: -moz-linear-gradient( 90deg, rgb(124,124,124) 0%, rgb(142,142,142) 100%);
 	background-image: -webkit-linear-gradient( 90deg, rgb(124,124,124) 0%, rgb(142,142,142) 100%);
 	background-image: -ms-linear-gradient( 90deg, rgb(124,124,124) 0%, rgb(142,142,142) 100%);
-	background-image:url('gray_button.png');
+	background-image:url('../img/gray_button.png');
 	border:none;
 	border-top:5px transparent;
 	font-size: 14px;
@@ -1990,7 +1990,7 @@ div.pagerInput {
 	background-image: -moz-linear-gradient( 90deg, #33ca3c 0%, #2caf33 100%);
 	background-image: -webkit-linear-gradient( 90deg, #33ca3c 0%, #2caf33 100%);
 	background-image: -ms-linear-gradient( 90deg, #33ca3c 0%, #2caf33 100%);
-	background-image:url('green_button.png');
+	background-image:url('../img/green_button.png');
 	border:none;
 	border-top:5px transparent;
 	font-size: 14px;
@@ -2008,7 +2008,7 @@ div.pagerInput {
 	background-image: -moz-linear-gradient( 90deg, #33ca3c 0%, #2caf33 100%);
 	background-image: -webkit-linear-gradient( 90deg, #33ca3c 0%, #2caf33 100%);
 	background-image: -ms-linear-gradient( 90deg, #33ca3c 0%, #2caf33 100%);
-	background-image:url('blue_button.png');
+	background-image:url('../img/blue_button.png');
 	border:none;
 	border-top:5px transparent;
 	font-size: 14px;
@@ -2193,6 +2193,9 @@ div.pagerInput {
 
 
 .mcenter {
+	max-width: 600px;
+    margin: auto;
+    text-align: center;
 }
 
 .lothr {
