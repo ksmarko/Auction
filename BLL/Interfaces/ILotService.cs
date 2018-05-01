@@ -1,23 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BLL.DTO;
 
 namespace BLL.Interfaces
 {
     public interface ILotService
     {
-        //functional for lots (create, edit, remove etc) and categories (add category, add lot to category and so)
         void EditLot(LotDTO entity);
         void CreateLot(LotDTO entity);
-        void RemoveLot(int lotId);
-        IEnumerable<LotDTO> GetAll();
-        LotDTO GetLot(int LotId);
-        //function RemoveLotCategory and AddLotCategor use to work with category that lot contein
+        void RemoveLot(int id);
+        IEnumerable<LotDTO> GetAllLots();
+        LotDTO GetLot(int id);
         void RemoveLotFromCategory(int lotId, int categoryId);
         void AddLotToCategory(int lotId, int categoryId);
+        void VerifyLot(int id);
         void Dispose();
     }
 }

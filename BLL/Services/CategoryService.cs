@@ -5,10 +5,7 @@ using DAL.Interfaces;
 using System;
 using DAL.Entities;
 using System.Collections.Generic;
-using System.Linq;
 using BLL.Infrastructure;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BLL.Services
 {
@@ -28,42 +25,42 @@ namespace BLL.Services
 
         public void EditCategory(CategoryDTO entity)
         {
-            Database.Categorys.Update(Mapper.Map<CategoryDTO, Category>(entity));
+            var temp = Database.Categories.Get(entity.Id);
+
+            temp.Name = entity.Name;
+
+            Database.Categories.Update(temp);
             Database.Save();
         }
 
-        public void RemoveCategory(int categoryId)
+        public void RemoveCategory(int id)
         {
-            if (categoryId == 1)
-                throw new AuctionException("Yuo can`t delete default category");
-            Category category = Database.Categorys.Find(x => x.Id == categoryId).FirstOrDefault();
+            if (id == 1)
+                throw new AuctionException("You can't delete default category");
+
+            var category = Database.Categories.Get(id);
+
             if (category == null)
                 throw new ArgumentNullException();
-            /*if(category.Lots!= null)
-                foreach (var el in category.Lots)
-                {
-                    el.Categories.Remove(category);
-                    Database.Lots.Update(el);
-                }*/
-                
-            Database.Categorys.Delete(category.Id);
+
+            Database.Categories.Delete(category.Id);
             Database.Save();
         }
 
         public void CreateCategory(CategoryDTO entity)
         {
-            Database.Categorys.Create(Mapper.Map<CategoryDTO, Category>(entity));
+            Database.Categories.Create(Mapper.Map<CategoryDTO, Category>(entity));
             Database.Save();
         }
 
-        public IEnumerable<CategoryDTO> GetAllCategory()
+        public IEnumerable<CategoryDTO> GetAllCategories()
         {
-            return Mapper.Map<IEnumerable<Category>, List<CategoryDTO>>(Database.Categorys.GetAll());
+            return Mapper.Map<IEnumerable<Category>, List<CategoryDTO>>(Database.Categories.GetAll());
         }
 
-        public CategoryDTO GetCategory(int categoryId)
+        public CategoryDTO GetCategory(int id)
         {
-            return Mapper.Map<Category, CategoryDTO>(Database.Categorys.Get(categoryId));
+            return Mapper.Map<Category, CategoryDTO>(Database.Categories.Get(id));
         }
     }
 }

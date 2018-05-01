@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using DAL.EF;
 using DAL.Entities;
 using DAL.Interfaces;
@@ -39,7 +38,7 @@ namespace DAL.Repositories
             }
         }
 
-        public IRepository<Category> Categorys
+        public IRepository<Category> Categories
         {
             get
             {

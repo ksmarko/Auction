@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using BLL.DTO;
 
 namespace BLL.Interfaces
@@ -10,10 +6,10 @@ namespace BLL.Interfaces
     public interface ICategoryService
     {
         void CreateCategory(CategoryDTO entity);
-        void RemoveCategory(int categoryId);
+        void RemoveCategory(int id);
         void EditCategory(CategoryDTO entity);
-        IEnumerable<CategoryDTO> GetAllCategory();
-        CategoryDTO GetCategory(int categoryId);
+        IEnumerable<CategoryDTO> GetAllCategories();
+        CategoryDTO GetCategory(int id);
         void Dispose();
     }
 }

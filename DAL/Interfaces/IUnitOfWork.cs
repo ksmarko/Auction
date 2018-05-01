@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Threading.Tasks;
 using DAL.Entities;
-using DAL.Repositories;
 
 namespace DAL.Interfaces
 {
@@ -9,7 +7,7 @@ namespace DAL.Interfaces
     {
         IRepository<Lot> Lots { get; }
         IRepository<Trade> Trades { get; }
-        IRepository<Category> Categorys { get; }
+        IRepository<Category> Categories { get; }
         IUserRepository Users { get; }
         void Save();
     }

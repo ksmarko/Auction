@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace BLL.DTO
 {
@@ -17,9 +13,6 @@ namespace BLL.DTO
         public string UserName { get; set; }
         public string Role { get; set; }
 
-        public UserDTO()
-        {
-            Lots = new List<LotDTO>();
-        }
+        public UserDTO() => Lots = new List<LotDTO>();
     }
 }
