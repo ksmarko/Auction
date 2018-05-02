@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BLL.DTO
 {
@@ -10,14 +6,10 @@ namespace BLL.DTO
     {
         public int Id { get; set; }
         public LotDTO Lot { get; set; }
-
-        //<UserId, UserPrice>
-        public IDictionary<int, double> Rates { get; set; }
-
-        public TradeDTO()
-        {
-            Rates = new Dictionary<int, double>();
-        }
+        public DateTime TradeStart { get; set; }
+        public DateTime TradeEnd { get; set; }
+        public string LastRateUserId { get; set; }
+        public double LastPrice { get; set; }
 
         public override string ToString()
         {

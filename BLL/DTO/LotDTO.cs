@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace BLL.DTO
 {
@@ -14,12 +10,14 @@ namespace BLL.DTO
         public byte[] Img { get; set; }
         public double Price { get; set; }
         public int TradeDuration { get; set; }
+        public bool IsVerified { get; set; }
         public ICollection<CategoryDTO> Categories { get; set; }
         public UserDTO User { get; set; }
 
         public LotDTO()
         {
             Categories = new List<CategoryDTO>();
+            IsVerified = false;
         }
 
         public override string ToString()

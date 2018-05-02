@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL.Entities
 {
@@ -15,12 +11,12 @@ namespace DAL.Entities
         public virtual Lot Lot { get; set; }
         public int LotId { get; set; }
 
-        //<UserId, UserPrice>
-        public virtual IDictionary<int, double> Rates { get; set; }
+        public DateTime TradeStart { get; set; }
 
-        public Trade()
-        {
-            Rates = new Dictionary<int, double>();
-        }
+        public DateTime TradeEnd { get; set; }
+
+        public string LastRateUserId { get; set; }
+
+        public double LastPrice { get; set; }
     }
 }

@@ -3,16 +3,13 @@ using BLL.DTO;
 using BLL.Infrastructure;
 using BLL.Interfaces;
 using DAL.Entities;
-using DAL.Identity;
 using DAL.Identity.Entities;
 using DAL.Identity.Interfaces;
 using DAL.Interfaces;
 using Microsoft.AspNet.Identity;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BLL.Services

@@ -1,10 +1,11 @@
-﻿using BLL.Interfaces;
+﻿using AutoMapper;
+using BLL.DTO;
+using BLL.Interfaces;
 using DAL.Interfaces;
 using System;
+using DAL.Entities;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using BLL.Infrastructure;
 
 namespace BLL.Services
 {
@@ -20,6 +21,108 @@ namespace BLL.Services
         public void Dispose()
         {
             Database.Dispose();
+        }
+
+        public void EditLot(LotDTO entity)
+        {
+            if (new TradeService(Database).GetTradeByLot(entity.Id) != null)
+                throw new AuctionException("You can`t change the information about the lot after the start of the bidding");
+
+            var lot = Database.Lots.Get(entity.Id);
+
+            if (lot == null)
+                throw new ArgumentNullException();
+
+            lot.Name = entity.Name;
+            lot.Description = entity.Description;
+            lot.Img = entity.Img;
+            lot.TradeDuration = entity.TradeDuration;
+
+            Database.Lots.Update(lot);
+            Database.Save();
+        }
+
+        public void CreateLot(LotDTO entity)
+        {
+            var newLot = new Lot()
+            {
+                Name = entity.Name,
+                Price = entity.Price,
+                Description = entity.Description,
+                Img = entity.Img,
+                TradeDuration = entity.TradeDuration,
+                User = Database.Users.Get(entity.User.Id)
+            };
+            
+            newLot.Categories.Add(Database.Categories.Get(1));
+
+            Database.Lots.Create(newLot);
+            Database.Save();
+        }
+
+        public void RemoveLot(int id)
+        {
+            Lot lot = Database.Lots.Get(id);
+
+            if (lot == null)
+                throw new ArgumentNullException();
+            
+            Database.Lots.Delete(lot.Id);
+            Database.Save();
+        }
+
+        public void RemoveLotFromCategory(int lotId, int categoryId)
+        {
+            Lot lot = Database.Lots.Get(lotId);
+            Category category = Database.Categories.Get(categoryId);
+
+            if (lot == null || category == null)
+                throw new ArgumentNullException();
+            
+            lot.Categories.Remove(category);
+
+            if (lot.Categories.Count == 0)
+                AddLotToCategory(lotId, 1);
+
+            Database.Lots.Update(lot);
+            Database.Save();
+        }
+
+        public void AddLotToCategory(int lotId, int categoryId)
+        {
+            Lot lot = Database.Lots.Get(lotId);
+            Category category = Database.Categories.Get(categoryId);
+
+            if (lot == null || category == null)
+                throw new ArgumentNullException();
+
+            lot.Categories.Add(category);
+                
+            Database.Lots.Update(lot);
+            Database.Save();
+        }
+
+        public IEnumerable<LotDTO> GetAllLots()
+        {
+            return Mapper.Map<IEnumerable<Lot>, List<LotDTO>>(Database.Lots.GetAll());
+        }
+
+        public LotDTO GetLot(int id)
+        {
+            return Mapper.Map<Lot, LotDTO>(Database.Lots.Get(id));
+        }
+
+        public void VerifyLot(int id)
+        {
+            Lot lot = Database.Lots.Get(id);
+
+            if (lot == null)
+                throw new ArgumentNullException();
+
+            lot.IsVerified = true;
+
+            Database.Lots.Update(lot);
+            Database.Save();
         }
     }
 }

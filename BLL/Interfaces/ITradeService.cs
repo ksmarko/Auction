@@ -1,16 +1,15 @@
 ﻿using BLL.DTO;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BLL.Interfaces
 {
     public interface ITradeService
     {
-        //functional for trades (add, stop etc.)
-
+        void StartTrade(int lotId);
+        void Rate(int lotId, string userId, double price);
+        IEnumerable<TradeDTO> GetAllTrades();
+        TradeDTO GetTrade(int id);        
+        TradeDTO GetTradeByLot(int id);
         void Dispose();
     }
 }

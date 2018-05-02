@@ -16,7 +16,7 @@ namespace Tests
     {
         public override void Load()
         {
-            Bind<IMediaService>().To<MediaService>();
+            Bind<ILotService>().To<LotService>();
             Bind<IUserManager>().To<UserManager>();
         }
     }
@@ -32,7 +32,7 @@ namespace Tests
             NinjectModule module = new ServiceModule();
             var kernel = new StandardKernel(serviceModule, module);
 
-            kernel.Get(typeof(PhotoAlbumApp));
+            kernel.Get(typeof(AuctionAppTest));
         }
     }
 }

@@ -11,21 +11,20 @@ namespace Tests
     {
         readonly IUserManager um;
         readonly ILotService ls;
-        readonly ICategoryService cs;
-        readonly ITradeService ts;
 
-        public AuctionAppTest(IUserManager userManager, ILotService lotService, ICategoryService categoryService, ITradeService tradeService)
+        public AuctionAppTest(IUserManager userManager, ILotService lotService)
         {
             this.um = userManager;
             this.ls = lotService;
-            this.cs = categoryService;
-            this.ts = tradeService;
             Run();
         }
 
         public void Run()
         {
-
+            var lot = new LotDTO() { Name = "MyLot", Price = 800 };
+            ls.CreateLot(lot);
+            
+            //Console.ReadKey();
         }
     }
 }

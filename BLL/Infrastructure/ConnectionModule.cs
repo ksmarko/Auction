@@ -1,12 +1,9 @@
-﻿using BLL.Interfaces;
-using DAL.Identity;
-using DAL.Identity.Interfaces;
+﻿using DAL.Identity.Interfaces;
 using DAL.Identity.Repositories;
 using DAL.Interfaces;
 using DAL.Repositories;
 
 using Ninject.Modules;
-using System.Net;
 
 namespace BLL.Infrastructure
 {
