@@ -208,7 +208,9 @@ modal_multisearch=document.getElementById('modal_multisearch');
 <b>Повторите пароль:</b><br><br><input type=password id='pass2' onchange="check_pass2()" style="width:75%;max-width:450px;margin-left: 50px;" name="pass2" value="" class=pass><a href="#?" onclick="showPass()" style="position:relative;right:60px;color:gray;"><small>показать</small></a>
 <br><div style="color:red;font-weight:600;display:none" id='ppch_error'>Введенные пароли не совпадают</div>
 <br><br>
-<button type="submit" class="green_button g-recaptcha" data-sitekey="6LfMZzsUAAAAAPWBkRaMIyOh0uS9skAnpvThaHv0" data-callback="onSubmit">Отправить</button>
+<div id="noauth">
+<a href="purchase.html" style="text-decoration:none;"><div class=green_button style="width:150px;min-height:28px;border-radius:4px;text-align:center;padding-top:9px; margin: auto;">Отправить</div></a>
+</div>
 <br>
 </form>
 </center>
