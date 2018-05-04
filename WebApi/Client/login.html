@@ -1,0 +1,71 @@
+﻿<div id="pagewrapper">
+
+<script>
+modal_multisearch=document.getElementById('modal_multisearch'); 
+</script><div class="mcenter">
+<div class="bodywrapper">
+<script>
+	$(document).ready(function() {
+		  $("#aform").keydown(function(event){
+			if(event.keyCode == 13) {
+			  event.preventDefault();
+			  return false;
+		  }
+	   });
+	});
+	function isUserActive(username){
+			$.getJSON('check_account.html', {name:username}, function(list){  
+				var active=""
+                $.each(list, function(i){ 
+					active=this 
+                });  
+		                if(active>0){
+					$('#pass').removeAttr('style'); 
+					$('#reg').attr('style','display:none;') 
+					$('#login_pass').focus(); 
+				}else{ 
+					if(active==0){
+						$('#reg').removeAttr('style');
+						$('#pass').attr('style','display:none;') 
+					} 
+					if(active<0){
+						$('#inactive').show();
+					}
+				}					
+				$('#auth').removeAttr('style'); 
+                $('#noauth').attr('style','display:none;') 
+            });
+	};
+	
+	function showPass(){ 
+		var type = $('.pass').attr('type') == "text" ? "password" : 'text';
+		$('.pass').prop('type', type);
+	}
+	 
+</script>
+<br>
+
+<div id="categories" class="departments">
+<h2>Авторизация</h2>
+</div>
+<div id="fullsize_description">
+<br>
+<form method=POST enctype="multipart/form-data" name="mylot" id="aform">
+<input type=hidden name=s value="b08e4aee8844d776d8f617d82bc712b8a9d27638">
+<span>Логин:</span><br><br><input type=text style="width:75%;max-width:450px;" onchange="javascript:isUserActive(this.value)" size=60 name="user_login" value=""><br><br>
+<div style="" id="pass">
+<span>Пароль:</span><br><br><input type=password style="width:75%;max-width:450px;margin-right: -54px;" name="user_password" value="" class=pass id="login_pass"><a href="#" onclick="showPass()" style="position:relative;right: 18px;color:gray;"><small>показать</small></a><br><br>
+</div>
+<div id="noauth">
+<a href="profile.html" style="text-decoration:none;"><div class=green_button style="width:150px;min-height:28px;border-radius:4px;text-align:center;padding-top:9px; margin: auto;">Отправить</div></a>
+</div>
+<div style="display:none" id="auth">
+<input type="submit" class=green_button style="width:180px" name="addlot" value="Отправить"></button><br>
+</div>
+<br>
+</form>
+</center>
+</div>
+</div>
+</div>
+<div id="scrollup"><img src="img/up.png" style="width:30px "></div>

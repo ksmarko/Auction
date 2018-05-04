@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    <link rel="stylesheet" media="screen" type="text/css" href="~/Client/css/style.css" title="">
+    <link rel="stylesheet" media="screen" type="text/css" href="~/Client/css/portable_style.css" title="">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700,800&amp;subset=latin,cyrillic" rel="stylesheet">
+    <script src='~/Client/js/jquery-11.0.min.js' type="text/javascript"></script>
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <ul class="nav navbar-nav navbar-left">
+
+            <li> <a href="#" id="home_a">Home</a></li>
+
+                </ul>
+                
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <li>
+                            <a href="#" id="login_a">Войти</a>
+                        </li>
+                        <li> <a href="#" id="register_a">Регистрация</a></li>
+                    }
+                    else
+                    {
+                        <li> <a href="#">Выход id="logout_a"</a></li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        @RenderBody()
+    </div>
+</body>
+</html>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        Home();
+        $("#login_a").click(LogIn);
+        $("#register_a").click(Register);
+        $("#logout_a").click(LogOut);
+        $("#home_a").click(Home);
+    });
+
+    function LogIn() {
+        $('#body-container').load('Client/login.html');
+    }
+
+    function Register() {
+        $('#body-container').load('Client/register.html');
+    }
+
+    function LogOut() {
+        url = 'api/account/logout';
+        Home();
+    }
+
+    function Home() {
+        //url = 'api/index';
+        $('#body-container').load('Client/index.html');
+        //var text = '';
+
+        //$.getJSON(url, function (data) {
+        //    $.each(data, function (key, value) {
+        //        text += "<br style='line-height:25px;'> <div style='display:inline-block;width:200px;padding-right:10px;'><a class='sp_href' href='#'>" + value + "</a></div>";
+        //    });
+        //});
+
+        //$('#categories').html(text);
+    }
+
+        
+</script>
