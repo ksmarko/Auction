@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<head>
+<meta name="viewport" content="width=device-width">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<title>Мои продажи</title>
+<link rel="icon" href="favicon.ico">	 
+<link rel="stylesheet" media="screen" type="text/css" href="css/style.css" title="">
+<link rel="stylesheet" media="screen" type="text/css" href="css/portable_style.css" title="">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700,800&amp;subset=latin,cyrillic" rel="stylesheet">
+<script src='js/jquery-11.0.min.js' type="text/javascript"></script>
+
+<script type='text/javascript' src='js/unitegallery.js'></script>
+<script type='text/javascript' src='js/ug-theme-default.js'></script>
+<script type='text/javascript' src='js/ug-theme-carousel.js'></script>
+</head>
+<body onload="$('#mainform').focus();scrollup();">
+<div class="top_nav">
+	<div class="container">
+		<div class="menu fullsize">
+			<ul>
+				<li><a href="purchase.html">Мой кабинет</a></li><div class="arrow"></div>
+				<li><a href="index.html">Выход</a></li> 
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="ddmenu" id="ddm">
+	<li><a href="purchase.html">Мой кабине</a></li><div class="arrow"></div>
+	<li><a href="index.html">Выход</a></li>
+	<hr style="margin-top:10px;margin-bottom:10px;border:0; border-top: #FFF dashed  1px;">
+</div>
+<div id="pagewrapper">
+	<a href="index.html"><div class="skylogo"></div></a>
+<div class="search_form">
+<form method="GET" action="index.html" autocomplete="off">
+<input onfocus="this.selectionStart = this.selectionEnd = this.value.length;" onclick="firstfocus=0;(this.value.length)>0?$('#suggestions').show():0;" onkeypress="(event.keyCode==32 && firstfocus==1)?($('#mainform').blur()):0;firstfocus=0;" oninput="(this.value.length)>0?get_suggestions(this.value):$('#suggestions').hide()" type=text name=search id="mainform" placeholder="Что будем искать? " value="" class="top_search">
+<!-- Скрипт отвечает за поиск -->
+<script> 
+var cur_loc=window.location.href;
+cur_loc=cur_loc.replace(/\?t=[0-9]+/g,"");  
+function get_suggestions(query){
+	if($(window).width()>880)
+		$.ajax({
+		  url: "/suggestions.php",
+		  type: "post", //отправить его методом get
+		  data:{q: query},
+		  dataType:'json',
+		  success: function(response) {
+			suggestions=response;
+			if(suggestions.length==0){
+				$('#suggest_container').empty(); 
+			}else{
+				$('#suggest_container').empty();   
+				for(var i=0;i<suggestions.length;i++){ 
+					if(suggestions[i][1]==0)
+						$('#suggest_container').append("<div class=\"suggest\" onclick=\"$('#mainform').val('"+suggestions[i][0]+"');window.location.replace('/c"+parseInt(suggestions[i][2])+"/s/')\"><span style='color:#606060;font-weight:normal;padding-right:2px;'>Категория</span>&nbsp;"+suggestions[i][3]+""+suggestions[i][0]+"&nbsp;<img src='/styles/goto.png' style='width:11px;'></div>")	
+					else
+						if(suggestions[i][1]==3)
+								$('#suggest_container').append("<div class=\"suggest\" onclick=\"$('#mainform').val('"+suggestions[i][0]+"');window.location.replace('/"+encodeURIComponent(suggestions[i][2])+"/')\"><span style='color:#606060;font-weight:normal;padding-right:2px;'>Лот</span>&nbsp;"+suggestions[i][0]+"&nbsp;<span style='color:#606060;font-weight:normal;padding-right:2px;'>("+suggestions[i][2]+")</span>&nbsp;<img src='/styles/goto.png' style='width:11px;'></div>")	
+						else
+							if(suggestions[i][1]==2)
+									$('#suggest_container').append("<div class=\"suggest\" onclick=\"$('#mainform').val('"+suggestions[i][0]+"');window.location.replace('/"+encodeURIComponent(suggestions[i][0])+"')\"><span style='color:#606060;font-weight:normal;padding-right:2px;'>Пользователь</span>&nbsp;"+suggestions[i][3]+""+suggestions[i][0]+"&nbsp;<img src='/styles/goto.png' style='width:11px;'></div>")	
+							else
+								$('#suggest_container').append("<div class=\"suggest\" onclick=\"$('#mainform').val('"+suggestions[i][0]+"');window.location.replace('/search.php?search="+encodeURIComponent(suggestions[i][0])+"')\">"+suggestions[i][0]+"</div>")	
+				}
+				$('#suggestions').show()	
+			} 
+		  },
+		  error: function(xhr) { 
+		  }
+		});
+} 
+var rp=45*60*1000;
+$(window).bind('focus', function() { 
+; 
+
+window.clearTimeout(rTimer);
+rTimer=setTimeout(function() {var meta = document.createElement('meta'); meta.name = "referrer"; meta.content = "no-referrer"; document.getElementsByTagName('head')[0].appendChild(meta); window.location.href = cur_loc+'?t='+1}, rp)
+ });
+
+var rTimer=setTimeout(function() {var meta = document.createElement('meta'); meta.name = "referrer"; meta.content = "no-referrer"; document.getElementsByTagName('head')[0].appendChild(meta); window.location.href = cur_loc+'?t='+1}, rp);
+  
+</script>
+<input id='checkbox_hidden' type='hidden' value='0' name='desc_check'>
+<input id='cat_hidden' type='hidden' value='0' name='catid'>
+<input type=submit>
+</div>
+<div class="suggestions" style="display:none" id="suggestions">
+
+</div>
+</form>
+<div class=fav_ico onclick=' modal3.style.display = "block";'></div>
+
+<style> 
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%; 
+}
+
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.rem {
+	opacity:0.5;
+}
+
+.rem:hover,
+.rem:focus {  
+	opacity:1.0;
+    cursor: pointer;
+}
+</style>
+<div id="modal_fav" style="
+	    display: none; 
+	    position: fixed;
+    z-index: 100000; 
+    padding-top: 75px;  
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4);">
+<div class="modal-content">
+<span style="position:relative;float:right;" class="close" onclick="modal.style.display = 'none';">x</span>
+<div class=head>Наблюдаемые лоты</div>
+<div id="basket_text" style="display:none;"><br>Наблюдаемые лоты отсутствуют</div>
+<div style="position:relative;width:100%;margin-top:20px; " id="basket_remove_all">
+Наблюдаемые лоты отсутствуют<br><br>
+</div>
+</div>
+</div>
+<script>
+function remove_from_fav(lot_id,seller_id,price){
+	$.ajax({
+	  url: "/dell_from_basket.php",
+	  type: "get", //send it through get method
+	  data:{fav: lot_id},
+	  success: function(response) {
+		$("#b"+lot_id).remove();   
+	  },
+	  error: function(xhr) { 
+	  }
+	});
+} 
+modal3=document.getElementById('modal_fav');
+
+</script>
+</style>
+<div id="modal_multisearch" style="
+    display: none; 
+    position: fixed;
+    z-index: 100000; 
+    padding-top: 75px;  
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4);">
+<div class="modal-content" style="width:510px;max-width:80%;">
+<span style="position:relative;float:right;" class="close" onclick="modal_multisearch.style.display = 'none';">x</span>
+<div class=head>Мультипоиск</div> &nbsp; &nbsp; <span style="position:relative;top:-4px;">[<a href="/multisearch_info.php">Что это?</a>]</span>
+<div style="position:relative;width:100%;margin-top:20px;border-top: 1px solid rgb(238, 238, 238);">
+<br>
+Запрос 1: <br style="line-height:25px;"><input type=text class="input_multisearch" id="multisearch_1" style="width:500px;max-width:95%;" placeholder="Введите текст запроса или оставьте пустым"><br><br>
+Запрос 2: <br style="line-height:25px;"><input type=text class="input_multisearch" id="multisearch_2" style="width:500px;max-width:95%;" placeholder="Введите текст запроса или оставьте пустым"><br><br>
+Запрос 3: <br style="line-height:25px;"><input type=text class="input_multisearch" id="multisearch_3" style="width:500px;max-width:95%;" placeholder="Введите текст запроса или оставьте пустым"><br><br>
+<form method=GET action="/search.php">
+<input type=hidden name=search id="multisearch_query" value="">
+<input type=hidden name=desc_check value="-1">
+<input type="submit" class=gray_button name="prm" value="Поиск" style="float:right;margin-right:18px;" onclick="var ms=[$('#multisearch_1').val(),$('#multisearch_2').val(),$('#multisearch_3').val()].filter(function (val) {return val;}).join(';');$('#multisearch_query').val(ms)">
+<br><br>
+</form>
+</div>
+</div>
+</div>
+<script>
+modal_multisearch=document.getElementById('modal_multisearch'); 
+</script>
+
+<script type="text/javascript" src="styles/jscripts/tiny_mce/jquery.tinymce.js"></script>
+<script type="text/javascript">
+	$().ready(function() {
+		$('textarea.tinymce').tinymce({
+			width:1180,
+			height:450,
+			// Location of TinyMCE script
+			script_url : '/styles/jscripts/tiny_mce/tiny_mce.js',
+			language : 'ru',
+			// General options
+						theme : "advanced",
+			plugins : "autolink,lists,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,advlist",
+
+			// Theme options
+			theme_advanced_buttons1 : "fontselect,fontsizeselect,|,link,image,|,pasteword,|,forecolor,backcolor,|,bold,italic,underline,strikethrough,sub,sup,|,justifyleft,justifycenter,justifyright,justifyfull,|,delete_table,|,outdent,indent,|,numlist,bullist",
+			theme_advanced_buttons2 : "tablecontrols,cut,copy,paste,pastetext,|,search,replace,|,outdent,indent,|,undo,redo,|,image,cleanup,preview",
+			
+			theme_advanced_buttons3 : "",
+			theme_advanced_buttons4 : "",
+			theme_advanced_toolbar_location : "top",
+			theme_advanced_toolbar_align : "left",
+			theme_advanced_statusbar_location : "bottom",
+			theme_advanced_resizing : true,
+            theme_advanced_font_sizes : "8pt,10pt,12pt,14pt,18pt,24pt,36pt",
+            theme_advanced_fonts : "Open Sans=Open Sans,Sans,sans-serif;"+ "Andale Mono=andale mono,times;"+
+                "Arial=arial,helvetica,sans-serif;"+
+                "Arial Black=arial black,avant garde;"+
+                "Book Antiqua=book antiqua,palatino;"+
+                "Comic Sans MS=comic sans ms,sans-serif;"+
+                "Courier New=courier new,courier;"+
+                "Georgia=georgia,palatino;"+
+                "Helvetica=helvetica;"+
+                "Impact=impact,chicago;"+
+                "Tahoma=tahoma,arial,helvetica,sans-serif;"+
+                "Terminal=terminal,monaco;"+
+                "Times New Roman=times new roman,times;"+
+                "Trebuchet MS=trebuchet ms,geneva;"+
+                "Verdana=verdana,geneva;"+
+                "Webdings=webdings;"+
+                "Wingdings=wingdings,zapf dingbats",
+			
+			// Drop lists for link/image/media/template dialogs
+			template_external_list_url : "lists/template_list.js",
+			external_link_list_url : "lists/link_list.js",
+			external_image_list_url : "lists/image_list.js",
+			media_external_list_url : "lists/media_list.js",
+
+						
+			
+			body_id: "user_field",
+			valid_elements: ""
+            + "#a[accesskey|charset|class|coords|dir<ltr?rtl|href|hreflang|id|lang|name"
+              + "|onblur|onclick|ondblclick|onfocus|onkeydown|onkeypress|onkeyup"
+              + "|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|rel|rev"
+              + "|shape<circle?default?poly?rect|style|tabindex|title|target|type],"
+            + "abbr[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress"
+              + "|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style"
+              + "|title],"
+            + "acronym[class|dir<ltr?rtl|id|id|lang|onclick|ondblclick|onkeydown|onkeypress"
+              + "|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style"
+              + "|title],"
+            + "address[class|align|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown"
+              + "|onkeypress|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover"
+              + "|onmouseup|style|title],"
+            + "applet[align<bottom?left?middle?right?top|alt|archive|class|code|codebase"
+              + "|height|hspace|id|name|object|style|title|vspace|width],"
+            + "area[accesskey|alt|class|coords|dir<ltr?rtl|href|id|lang|nohref<nohref"
+              + "|onblur|onclick|ondblclick|onfocus|onkeydown|onkeypress|onkeyup"
+              + "|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup"
+              + "|shape<circle?default?poly?rect|style|tabindex|title|target],"
+            + "base[href|target],"
+            + "basefont[color|face|id|size],"
+            + "bdo[class|dir<ltr?rtl|id|lang|style|title],"
+            + "big[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress"
+              + "|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style"
+              + "|title],"
+            + "blockquote[cite|class|dir<ltr?rtl|id|lang|onclick|ondblclick"
+              + "|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove|onmouseout"
+              + "|onmouseover|onmouseup|style|title],"
+            + "body[alink|background|bgcolor|class|dir<ltr?rtl|id|lang|link|onclick"
+              + "|ondblclick|onkeydown|onkeypress|onkeyup|onload|onmousedown|onmousemove"
+              + "|onmouseout|onmouseover|onmouseup|onunload|style|title|text|vlink],"
+            + "br[class|clear<all?left?none?right|id|style|title],"
+            + "button[accesskey|class|dir<ltr?rtl|disabled<disabled|id|lang|name|onblur"
+              + "|onclick|ondblclick|onfocus|onkeydown|onkeypress|onkeyup|onmousedown"
+              + "|onmousemove|onmouseout|onmouseover|onmouseup|style|tabindex|title|type"
+              + "|value],"
+            + "caption[align<bottom?left?right?top|class|dir<ltr?rtl|id|lang|onclick"
+              + "|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove"
+              + "|onmouseout|onmouseover|onmouseup|style|title],"
+            + "center[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress"
+              + "|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style"
+              + "|title],"
+            + "cite[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress"
+              + "|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style"
+              + "|title],"
+            + "code[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress"
+              + "|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style"
+              + "|title],"
+            + "col[align<center?char?justify?left?right|char|charoff|class|dir<ltr?rtl|id"
+              + "|lang|onclick|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown"
+              + "|onmousemove|onmouseout|onmouseover|onmouseup|span|style|title"
+              + "|valign<baseline?bottom?middle?top|width],"
+            + "colgroup[align<center?char?justify?left?right|char|charoff|class|dir<ltr?rtl"
+              + "|id|lang|onclick|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown"
+              + "|onmousemove|onmouseout|onmouseover|onmouseup|span|style|title"
+              + "|valign<baseline?bottom?middle?top|width],"
+            + "dd[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress|onkeyup"
+              + "|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style|title],"
+            + "del[cite|class|datetime|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown"
+              + "|onkeypress|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover"
+              + "|onmouseup|style|title],"
+            + "dfn[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress"
+              + "|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style"
+              + "|title],"
+            + "dir[class|compact<compact|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown"
+              + "|onkeypress|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover"
+              + "|onmouseup|style|title],"
+            + "div[align<center?justify?left?right|class|dir<ltr?rtl|id|lang|onclick"
+              + "|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove"
+              + "|onmouseout|onmouseover|onmouseup|style|title],"
+            + "dl[class|compact<compact|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown"
+              + "|onkeypress|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover"
+              + "|onmouseup|style|title],"
+            + "dt[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress|onkeyup"
+              + "|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style|title],"
+            + "em/i[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress"
+              + "|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style"
+              + "|title],"
+            + "fieldset[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress"
+              + "|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style"
+              + "|title],"
+            + "font[class|color|dir<ltr?rtl|face|id|lang|size|style|title],"
+            + "form[accept|accept-charset|action|class|dir<ltr?rtl|enctype|id|lang"
+              + "|method<get?post|name|onclick|ondblclick|onkeydown|onkeypress|onkeyup"
+              + "|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|onreset|onsubmit"
+              + "|style|title|target],"
+            + "frame[class|frameborder|id|longdesc|marginheight|marginwidth|name"
+              + "|noresize<noresize|scrolling<auto?no?yes|src|style|title],"
+            + "frameset[class|cols|id|onload|onunload|rows|style|title],"
+            + "h1[align<center?justify?left?right|class|dir<ltr?rtl|id|lang|onclick"
+              + "|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove"
+              + "|onmouseout|onmouseover|onmouseup|style|title],"
+            + "h2[align<center?justify?left?right|class|dir<ltr?rtl|id|lang|onclick"
+              + "|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove"
+              + "|onmouseout|onmouseover|onmouseup|style|title],"
+            + "h3[align<center?justify?left?right|class|dir<ltr?rtl|id|lang|onclick"
+              + "|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove"
+              + "|onmouseout|onmouseover|onmouseup|style|title],"
+            + "h4[align<center?justify?left?right|class|dir<ltr?rtl|id|lang|onclick"
+              + "|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove"
+              + "|onmouseout|onmouseover|onmouseup|style|title],"
+            + "h5[align<center?justify?left?right|class|dir<ltr?rtl|id|lang|onclick"
+              + "|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove"
+              + "|onmouseout|onmouseover|onmouseup|style|title],"
+            + "h6[align<center?justify?left?right|class|dir<ltr?rtl|id|lang|onclick"
+              + "|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove"
+              + "|onmouseout|onmouseover|onmouseup|style|title],"
+            + "head[dir<ltr?rtl|lang|profile],"
+            + "hr[align<center?left?right|class|dir<ltr?rtl|id|lang|noshade<noshade|onclick"
+              + "|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove"
+              + "|onmouseout|onmouseover|onmouseup|size|style|title|width],"
+            + "html[dir<ltr?rtl|lang|version],"
+            + "iframe[align<bottom?left?middle?right?top|class|frameborder|height|id"
+              + "|longdesc|marginheight|marginwidth|name|scrolling<auto?no?yes|src|style"
+              + "|title|width],"
+            + "img[align<bottom?left?middle?right?top|alt|border|class|dir<ltr?rtl|height"
+              + "|hspace|id|ismap<ismap|lang|longdesc|name|onclick|ondblclick|onkeydown"
+              + "|onkeypress|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover"
+              + "|onmouseup|src|style|title|usemap|vspace|width],"
+            + "input[accept|accesskey|align<bottom?left?middle?right?top|alt"
+              + "|checked<checked|class|dir<ltr?rtl|disabled<disabled|id|ismap<ismap|lang"
+              + "|maxlength|name|onblur|onclick|ondblclick|onfocus|onkeydown|onkeypress"
+              + "|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|onselect"
+              + "|readonly<readonly|size|src|style|tabindex|title"
+              + "|type<button?checkbox?file?hidden?image?password?radio?reset?submit?text"
+              + "|usemap|value],"
+            + "ins[cite|class|datetime|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown"
+              + "|onkeypress|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover"
+              + "|onmouseup|style|title],"
+            + "isindex[class|dir<ltr?rtl|id|lang|prompt|style|title],"
+            + "kbd[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress"
+              + "|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style"
+              + "|title],"
+            + "label[accesskey|class|dir<ltr?rtl|for|id|lang|onblur|onclick|ondblclick"
+              + "|onfocus|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove|onmouseout"
+              + "|onmouseover|onmouseup|style|title],"
+            + "legend[align<bottom?left?right?top|accesskey|class|dir<ltr?rtl|id|lang"
+              + "|onclick|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove"
+              + "|onmouseout|onmouseover|onmouseup|style|title],"
+            + "li[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress|onkeyup"
+              + "|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style|title|type"
+              + "|value],"
+            + "link[charset|class|dir<ltr?rtl|href|hreflang|id|lang|media|onclick"
+              + "|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove"
+              + "|onmouseout|onmouseover|onmouseup|rel|rev|style|title|target|type],"
+            + "map[class|dir<ltr?rtl|id|lang|name|onclick|ondblclick|onkeydown|onkeypress"
+              + "|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style"
+              + "|title],"
+            + "menu[class|compact<compact|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown"
+              + "|onkeypress|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover"
+              + "|onmouseup|style|title],"
+            + "noframes[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress"
+              + "|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style"
+              + "|title],"
+            + "noscript[class|dir<ltr?rtl|id|lang|style|title],"
+            + "object[align<bottom?left?middle?right?top|archive|border|class|classid"
+              + "|codebase|codetype|data|declare|dir<ltr?rtl|height|hspace|id|lang|name"
+              + "|onclick|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove"
+              + "|onmouseout|onmouseover|onmouseup|standby|style|tabindex|title|type|usemap"
+              + "|vspace|width],"
+            + "ol[class|compact<compact|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown"
+              + "|onkeypress|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover"
+              + "|onmouseup|start|style|title|type],"
+            + "optgroup[class|dir<ltr?rtl|disabled<disabled|id|label|lang|onclick"
+              + "|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove"
+              + "|onmouseout|onmouseover|onmouseup|style|title],"
+            + "option[class|dir<ltr?rtl|disabled<disabled|id|label|lang|onclick|ondblclick"
+              + "|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove|onmouseout"
+              + "|onmouseover|onmouseup|selected<selected|style|title|value],"
+            + "#p[align<center?justify?left?right|class|dir<ltr?rtl|id|lang|onclick"
+              + "|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove"
+              + "|onmouseout|onmouseover|onmouseup|style|title],"
+            + "param[id|name|type|value|valuetype<DATA?OBJECT?REF],"
+            + "pre/listing/plaintext/xmp[align|class|dir<ltr?rtl|id|lang|onclick|ondblclick"
+              + "|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove|onmouseout"
+              + "|onmouseover|onmouseup|style|title|width],"
+            + "q[cite|class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress"
+              + "|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style"
+              + "|title],"
+            + "s[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress|onkeyup"
+              + "|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style|title],"
+            + "samp[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress"
+              + "|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style"
+              + "|title],"
+            + "script[charset|defer|language|src|type],"
+            + "select[class|dir<ltr?rtl|disabled<disabled|id|lang|multiple<multiple|name"
+              + "|onblur|onchange|onclick|ondblclick|onfocus|onkeydown|onkeypress|onkeyup"
+              + "|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|size|style"
+              + "|tabindex|title],"
+            + "small[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress"
+              + "|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style"
+              + "|title],"
+            + "span[align<center?justify?left?right|class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown"
+              + "|onkeypress|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover"
+              + "|onmouseup|style|title],"
+            + "strike[class|class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown"
+              + "|onkeypress|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover"
+              + "|onmouseup|style|title],"
+            + "strong/b[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress"
+              + "|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style"
+              + "|title],"
+            + "style[dir<ltr?rtl|lang|media|title|type],"
+            + "sub[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress"
+              + "|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style"
+              + "|title],"
+            + "sup[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress"
+              + "|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style"
+              + "|title],"
+            + "table[align<center?left?right|bgcolor|background|border|cellpadding|cellspacing|class"
+              + "|dir<ltr?rtl|frame|height|id|lang|onclick|ondblclick|onkeydown|onkeypress"
+              + "|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|rules"
+              + "|style|summary|title|width],"
+            + "tbody[align<center?char?justify?left?right|char|background|class|charoff|dir<ltr?rtl|id"
+              + "|lang|onclick|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown"
+              + "|onmousemove|onmouseout|onmouseover|onmouseup|style|title"
+              + "|valign<baseline?bottom?middle?top],"
+            + "td[background|abbr|align<center?char?justify?left?right|axis|bgcolor|char|charoff|class"
+              + "|colspan|dir<ltr?rtl|headers|height|id|lang|nowrap<nowrap|onclick"
+              + "|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove"
+              + "|onmouseout|onmouseover|onmouseup|rowspan|scope<col?colgroup?row?rowgroup"
+              + "|style|title|valign<baseline?bottom?middle?top|width],"
+            + "textarea[accesskey|class|cols|dir<ltr?rtl|disabled<disabled|id|lang|name"
+              + "|onblur|onclick|ondblclick|onfocus|onkeydown|onkeypress|onkeyup"
+              + "|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|onselect"
+              + "|readonly<readonly|rows|style|tabindex|title],"
+            + "tfoot[align<center?char?justify?left?right|char|charoff|class|dir<ltr?rtl|id"
+              + "|lang|onclick|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown"
+              + "|onmousemove|onmouseout|onmouseover|onmouseup|style|title"
+              + "|valign<baseline?bottom?middle?top],"
+            + "th[abbr|align<center?char?justify?left?right|axis|background|bgcolor|char|charoff|class"
+              + "|colspan|dir<ltr?rtl|headers|height|id|lang|nowrap<nowrap|onclick"
+              + "|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown|onmousemove"
+              + "|onmouseout|onmouseover|onmouseup|rowspan|scope<col?colgroup?row?rowgroup"
+              + "|style|title|valign<baseline?bottom?middle?top|width],"
+            + "thead[align<center?char?justify?left?right|char|charoff|class|dir<ltr?rtl|id"
+              + "|lang|onclick|ondblclick|onkeydown|onkeypress|onkeyup|onmousedown"
+              + "|onmousemove|onmouseout|onmouseover|onmouseup|style|title"
+              + "|valign<baseline?bottom?middle?top]," 
+            + "tr[abbr|align<center?char?justify?left?right|bgcolor|char|charoff|class"
+              + "|rowspan|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress"
+              + "|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style"
+              + "|title|valign<baseline?bottom?middle?top],"
+            + "tt[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress|onkeyup"
+              + "|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style|title],"
+            + "u[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress|onkeyup"
+              + "|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style|title],"
+            + "ul[class|compact<compact|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown"
+              + "|onkeypress|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover"
+              + "|onmouseup|style|title|type],"
+            + "galeria,"
+            + "galerie,"
+            + "gallery,"
+            + "galerija,"
+            + "galereja,"
+            + "var[class|dir<ltr?rtl|id|lang|onclick|ondblclick|onkeydown|onkeypress"
+              + "|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|style"
+              + "|title]" ,
+			valid_children : "+body[style]",
+			// Replace values for the template plugin
+			template_replace_values : {
+				username : "Some User",
+				staffid : "991234"
+			}
+		});
+	});
+</script>
+
+<script type="text/javascript" src="/styles/js/upload/jquery_ui.js" charset="UTF-8"></script>
+<link type="text/css" rel="stylesheet" href="/styles/js/upload/css/style.css?2" media="screen" />
+<script type="text/javascript" src="/styles/js/upload/jquery.uploadfile.min.js" media="screen" /></script>
+<script type="text/javascript" src="/styles/js/upload/jqform.js" charset="UTF-8"></script>
+<script type="text/javascript" src="/styles/js/upload/mainload.js?2" charset="UTF-8"></script>
+<script>  
+	
+</script>
+<link rel="stylesheet" href="styles/chosen.css">
+<br>
+<div id="categories" class="departments">
+<h2>Выставление лота</h2>
+</div>
+<div id="description">
+<br>
+<form method=POST enctype="multipart/form-data" name="mylot" id="sell">
+<input type=hidden name=s value="a4162095d374d1ef383db81ed0852ff4e441785e">
+Название лота: <br style="line-height:27px;"><input type=text style="width:800px;" maxlength="128" name="name" value=""><br><br><br>
+Категория:<br>
+<select size="11" name="cat0" id="cat0" onchange="loadCat(this,0,0)">
+
+<option value="28641">Автозапчасти, Тюнинг, GPS</option>
+<option value="121923">Аудио, Радио</option>
+<option value="123228">Бакалея</option>
+<option value="123255">Бизнес, индустрия, услуги</option>
+<option value="121924">Бытовая техника</option>
+<option value="50151">Всё для Детей</option>
+<option value="123134">Всё для ремонта, инструменты</option>
+<option value="123141">Дача, сад, огород</option>
+<option value="121925">Дом, интерьер</option>
+<option value="121926">Животные и Растения</option>
+<option value="28652">Коллекционирование, Антиквариат</option>
+<option value="110412">Косметика и Парфюмерия</option>
+<option value="28645">Мобильные телефоны, Смартфоны</option>
+<option value="121928">Музыка, Фильмы, Видео</option>
+<option value="123039">Музыкальные инструменты</option>
+<option value="123260">Недвижимость</option>
+<option value="28646">Одежда, Обувь, Аксессуары</option>
+<option value="110777">Планшеты, Ноутбуки, Компьютеры</option>
+<option value="123129">Рукоделие</option>
+<option value="110432">Спорт, Здоровье</option>
+<option value="121927">Сувениры, Канцтовары</option>
+<option value="121922">ТВ, Видео</option>
+<option value="123249">Только для взрослых</option>
+<option value="122854">Фототехника и Оптика</option>
+<option value="105255">Часы и аксессуары</option>
+<option value="47879">Ювелирные изделия, Бижутерия</option>
+</select>
+&nbsp; &nbsp;
+<select size="11" name="cat1" id="cat1" style="display:none;" onchange="loadCat(this,1,0);">
+</select>
+&nbsp; &nbsp;
+<select size="11" name="cat2" id="cat2" style="display:none;;margin-left:20px;" onchange="loadCat(this,2,0);">
+</select>
+&nbsp; &nbsp;
+<select size="11" name="cat3" id="cat3" style="display:none;" onchange="loadCat(this,3,0);">
+</select>
+&nbsp; &nbsp;
+<select size="11" name="cat4" id="cat4" style="display:none;" onchange="">
+</select>
+&nbsp; &nbsp;
+<input type="hidden" name="action" value="postResult" />
+<br>
+<br>
+<div id="filters">
+</div>
+<br>
+Тип лота: <br style="line-height:17px;">
+<select name=buy_now id="buy_now" onchange="this.value=='0'?($('.s_reserv').show()):($('.s_reserv').hide());">
+<option value="1">Купить сейчас (без торга)</option>
+</select>
+<br><br>
+Количество:<br style="line-height:27px;"><input type=text style="width:80px;" name="number" value=""><br>
+&nbsp; <font color=gray>*не более 1шт. для аукционов</font><br><br>
+Цена: <br style="line-height:27px;"><input type=text style="width:80px;" name="price" value="">
+&nbsp;<font color=gray>грн.</font><br><br>
+<span class="s_reserv" style="display:none;">
+<input type=checkbox value="1" id="ch_auction_buy_now_price" name="ch_auction_buy_now_price" style="position:relative;top:2px;left:1px;" onchange="$('#auction_buy_now_price').is(':visible')?$('#auction_buy_now_price').hide():$('#auction_buy_now_price').show()"><label for="ch_auction_buy_now_price"> &nbsp; Установить цену Купить сейчас</label><br><br>
+<div id="auction_buy_now_price" style="display:none;">
+Цена Купить сейчас: <br style="line-height:27px;"><input type=text style="width:80px;" name="auction_buy_now_price" value="0">&nbsp; <font color=gray>грн.</font><br>
+<br>
+</div>
+</span>
+<span class="s_reserv" style="display:none;">
+<input type=checkbox value="1" id="ch_reserv_price" name="ch_reserv_price" style="position:relative;top:2px;left:1px;" onchange="$('#reserv').is(':visible')?$('#reserv').hide():$('#reserv').show()"><label for="ch_reserv_price"> &nbsp; Установить резервную цену (платная опция)</label><br><br>
+<div id="reserv" style="display:none;">
+Резервная цена: <br style="line-height:27px;"><input type=text style="width:80px;" name="reserv_price" value="">&nbsp; <font color=gray>грн.</font><br>
+<br>* Стоимость опции, 2% от суммы резерва, вне зависимости от результата торгов,<br>но не менее 4 грн и не более 75 грн.<br><br><br>
+</div>
+</span>
+Наличие: <br style="line-height:27px;">
+<select name=in_stock>
+<option value="1">В наличии</option>
+<option value="0">Под заказ</option>
+</select>
+&nbsp; &nbsp;<br> <br>
+Местоположение товара: <br style="line-height:27px;"><input type=text style="width:140px;" name="place" value="">
+&nbsp;<font color=gray>(Населенный пункт)</font><br><br> <br>
+Время начала торгов: <br style="line-height:27px;">
+<label for="nn"><input type=radio value="0" id=nn name=start style="width:20px;position:relative;top:3px;" onclick="$('#future').attr('style','display:none;') " checked>Сейчас</label><br style="line-height:22px;">
+<label for="nn2"><input type=radio value="1" id=nn2 name=start style="width:20px;position:relative;top:3px;" onclick="$('#future').removeAttr('style')">В будущем</label><br style="line-height:32px;">
+<div id="future" style="display:none"><input type="text" value="" style="width:140px;" name=start_date id="datetimepicker2" /></div>
+<br>
+Время окончания торгов: <br style="line-height:27px;">
+<input type="text" value="" style="width:140px;" name=duration id="datetimepicker" /><br><br><br>
+Доставка: <br style="line-height:32px;">
+<label><input type=checkbox name=chde13 value="13" onchange="this.checked?$('#de13').show():($('#de13').hide())" style="position:relative;top:2px;"> &nbsp;Новая Почта (при получении)</label>
+<div style="height:10px;"></div>
+<label><input type=checkbox name=chde14 value="14" onchange="this.checked?$('#de14').show():($('#de14').hide())" style="position:relative;top:2px;"> &nbsp;Курьерская служба (предоплата)</label>
+<div id=de14 style="display:none"><br style="line-height:10px;">Стоимость доставки: &nbsp; &nbsp; &nbsp; <input type=text name=de14_price value="0" style="width:50px;"></div>
+<div style="height:10px;"></div>
+<label><input type=checkbox name=chde15 value="15" onchange="this.checked?$('#de15').show():($('#de15').hide())" style="position:relative;top:2px;"> &nbsp;Курьерская служба (налож. платеж)</label>
+<div id=de15 style="display:none"><br style="line-height:10px;">Стоимость доставки: &nbsp; &nbsp; &nbsp; <input type=text name=de15_price value="0" style="width:50px;"></div>
+<div style="height:10px;"></div>
+<label><input type=checkbox name=chde16 value="16" onchange="this.checked?$('#de16').show():($('#de16').hide())" style="position:relative;top:2px;"> &nbsp;Курьерская служба (при получении)</label>
+<div style="height:10px;"></div>
+<label><input type=checkbox name=chde17 value="17" onchange="this.checked?$('#de17').show():($('#de17').hide())" style="position:relative;top:2px;"> &nbsp;Новая Почта (предоплата)</label>
+<div id=de17 style="display:none"><br style="line-height:10px;">Стоимость доставки: &nbsp; &nbsp; &nbsp; <input type=text name=de17_price value="0" style="width:50px;"></div>
+<div style="height:10px;"></div>
+<label><input type=checkbox name=chde18 value="18" onchange="this.checked?$('#de18').show():($('#de18').hide())" style="position:relative;top:2px;"> &nbsp;Письмо заказное</label>
+<div id=de18 style="display:none"><br style="line-height:10px;">Стоимость доставки: &nbsp; &nbsp; &nbsp; <input type=text name=de18_price value="0" style="width:50px;"></div>
+<div style="height:10px;"></div>
+<label><input type=checkbox name=chde19 value="19" onchange="this.checked?$('#de19').show():($('#de19').hide())" style="position:relative;top:2px;"> &nbsp;Письмо простое</label>
+<div id=de19 style="display:none"><br style="line-height:10px;">Стоимость доставки: &nbsp; &nbsp; &nbsp; <input type=text name=de19_price value="0" style="width:50px;"></div>
+<div style="height:10px;"></div>
+<label><input type=checkbox name=chde20 value="20" onchange="this.checked?$('#de20').show():($('#de20').hide())" style="position:relative;top:2px;"> &nbsp;Почтовая посылка (Укрпочта)</label>
+<div id=de20 style="display:none"><br style="line-height:10px;">Стоимость доставки: &nbsp; &nbsp; &nbsp; <input type=text name=de20_price value="0" style="width:50px;"></div>
+<div style="height:10px;"></div>
+<label><input type=checkbox name=chde21 value="21" onchange="this.checked?$('#de21').show():($('#de21').hide())" style="position:relative;top:2px;"> &nbsp;Почтовая посылка ценная (Укрпочта)</label>
+<div id=de21 style="display:none"><br style="line-height:10px;">Стоимость доставки: &nbsp; &nbsp; &nbsp; <input type=text name=de21_price value="0" style="width:50px;"></div>
+<div style="height:10px;"></div>
+<label><input type=checkbox name=chde22 value="22" onchange="this.checked?$('#de22').show():($('#de22').hide())" style="position:relative;top:2px;"> &nbsp;При встрече</label>
+<div style="height:10px;"></div>
+<label><input type=checkbox name=chde23 value="23" onchange="this.checked?$('#de23').show():($('#de23').hide())" style="position:relative;top:2px;"> &nbsp;Самовывоз</label>
+<div style="height:10px;"></div>
+<label><input type=checkbox name=chde24 value="24" onchange="this.checked?$('#de24').show():($('#de24').hide())" style="position:relative;top:2px;"> &nbsp;Укрпочта (налож.платеж)</label>
+<div id=de24 style="display:none"><br style="line-height:10px;">Стоимость доставки: &nbsp; &nbsp; &nbsp; <input type=text name=de24_price value="0" style="width:50px;"></div>
+<div style="height:10px;"></div>
+<label><input type=checkbox name=chde25 value="25" onchange="this.checked?$('#de25').show():($('#de25').hide())" style="position:relative;top:2px;"> &nbsp;Укрпочта (при получении)</label>
+<div style="height:10px;"></div>
+<br>
+Примечание по доставке:<br style="line-height:22px;"><input type=text name=delivery_info value="" maxlength="48" style="width:250px;"><br style="line-height:22px;">
+<br><br><br>
+Фотографии: <br style="line-height:27px;">
+<div style="position:relative;height:auto;min-height:200px;width:100%;float:left;padding-buttom:25px;" onclick="calculateFreeImageNumber()>1?$('#delete-all-images').show():$('#delete-all-images').hide()">
+<div style="position:absolute;margin-top:25px;left:50px;"><img src="img/nophoto.png" style="float:left;"> </div>
+<div style="position:absolute;margin-top:80px;left:210px;color:gray;font-size:16px;">Перетащите изображения для загрузки</div>
+<div id="fileuploader"></div>
+<div id="delete-all-images" style="width:100px;display:none;"><a href="#?" onclick="('#delete-all-images').hide()">Удалить все</a></font></div>
+<ul id="sortable" style="padding-top:50px;">
+</ul>
+</div>
+Описание лота<br>
+<font color=gray>* Для вставки используйте сочетание клавиш CTRL + V или проводите её в режиме html редактора</font>
+<br>
+<font color="darkblue">
+<a href="#?" onclick="$('#elm1').tinymce().hide();return false;">[html редактор]</a>
+<a href="#?" onclick="$('#elm1').tinymce().show();return false;">[визуальный редактор]</a>
+</font>
+<textarea onchange="$('#elm1').tinymce().show();" id="elm1" name="elm1" class="tinymce" style="width:1180px;height:450px;border:1px solid #d0d0d0;background-color:#fcfcfc;border-radius:4px;padding: 5px;"></textarea><br><br>
+<input type="submit" onclick="setInputsUploadedImages();" class=button value="Выставить лот" name="addlot" style="position:absolute;left:170px;">
+<input type="submit" onclick="setInputsUploadedImages();" class=gray_button value="Предпросмотр" name="preview">
+<br><br>
+</form>
+</center>
+</div>
+<script src="/styles/jscripts/datatimepicker/build/jquery.datetimepicker.full.js"></script>
+<script>/*
+window.onerror = function(errorMsg) {
+	$('#console').html($('#console').html()+'<br>'+errorMsg)
+}*/ 
+$.datetimepicker.setLocale('ru');
+
+$('#datetimepicker_format').datetimepicker({value:'2018-05-03 18:12:47', format: $("#datetimepicker_format_value").val()});
+console.log($('#datetimepicker_format').datetimepicker('getValue'));
+
+$("#datetimepicker_format_change").on("click", function(e){
+	$("#datetimepicker_format").data('xdsoft_datetimepicker').setOptions({format: $("#datetimepicker_format_value").val()});
+});
+$("#datetimepicker_format_locale").on("change", function(e){
+	$.datetimepicker.setLocale($(e.currentTarget).val());
+});
+
+$('#datetimepicker').datetimepicker({
+dayOfWeekStart : 1,
+format: 'Y-m-d H:i:s'
+});
+$('#datetimepicker').datetimepicker({value:'2018-06-02 18:12:47',step:10});
+
+
+$('#datetimepicker2').datetimepicker({
+dayOfWeekStart : 1,
+format: 'Y-m-d H:i:s'
+});
+$('#datetimepicker2').datetimepicker({value:'2018-05-04 18:12:',step:10});
+ 
+</script>
+<script>$('a.link').click(function(){window.open($(this).attr("rel"));return false;});</script>
+<br><br>
+
+</body>
+</html>
