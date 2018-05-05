@@ -110,27 +110,115 @@ modal_multisearch=document.getElementById('modal_multisearch');
 <li>
 <h2><a href="сompleted.html">Завершенные</a></h2>
 </li>
-</div>
-<br>
+</ul>
+</div></div>
+<div style="float:right;position:relative;width:978px;z-index:0">
+<div id="description" style="border-radius:5px;padding-bottom:50px;">
+<form method=GET id="filters_form">
 
-</div><div style="float:right;position:relative;width:978px;z-index:0">
-<div id="description" style="border-radius:5px;">
-<form method=GET>
+<div style="position:relative;top:5px;bottom:5px;float:right;margin-right:5px;z-index:20;">
+</div>
+<h2 style='color:#424242;margin-top:3px;'>В продаже</h2>
+<div style="margin-left:10px;margin-top:10px;display:none" id="s_filter">
+<hr class="dotted_s_hr" style="margin-bottom:15px;">
+&nbsp;Категория:<br>
+
+<br><br style="line-height:15px;">
+&nbsp;Цена:<br style="line-height:25px;">
+<input type="text" style="width:36px;height:18px;" value="" placeholder="   от" name="price_from"> &nbsp; – &nbsp;
+<input type="text" style="width:36px;height:18px;" value="" placeholder="   до" name="price_to"> &nbsp; грн.
+<br><br style="line-height:25px;">
+<input type="submit" class=wg_button name="set" style="margin-left:0px;min-width:105px;" value="Применить" onclick="document.getElementById('filters_form').onsubmit=null;">
+<br><br style="line-height:15px;">
 </form>
-<h2 style='color:#424242;margin-top:4px;'>Продано</h2>
-&nbsp;&nbsp; Здесь ничего нет<br>
+<hr class="dotted_s_hr">
+</div>
+
+
+
+<div style="position:absolute;margin-top:4px;left:20px;z-index:16;z-index:1000001;display:none;" name="more">
+<div style="
+	background:#FFF; 
+    background: -webkit-linear-gradient(360deg, #FAFAFA, #FFF 100%); 
+    background: -moz-linear-gradient(360deg, #FAFAFA, #FFF 100%); 
+    background: -ms-linear-gradient(360deg, #FAFAFA, #FFF 100%); 
+    background: -o-linear-gradient(360deg, #FAFAFA, #FFF 100%); 
+    background: linear-gradient(360deg, #FAFAFA, #FFF 100%); 
+	border:1px solid lightgray;
+	border-radius:4px; 
+	padding:7px 10px 10px 10px;
+	width:250px;height:auto; 
+	color:#585858;
+	font-size:12px;  
+	">
+<a href="#" onclick="javascript:$('div[name=more]').hide()" style="color:#585858;text-decoration:none">
+<div style="display:inline-block;width:100%;">
+<b>Сортировка:</b> не выбрано
+<img src="/styles/close.png" style="float:right;position:relative;top:2px;">
+</div>
+</a>
+</div></div>
+<form method=POST id="sellform">
+<br>
+<div class="itemListing" style="position:relative;z-index:15">
+<table class="listStandard">
+<thead>
+<tr>
+<th style="width:130px;">&nbsp;<input type=checkbox id=selectall onchange=" $('input:checkbox').prop('checked', $(this).prop('checked'));"></a></th>
+<th style="width:50px;"></th>
+<th style="width:600px;">Название</th>
+<th style="width:50px;"></th>
+<th style="width:50px;"></th> 
+<th style="width:200px;"></th>
+<th style="width:150px;"></th>
+<th style="width:200px;"></th>
+<th style="width:290px;">Цена</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><input type=checkbox name="lot[]" value="6556218666" class=itembox></td>
+<td><a href="/lot/6556218666"><div style="border:1px solid lightgray; border-radius: 5px; width:96px; height:71px; padding:10px;"><div style="width:96px; height:76px;background: url('images/DDR2.jpg') no-repeat top center;background-size:contain"></a></div></div></td>
+<td><a href="lot.html" title="DDR2 1GB 800 MHz (PC2-6400) разные производители" style="word-break:break-all">DDR2 1GB 800 MHz (PC2-6400) разные производители</a><br style="line-height:25px;"><font color=#666 style="font-family:tahoma;font-weight:normal">Дата завершения:<br>04 июн 2018 23:31:28</font></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td style="font:tahoma;font-size:13px;">54.00 грн.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div style="float:right">
+</div>
+<br><br style="line-height:30px;">
+<span style="position:relative;float:right;margin-top:20px;">
+<input type="submit" class=blue_button name="edit" onclick="$('#sellform').attr('action','/cabinet.php?opt=totaledit');" value="Изменить"> &nbsp;
+<input type="submit" class=green_button name="addlot" value="Завершить">
+</span>
+</form> <br>
+&nbsp;
 </div>
 </div>
 </div>
+<script>$('a.link').click(function(){window.open($(this).attr("rel"));return false;});</script>
 
 <div id="scrollup"><img src="/styles/up.png" style="width:30px "></div>
-
+<script type="text/javascript">
+	/* <![CDATA[ */
+	var google_conversion_id = 854531388;
+	var google_custom_params = window.google_tag_params;
+	var google_remarketing_only = true;
+	/* ]]> */
+	</script>
 <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
 	</script>
 <noscript>
 	<div style="display:inline;">
 	<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/854531388/?guid=ON&amp;script=0"/>
 	</div>
-	</noscript> 
+	</noscript>
 </body>
 </html>
