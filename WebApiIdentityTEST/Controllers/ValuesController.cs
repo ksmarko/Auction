@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BLL.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -10,6 +11,13 @@ namespace WebApiIdentityTEST.Controllers
     [Authorize]
     public class ValuesController : ApiController
     {
+        readonly ICategoryService categoryService;
+
+        public ValuesController(ICategoryService categoryService)
+        {
+            this.categoryService = categoryService;
+        }
+
         // GET api/values
         public IEnumerable<string> Get()
         {
@@ -19,7 +27,7 @@ namespace WebApiIdentityTEST.Controllers
         // GET api/values/5
         public string Get(int id)
         {
-            return "value";
+            return categoryService.GetAllCategories().First().Name;
         }
 
         // POST api/values

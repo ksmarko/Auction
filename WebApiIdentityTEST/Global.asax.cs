@@ -18,6 +18,7 @@ namespace WebApiIdentityTEST
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            BLL.Infrastructure.AutoMapperConfig.Initialize();
         }
     }
 }
