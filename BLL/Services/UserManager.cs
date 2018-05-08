@@ -24,7 +24,7 @@ namespace BLL.Services
             Database = uowi;
             Data = uow;
         }
-
+        
         public async Task<OperationDetails> Create(UserDTO userDto)
         {
             var user = await Database.UserManager.FindByEmailAsync(userDto.Email);

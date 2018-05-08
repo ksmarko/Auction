@@ -1,71 +1,49 @@
-﻿<div id="pagewrapper">
+﻿<div class="userInfo" style="display:none;">
+    <p>Вы вошли как: <span class="userName"></span></p>
+    <input type="button" value="Выйти" id="logOut" />
+</div>
+<div class="loginForm">
+    <h3>Вход на сайт</h3>
+    <label>Введите email</label><br />
+    <input type="email" id="email" /> <br /><br />
+    <label>Введите пароль</label><br />
+    <input type="password" id="password" /><br /><br />
+    <input type="submit" id="submit" value="Логин" />
+</div>
+@section scripts{
+<script type="text/javascript">
+    $(function () {
+        //...........................
 
-<script>
-modal_multisearch=document.getElementById('modal_multisearch'); 
-</script><div class="mcenter">
-<div class="bodywrapper">
-<script>
-	$(document).ready(function() {
-		  $("#aform").keydown(function(event){
-			if(event.keyCode == 13) {
-			  event.preventDefault();
-			  return false;
-		  }
-	   });
-	});
-	function isUserActive(username){
-			$.getJSON('check_account.html', {name:username}, function(list){  
-				var active=""
-                $.each(list, function(i){ 
-					active=this 
-                });  
-		                if(active>0){
-					$('#pass').removeAttr('style'); 
-					$('#reg').attr('style','display:none;') 
-					$('#login_pass').focus(); 
-				}else{ 
-					if(active==0){
-						$('#reg').removeAttr('style');
-						$('#pass').attr('style','display:none;') 
-					} 
-					if(active<0){
-						$('#inactive').show();
-					}
-				}					
-				$('#auth').removeAttr('style'); 
-                $('#noauth').attr('style','display:none;') 
+        var tokenKey = "tokenInfo";
+        $('#submit').click(function (e) {
+            e.preventDefault();
+            var loginData = {
+                grant_type: 'password',
+                username: $('#email').val(),
+                password: $('#password').val()
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: '/Token',
+                data: loginData
+            }).success(function (data) {
+                $('.userName').text(data.userName);
+                $('.userInfo').css('display', 'block');
+                $('.loginForm').css('display', 'none');
+                // сохраняем в хранилище sessionStorage токен доступа
+                sessionStorage.setItem(tokenKey, data.access_token);
+                console.log(data.access_token);
+            }).fail(function (data) {
+                alert('При логине возникла ошибка');
             });
-	};
-	
-	function showPass(){ 
-		var type = $('.pass').attr('type') == "text" ? "password" : 'text';
-		$('.pass').prop('type', type);
-	}
-	 
-</script>
-<br>
+        });
 
-<div id="categories" class="departments">
-<h2>Авторизация</h2>
-</div>
-<div id="fullsize_description">
-<br>
-<form method=POST enctype="multipart/form-data" name="mylot" id="aform">
-<input type=hidden name=s value="b08e4aee8844d776d8f617d82bc712b8a9d27638">
-<span>Логин:</span><br><br><input type=text style="width:75%;max-width:450px;" onchange="javascript:isUserActive(this.value)" size=60 name="user_login" value=""><br><br>
-<div style="" id="pass">
-<span>Пароль:</span><br><br><input type=password style="width:75%;max-width:450px;margin-right: -54px;" name="user_password" value="" class=pass id="login_pass"><a href="#" onclick="showPass()" style="position:relative;right: 18px;color:gray;"><small>показать</small></a><br><br>
-</div>
-<div id="noauth">
-<a href="profile.html" style="text-decoration:none;"><div class=green_button style="width:150px;min-height:28px;border-radius:4px;text-align:center;padding-top:9px; margin: auto;">Отправить</div></a>
-</div>
-<div style="display:none" id="auth">
-<input type="submit" class=green_button style="width:180px" name="addlot" value="Отправить"></button><br>
-</div>
-<br>
-</form>
-</center>
-</div>
-</div>
-</div>
-<div id="scrollup"><img src="img/up.png" style="width:30px "></div>
+        $('#logOut').click(function (e) {
+            e.preventDefault();
+            sessionStorage.removeItem(tokenKey);
+        });
+    })
+</script>
+    }

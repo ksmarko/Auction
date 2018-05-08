@@ -1,127 +1,56 @@
-﻿
-<script>
-modal_multisearch=document.getElementById('modal_multisearch'); 
-</script><div class="mcenter">
+﻿<div class="mcenter">
 <div class="bodywrapper">
 <br>
-<script src="../ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-<script>
-	function showPass(){ 
-		var type = $('.pass').attr('type') == "text" ? "password" : 'text';
-		$('.pass').prop('type', type);
-	}
-	
-	
-	function isUserActive(username){
-			$.getJSON('check_account6fb6.html?exist=1', {name:username}, function(list){  
-				var active=""
-                $.each(list, function(i){ 
-					active=this 
-                });  
-				if(active==1){ 
-					$('#user_login').css('border-bottom','3px solid red')
-					$('#lche_error').show()
-				}else{   
-					$('#user_login').css('border-bottom','1px solid #d0d0d0')
-					$('#lche_error').hide()		
-				} 
-            });
-	};
-	
-	function passCheck(){
-			$.getJSON('check_account.html', {pass:$('#pass').val(),login:$('#user_login').val(),email:$('#user_email').val()}, function(list){  
-				var valid=""
-                $.each(list, function(i){ 
-					valid=this 
-                });  
-				if(valid==0){ 
-					$('#pass').css('border-bottom','3px solid red')
-					$('#pchv_error').show()
-				}else{   
-					$('#pass').css('border-bottom','1px solid #d0d0d0')
-					$('#pchv_error').hide()		
-				} 
-            });
-	};
-	
-	
-	function check_login(){  
-		if(!$('#user_login').val().match(/^[a-zA-Z0-9_]{5,14}$/g)){
-			$('#user_login').css('border-bottom','3px solid red')
-			$('#lch_error').show()
-		}else{
-			$('#user_login').css('border-bottom','1px solid #d0d0d0')
-			$('#lch_error').hide()
-			isUserActive($('#user_login').val())
-		}		
-	}
-	
-	
-	function check_email(){  
-		if(!$('#user_email').val().match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/g)){
-			$('#user_email').css('border-bottom','3px solid red')
-			$('#ech_error').show()
-		}else{
-			$('#user_email').css('border-bottom','1px solid #d0d0d0')
-			$('#ech_error').hide()
-			isUserActive($('#user_email').val())
-		}		
-	}
-	
-	function check_pass(){  
-		if(!$('#pass').val().match(/^(?=.*\d)(?=.*[a-zA-Z]).{6,32}$/g)){
-			$('#pass').css('border-bottom','3px solid red')
-			$('#pch_error').show()
-		}else{
-			$('#pass').css('border-bottom','1px solid #d0d0d0')
-			$('#pch_error').hide()
-			passCheck()
-		}		
-	}
-	
-	function check_pass2(){  
-		if($('#pass2').val()!=$('#pass').val()){
-			$('#pass2').css('border-bottom','3px solid red')
-			$('#ppch_error').show()
-		}else{
-			$('#pass2').css('border-bottom','1px solid #d0d0d0')
-			$('#ppch_error').hide()
-			passCheck()
-		}		
-	}
-	
-	function onSubmit(token){
-		document.getElementById("aform").submit();
-	}
-</script>
+
 <div id="categories" class="departments">
 <h2 style="text-shadow: 1px 1px 1px Firebrick">Регистрация</h2>
 </div>
 <div id="fullsize_description">
-<form method=POST enctype="multipart/form-data" name="mylot" id="aform">
-<input type=hidden name=s value="b08e4aee8844d776d8f617d82bc712b8a9d27638">
-<script src='../www.google.com/recaptcha/api.js'></script><br>
-<b>Придумайте логин:</b><br><br><input type=text style="width:75%;max-width:450px;" onchange="check_login()" size=60 name="user_login" id="user_login" value=""><br>
-<div style="color:red;font-weight:600;display:none" id='lch_error'>Логин должен состоять из букв латинского алфавита и цифр, и иметь длину от 5 до 14 символов</div>
-<div style="color:red;font-weight:600;display:none" id='lche_error'>Пользователь с данным логином уже зарегистрирован. Придумайте другой логин</div>
-<font color=gray>* от 5 до 14 символов, только латинсий алфавит и цыфры</font><br><br>
-<b>Укажите Email:</b><br><br><input type=text style="width:75%;max-width:450px;" name="email" onchange="check_email()" id="user_email" value="">
-<br><div style="color:red;font-weight:600;display:none" id='ech_error'>Неправильный адрес email</div>
+<form method=POST action="api/account/register" enctype="multipart/form-data" name="mylot" id="aform">
+<b>Укажите Email:</b><br><br><input type=text style="width:75%;max-width:450px;" name="email" id="email" value="">
 <br>
-<b>Придумайте пароль:</b><br><br><input type=password style="width:75%;max-width:450px;margin-left: 50px;" name="pass" id="pass" onchange="check_pass()" value="" class=pass><a href="#?" onclick="showPass()" style="position:relative;right:60px;color:gray;"><small>показать</small></a>
+<b>Придумайте пароль:</b><br><br><input type=password style="width:75%;max-width:450px;margin-left: 50px;" name="password" id="password" value="" class=pass><a href="#?" onclick="showPass()" style="position:relative;right:60px;color:gray;"><small>показать</small></a>
 <div style="color:red;font-weight:600;display:none" id='pchv_error'>Придумайте другой пароль, введенный пароль слишком прост и ненадежен. Также убедитесь, что пароль не содержит логин или email</div>
 <div style="color:red;font-weight:600;display:none" id='pch_error'>Пароль должен иметь длину от 6 символов и состоять из букв и цифр</div>
 
 <br><br>
-<b>Повторите пароль:</b><br><br><input type=password id='pass2' onchange="check_pass2()" style="width:75%;max-width:450px;margin-left: 50px;" name="pass2" value="" class=pass><a href="#?" onclick="showPass()" style="position:relative;right:60px;color:gray;"><small>показать</small></a>
+<b>Повторите пароль:</b><br><br><input type=password id='confirmpassword' style="width:75%;max-width:450px;margin-left: 50px;" name="confirmpassword" value="" class=pass><a href="#?" onclick="showPass()" style="position:relative;right:60px;color:gray;"><small>показать</small></a>
 <br><div style="color:red;font-weight:600;display:none" id='ppch_error'>Введенные пароли не совпадают</div>
 <br><br>
-<div id="noauth">
-<a href="profile.html" style="text-decoration:none;"><div class=green_button style="width:150px;min-height:28px;border-radius:4px;text-align:center;padding-top:9px; margin: auto;">Отправить</div></a>
-</div>
+    <div id="noauth">
+        <input type="submit" id="submit" value="Регистрация" />
+    </div>
 <br>
 </form>
-</center>
 </div>
 </div>
-</div><br><br><br>
+</div>
+
+              <script type="text/javascript">
+                  function showPass() {
+                      var type = $('.pass').attr('type') == "text" ? "password" : 'text';
+                      $('.pass').prop('type', type);
+                  }
+
+                  $(function () {
+                      $('#submit').click(function (e) {
+                          e.preventDefault();
+                          var data = {
+                              Email: $('#email').val(),
+                              Password: $('#password').val(),
+                              ConfirmPassword: $('#confirmpassword').val()
+                          };
+
+                          $.ajax({
+                              type: 'POST',
+                              url: '/api/account/register',
+                              contentType: 'application/json; charset=utf-8',
+                              data: JSON.stringify(data)
+                          }).success(function (data) {
+                              $('#body-container').load('Client/profile.html');
+                          }).fail(function (data) {
+                              alert("В процесе регистрации возникла ошибка");
+                          });
+                      });
+                  })
+              </script>

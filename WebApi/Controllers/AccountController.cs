@@ -53,7 +53,7 @@ namespace WebApi.Controllers
                     return Ok();
                 }
             }
-            return Ok();
+            return BadRequest();
         }
 
         public IHttpActionResult Logout()
@@ -62,19 +62,8 @@ namespace WebApi.Controllers
             return Ok();
         }
 
-        public IHttpActionResult Register()
-        {
-            return Ok();
-        }
-
-        [HttpGet]
-        [Route("api/account/login")]
-        public IHttpActionResult Login()
-        {
-            return Ok();
-        }
-
         [HttpPost]
+        [Route("api/account/register")]
         //[ValidateAntiForgeryToken]
         public async Task<IHttpActionResult> Register(RegisterModel model)
         {
@@ -89,11 +78,26 @@ namespace WebApi.Controllers
 
                 OperationDetails operationDetails = await userManager.Create(userDto);
                 if (operationDetails.Succedeed)
-                    return Ok();
+                {
+                    ClaimsIdentity claim = await userManager.Authenticate(userDto);
+                    if (claim == null)
+                    {
+                        ModelState.AddModelError("", "Неверный логин или пароль.");
+                    }
+                    else
+                    {
+                        AuthenticationManager.SignOut();
+                        AuthenticationManager.SignIn(new AuthenticationProperties
+                        {
+                            IsPersistent = true
+                        }, claim);
+                        return Ok(model);
+                    }
+                }
                 else
                     ModelState.AddModelError(operationDetails.Property, operationDetails.Message);
             }
-            return Ok(model);
+            return BadRequest();
         }
     }
 }
