@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using BLL.Interfaces;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -16,38 +17,24 @@ namespace WebApiIdentityTEST.Providers
     public class ApplicationOAuthProvider : OAuthAuthorizationServerProvider
     {
         private readonly string _publicClientId;
+        private readonly IUserManager userManager;
 
-        public ApplicationOAuthProvider(string publicClientId)
+        public ApplicationOAuthProvider(string publicClientId, IUserManager userManager)
         {
-            if (publicClientId == null)
-            {
-                throw new ArgumentNullException("publicClientId");
-            }
-
-            _publicClientId = publicClientId;
+            _publicClientId = publicClientId ?? throw new ArgumentNullException("publicClientId");
+            this.userManager = userManager;
         }
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
+            var claims = await userManager.FindAsync(context.UserName, context.Password);
+            //item1= oAuthIdentity
+            //item2 = cookiesIdentity
 
-            ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
-
-            if (user == null)
-            {
-                context.SetError("invalid_grant", "The user name or password is incorrect.");
-                return;
-            }
-
-            ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager,
-               OAuthDefaults.AuthenticationType);
-            ClaimsIdentity cookiesIdentity = await user.GenerateUserIdentityAsync(userManager,
-                CookieAuthenticationDefaults.AuthenticationType);
-
-            AuthenticationProperties properties = CreateProperties(user.UserName);
-            AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
+            AuthenticationProperties properties = CreateProperties(context.UserName);
+            AuthenticationTicket ticket = new AuthenticationTicket(claims.Item1, properties);
             context.Validated(ticket);
-            context.Request.Context.Authentication.SignIn(cookiesIdentity);
+            context.Request.Context.Authentication.SignIn(claims.Item2);
         }
 
         public override Task TokenEndpoint(OAuthTokenEndpointContext context)

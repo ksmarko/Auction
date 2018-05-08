@@ -22,9 +22,9 @@ namespace WebApi.Controllers
         // GET api/values
         [HttpGet]
         [Route("api/account/id")]
-        public string fghjkl()
+        public string GetUser(int id)
         {
-            return userManager.GetUsers().First().Id;
+            return userManager.GetUsers().ElementAt(id).UserName;
         }
 
         // GET api/values/5
