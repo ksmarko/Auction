@@ -1,6 +1,3 @@
-//[assembly: WebActivator.PreApplicationStartMethod(typeof(WebApi.App_Start.NinjectWebCommon), "Start")]
-//[assembly: WebActivator.ApplicationShutdownMethodAttribute(typeof(WebApi.App_Start.NinjectWebCommon), "Stop")]
-
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(WebApi.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(WebApi.App_Start.NinjectWebCommon), "Stop")]
 

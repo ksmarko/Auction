@@ -1,54 +1,41 @@
-﻿using BLL.Interfaces;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
-using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.OAuth;
-using Ninject;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using System.Web;
+using BLL.Interfaces;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.Cookies;
+using Microsoft.Owin.Security.OAuth;
+using WebApi.Models;
 
 namespace WebApi.Providers
 {
     public class ApplicationOAuthProvider : OAuthAuthorizationServerProvider
     {
         private readonly string _publicClientId;
+        private readonly IUserManager userManager;
 
-        [Inject]
-        readonly IUserManager userManager;
-
-        public ApplicationOAuthProvider(string publicClientId)
+        public ApplicationOAuthProvider(string publicClientId, IUserManager userManager)
         {
-            if (publicClientId == null)
-            {
-                throw new ArgumentNullException("publicClientId");
-            }
-
-            _publicClientId = publicClientId;
+            _publicClientId = publicClientId ?? throw new ArgumentNullException("publicClientId");
+            this.userManager = userManager;
         }
 
-        //public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
-        //{
-        //    var user = userManager.GetUsers().Where(x => x.UserName == context.UserName && x.Password == context.Password).FirstOrDefault();
-        //    if (user == null)
-        //    {
-        //        context.SetError("invalid_grant", "The user name or password is incorrect.");
-        //        return;
-        //    }
+        public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
+        {
+            var claims = await userManager.FindAsync(context.UserName, context.Password);
+            //item1= oAuthIdentity
+            //item2 = cookiesIdentity
 
-        //    ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager,
-        //       OAuthDefaults.AuthenticationType);
-        //    ClaimsIdentity cookiesIdentity = await user.GenerateUserIdentityAsync(userManager,
-        //        CookieAuthenticationDefaults.AuthenticationType);
-
-        //    AuthenticationProperties properties = CreateProperties(user.UserName);
-        //    AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
-        //    context.Validated(ticket);
-        //    context.Request.Context.Authentication.SignIn(cookiesIdentity);
-        //}
+            AuthenticationProperties properties = CreateProperties(context.UserName);
+            AuthenticationTicket ticket = new AuthenticationTicket(claims.Item1, properties);
+            context.Validated(ticket);
+            context.Request.Context.Authentication.SignIn(claims.Item2);
+        }
 
         public override Task TokenEndpoint(OAuthTokenEndpointContext context)
         {

@@ -8,31 +8,26 @@ using System.Web.Http;
 
 namespace WebApi.Controllers
 {
+    [Authorize]
     public class ValuesController : ApiController
     {
-        readonly IUserManager userManager;
         readonly ICategoryService categoryService;
 
-        public ValuesController(IUserManager userManager, ICategoryService categoryService)
+        public ValuesController(ICategoryService categoryService)
         {
-            this.userManager = userManager;
             this.categoryService = categoryService;
         }
 
         // GET api/values
-        [HttpGet]
-        [Route("api/account/id")]
-        public string GetUser(int id)
+        public IEnumerable<string> Get()
         {
-            return userManager.GetUsers().ElementAt(id).UserName;
+            return new string[] { "value1", "value2" };
         }
 
         // GET api/values/5
-        [HttpGet]
-        [Route("api/index")]
-        public string[] Get()
+        public string Get(int id)
         {
-            return categoryService.GetAllCategories().Select(x => x.Name).ToArray();
+            return categoryService.GetAllCategories().First().Name;
         }
 
         // POST api/values

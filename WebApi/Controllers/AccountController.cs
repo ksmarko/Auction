@@ -8,96 +8,170 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Http.ModelBinding;
 using BLL.DTO;
-using BLL.Infrastructure;
 using BLL.Interfaces;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using WebApi.Models;
+using WebApi.Providers;
+using WebApi.Results;
 
 namespace WebApi.Controllers
 {
+    [Authorize]
+    [RoutePrefix("api/Account")]
     public class AccountController : ApiController
     {
-        readonly IUserManager userManager;
+        private const string LocalLoginProvider = "Local";
+        readonly IUserManager userManager = System.Web.Http.GlobalConfiguration.Configuration.DependencyResolver.GetService(typeof(IUserManager)) as IUserManager;
 
-        private IAuthenticationManager AuthenticationManager
+        public AccountController() { }
+
+        public AccountController(ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
         {
-            get => Request.GetOwinContext().Authentication;
+            AccessTokenFormat = accessTokenFormat;
         }
 
-        public AccountController(IUserManager userManager) => this.userManager = userManager;
+        public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
 
-        [HttpPost]
-        [Route("api/account/login")]
-        //[ValidateAntiForgeryToken]
-        public async Task<IHttpActionResult> Login(LoginModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                UserDTO userDto = new UserDTO { Email = model.Email, Password = model.Password };
-                ClaimsIdentity claim = await userManager.Authenticate(userDto);
-                if (claim == null)
-                {
-                    ModelState.AddModelError("", "Неверный логин или пароль.");
-                }
-                else
-                {
-                    AuthenticationManager.SignOut();
-                    AuthenticationManager.SignIn(new AuthenticationProperties
-                    {
-                        IsPersistent = true
-                    }, claim);
-                    return Ok();
-                }
-            }
-            return BadRequest();
-        }
-
+        // POST api/Account/Logout
+        [Route("Logout")]
         public IHttpActionResult Logout()
         {
-            AuthenticationManager.SignOut();
+            Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
             return Ok();
         }
 
-        [HttpPost]
-        [Route("api/account/register")]
-        //[ValidateAntiForgeryToken]
-        public async Task<IHttpActionResult> Register(RegisterModel model)
+        // POST api/Account/Register
+        [AllowAnonymous]
+        [Route("Register")]
+        public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                UserDTO userDto = new UserDTO
-                {
-                    Email = model.Email,
-                    Password = model.Password,
-                    Role = "user"
-                };
+                return BadRequest(ModelState);
+            }
 
-                OperationDetails operationDetails = await userManager.Create(userDto);
-                if (operationDetails.Succedeed)
+            var user = new UserDTO() { UserName = model.Email, Email = model.Email, Password = model.Password, Role = "user" };
+
+            var result = await userManager.Create(user);// UserManager.CreateAsync(user, model.Password);
+
+            if (!result.Succedeed)
+            {
+                return BadRequest(result.Message); //GetErrorResult(result.Message.ToString());
+            }
+
+            return Ok();
+        }
+
+        #region Helpers
+
+        private IAuthenticationManager Authentication
+        {
+            get { return Request.GetOwinContext().Authentication; }
+        }
+
+        private IHttpActionResult GetErrorResult(IdentityResult result)
+        {
+            if (result == null)
+            {
+                return InternalServerError();
+            }
+
+            if (!result.Succeeded)
+            {
+                if (result.Errors != null)
                 {
-                    ClaimsIdentity claim = await userManager.Authenticate(userDto);
-                    if (claim == null)
+                    foreach (string error in result.Errors)
                     {
-                        ModelState.AddModelError("", "Неверный логин или пароль.");
-                    }
-                    else
-                    {
-                        AuthenticationManager.SignOut();
-                        AuthenticationManager.SignIn(new AuthenticationProperties
-                        {
-                            IsPersistent = true
-                        }, claim);
-                        return Ok(model);
+                        ModelState.AddModelError("", error);
                     }
                 }
-                else
-                    ModelState.AddModelError(operationDetails.Property, operationDetails.Message);
+
+                if (ModelState.IsValid)
+                {
+                    // No ModelState errors are available to send, so just return an empty BadRequest.
+                    return BadRequest();
+                }
+
+                return BadRequest(ModelState);
             }
-            return BadRequest();
+
+            return null;
         }
+
+        private class ExternalLoginData
+        {
+            public string LoginProvider { get; set; }
+            public string ProviderKey { get; set; }
+            public string UserName { get; set; }
+
+            public IList<Claim> GetClaims()
+            {
+                IList<Claim> claims = new List<Claim>();
+                claims.Add(new Claim(ClaimTypes.NameIdentifier, ProviderKey, null, LoginProvider));
+
+                if (UserName != null)
+                {
+                    claims.Add(new Claim(ClaimTypes.Name, UserName, null, LoginProvider));
+                }
+
+                return claims;
+            }
+
+            public static ExternalLoginData FromIdentity(ClaimsIdentity identity)
+            {
+                if (identity == null)
+                {
+                    return null;
+                }
+
+                Claim providerKeyClaim = identity.FindFirst(ClaimTypes.NameIdentifier);
+
+                if (providerKeyClaim == null || String.IsNullOrEmpty(providerKeyClaim.Issuer)
+                    || String.IsNullOrEmpty(providerKeyClaim.Value))
+                {
+                    return null;
+                }
+
+                if (providerKeyClaim.Issuer == ClaimsIdentity.DefaultIssuer)
+                {
+                    return null;
+                }
+
+                return new ExternalLoginData
+                {
+                    LoginProvider = providerKeyClaim.Issuer,
+                    ProviderKey = providerKeyClaim.Value,
+                    UserName = identity.FindFirstValue(ClaimTypes.Name)
+                };
+            }
+        }
+
+        private static class RandomOAuthStateGenerator
+        {
+            private static RandomNumberGenerator _random = new RNGCryptoServiceProvider();
+
+            public static string Generate(int strengthInBits)
+            {
+                const int bitsPerByte = 8;
+
+                if (strengthInBits % bitsPerByte != 0)
+                {
+                    throw new ArgumentException("strengthInBits must be evenly divisible by 8.", "strengthInBits");
+                }
+
+                int strengthInBytes = strengthInBits / bitsPerByte;
+
+                byte[] data = new byte[strengthInBytes];
+                _random.GetBytes(data);
+                return HttpServerUtility.UrlTokenEncode(data);
+            }
+        }
+
+        #endregion
     }
 }
