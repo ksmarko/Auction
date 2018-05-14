@@ -7,6 +7,9 @@ using DAL.Identity.Entities;
 using DAL.Identity.Interfaces;
 using DAL.Interfaces;
 using Microsoft.AspNet.Identity;
+using Microsoft.Owin.Security.Cookies;
+using Microsoft.Owin.Security.OAuth;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -24,7 +27,7 @@ namespace BLL.Services
             Database = uowi;
             Data = uow;
         }
-
+        
         public async Task<OperationDetails> Create(UserDTO userDto)
         {
             var user = await Database.UserManager.FindByEmailAsync(userDto.Email);
@@ -72,6 +75,25 @@ namespace BLL.Services
         public void Dispose()
         {
             Database.Dispose();
+        }
+
+        public async Task<Tuple<ClaimsIdentity, ClaimsIdentity>> FindAsync(string username, string password)
+        {
+            var appUser = await Database.UserManager.FindAsync(username, password);
+
+            //if (appUser == null)
+            //throw new AuthException("invalid_grant", "The user name or password is incorrect.");
+
+            ClaimsIdentity oAuthIdentity = await Database.UserManager.CreateIdentityAsync(appUser, OAuthDefaults.AuthenticationType);
+            ClaimsIdentity cookiesIdentity = await Database.UserManager.CreateIdentityAsync(appUser, CookieAuthenticationDefaults.AuthenticationType);
+
+            return new Tuple<ClaimsIdentity, ClaimsIdentity>(oAuthIdentity, cookiesIdentity);
+        }
+
+        public async Task<UserDTO> FindByIdAsync(string id)
+        {
+            var appUser = await Database.UserManager.FindByIdAsync(id);
+            return Mapper.Map<ApplicationUser, UserDTO>(appUser);
         }
     }
 }

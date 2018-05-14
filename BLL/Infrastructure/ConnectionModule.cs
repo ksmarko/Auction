@@ -2,7 +2,7 @@
 using DAL.Identity.Repositories;
 using DAL.Interfaces;
 using DAL.Repositories;
-
+using Ninject;
 using Ninject.Modules;
 
 namespace BLL.Infrastructure

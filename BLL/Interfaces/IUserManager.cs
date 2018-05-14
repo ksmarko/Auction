@@ -13,5 +13,8 @@ namespace BLL.Interfaces
         Task<ClaimsIdentity> Authenticate(UserDTO userDto);
         UserDTO GetUserById(string id);
         IEnumerable<UserDTO> GetUsers();
+
+        Task<Tuple<ClaimsIdentity, ClaimsIdentity>> FindAsync(string username, string password);
+        Task<UserDTO> FindByIdAsync(string id);
     }
 }
