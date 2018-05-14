@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<head>
+<meta name="viewport" content="width=device-width">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<title>Мои продажи</title>
+<link rel="icon" href="favicon.ico">	
+<link rel="stylesheet" media="screen" type="text/css" href="css/style.css" title="">
+<link rel="stylesheet" media="screen" type="text/css" href="css/portable_style.css" title="">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700,800&amp;subset=latin,cyrillic" rel="stylesheet">
+<script src='js/jquery-11.0.min.js' type="text/javascript"></script>
+
+
+</head>
+<body onload="$('#mainform').focus();scrollup();">
+<div class="top_nav">
+	<div class="container">
+		<div class="menu fullsize">
+			<ul>
+				<li><a href="purchase.html">Мой кабинет</a></li><div class="arrow"></div>
+				<li><a href="index.html">Выход</a></li> 
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="ddmenu" id="ddm">
+	<li><a href="purchase.html">Мой кабине</a></li><div class="arrow"></div>
+	<li><a href="index.html">Выход</a></li>
+	<hr style="margin-top:10px;margin-bottom:10px;border:0; border-top: #FFF dashed  1px;">
+</div>
+<div id="pagewrapper">
+	<a href="index.html"><div class="skylogo"></div></a>
+<div class="search_form">
+<form method="GET" action="index.html" autocomplete="off">
+<input onfocus="this.selectionStart = this.selectionEnd = this.value.length;" onclick="firstfocus=0;(this.value.length)>0?$('#suggestions').show():0;" onkeypress="(event.keyCode==32 && firstfocus==1)?($('#mainform').blur()):0;firstfocus=0;" oninput="(this.value.length)>0?get_suggestions(this.value):$('#suggestions').hide()" type=text name=search id="mainform" placeholder="Что будем искать? " value="" class="top_search">
+<!-- Скрипт отвечает за поиск -->
+<script> 
+var cur_loc=window.location.href;
+cur_loc=cur_loc.replace(/\?t=[0-9]+/g,"");  
+function get_suggestions(query){
+	if($(window).width()>880)
+		$.ajax({
+		  url: "/suggestions.php",
+		  type: "post", //отправить его методом get
+		  data:{q: query},
+		  dataType:'json',
+		  success: function(response) {
+			suggestions=response;
+			if(suggestions.length==0){
+				$('#suggest_container').empty(); 
+			}else{
+				$('#suggest_container').empty();   
+				for(var i=0;i<suggestions.length;i++){ 
+					if(suggestions[i][1]==0)
+						$('#suggest_container').append("<div class=\"suggest\" onclick=\"$('#mainform').val('"+suggestions[i][0]+"');window.location.replace('/c"+parseInt(suggestions[i][2])+"/s/')\"><span style='color:#606060;font-weight:normal;padding-right:2px;'>Категория</span>&nbsp;"+suggestions[i][3]+""+suggestions[i][0]+"&nbsp;<img src='/styles/goto.png' style='width:11px;'></div>")	
+					else
+						if(suggestions[i][1]==3)
+								$('#suggest_container').append("<div class=\"suggest\" onclick=\"$('#mainform').val('"+suggestions[i][0]+"');window.location.replace('/"+encodeURIComponent(suggestions[i][2])+"/')\"><span style='color:#606060;font-weight:normal;padding-right:2px;'>Лот</span>&nbsp;"+suggestions[i][0]+"&nbsp;<span style='color:#606060;font-weight:normal;padding-right:2px;'>("+suggestions[i][2]+")</span>&nbsp;<img src='/styles/goto.png' style='width:11px;'></div>")	
+						else
+							if(suggestions[i][1]==2)
+									$('#suggest_container').append("<div class=\"suggest\" onclick=\"$('#mainform').val('"+suggestions[i][0]+"');window.location.replace('/"+encodeURIComponent(suggestions[i][0])+"')\"><span style='color:#606060;font-weight:normal;padding-right:2px;'>Пользователь</span>&nbsp;"+suggestions[i][3]+""+suggestions[i][0]+"&nbsp;<img src='/styles/goto.png' style='width:11px;'></div>")	
+							else
+								$('#suggest_container').append("<div class=\"suggest\" onclick=\"$('#mainform').val('"+suggestions[i][0]+"');window.location.replace('/search.php?search="+encodeURIComponent(suggestions[i][0])+"')\">"+suggestions[i][0]+"</div>")	
+				}
+				$('#suggestions').show()	
+			} 
+		  },
+		  error: function(xhr) { 
+		  }
+		});
+} 
+var rp=45*60*1000;
+$(window).bind('focus', function() { 
+; 
+
+window.clearTimeout(rTimer);
+rTimer=setTimeout(function() {var meta = document.createElement('meta'); meta.name = "referrer"; meta.content = "no-referrer"; document.getElementsByTagName('head')[0].appendChild(meta); window.location.href = cur_loc+'?t='+1}, rp)
+ });
+
+var rTimer=setTimeout(function() {var meta = document.createElement('meta'); meta.name = "referrer"; meta.content = "no-referrer"; document.getElementsByTagName('head')[0].appendChild(meta); window.location.href = cur_loc+'?t='+1}, rp);
+  
+</script>
+<input id='checkbox_hidden' type='hidden' value='0' name='desc_check'>
+<input id='cat_hidden' type='hidden' value='0' name='catid'>
+<input type=submit>
+</div>
+<div class="suggestions" style="display:none" id="suggestions">
+
+</div>
+</form>
+
+<script>
+modal_multisearch=document.getElementById('modal_multisearch'); 
+</script>
+<div style="width:100%;height:53px;margin-left:2px;margin-bottom:15px;background:url('data:image/png;base64,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') no-repeat">
+<a href="purchase.html"><div style="position:absolute;left:20px;margin-top:20px;width:265px;height:15px;font-weight:600;font-family:'Arial';font-size:16px;color:#505050">Мои покупки</div></a>
+<a href="sale.html"><div style="position:absolute;left:166px;margin-top:20px;width:265px;height:15px;font-weight:600;font-family:'Arial';font-size:16px;color:#505050">Мои продажи</div></a>
+</div>
+<div id="wrapContent">
+<div id="left" style="width:205px;">
+<div id="categories" class="departments" style="position:relative;z-index:30;width:205px;">
+<h2>Мои продажи</h2>
+<ul class="no-js">
+<li>
+<h2><a href="sell.html">Выставить лот </a></h2>
+</li>
+<li>
+<h2><a href="onsale.html">В продаже</a></h2>
+</li>
+<li>
+<h2><a href="сompleted.html">Завершенные</a></h2>
+</li>
+</div>
+<br>
+
+</div><div style="float:right;position:relative;width:978px;z-index:0">
+<div id="description" style="border-radius:5px;">
+<form method=GET>
+</form>
+<h2 style='color:#424242;margin-top:4px;'>Продано</h2>
+&nbsp;&nbsp; Здесь ничего нет<br>
+</div>
+</div>
+</div>
+
+<div id="scrollup"><img src="/styles/up.png" style="width:30px "></div>
+
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+	</script>
+<noscript>
+	<div style="display:inline;">
+	<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/854531388/?guid=ON&amp;script=0"/>
+	</div>
+	</noscript> 
+</body>
+</html>
