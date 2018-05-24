@@ -62,5 +62,32 @@ namespace WebApi.Controllers
 
             return Mapper.Map<IEnumerable<LotDTO>, IEnumerable<LotModel>>(lots);
         }
+
+        [HttpGet]
+        [Route("api/lots/category/{id}")]
+        public IEnumerable<LotModel> GetLots(int id)
+        {
+            var lots = lotService.GetLotsForCategory(id);
+
+            return Mapper.Map<IEnumerable<LotDTO>, IEnumerable<LotModel>>(lots);
+        }
+
+        [HttpPut]
+        [Route("api/lots/{id}/verify")]
+        public IHttpActionResult VerifyLot(int id)
+        {
+            lotService.VerifyLot(id);
+
+            return Ok("Lot verified");
+        }
+
+        [HttpPost]
+        [Route("api/lots/change")]
+        public IHttpActionResult ChangeCategory(ChangeCategoryModel model)
+        {
+            lotService.ChangeLotCategory(model.LotId, model.CategoryId);
+
+            return Ok("Category changed");
+        }
     }
 }

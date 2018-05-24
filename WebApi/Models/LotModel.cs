@@ -13,7 +13,7 @@ namespace WebApi.Models
         public byte[] Img { get; set; }
         public double Price { get; set; }
         public int TradeDuration { get; set; }
-        public string CreatorId { get; set; }
+        public string Creator { get; set; }
         public bool IsVerified { get; set; }
         public string Category { get; set; }
     }

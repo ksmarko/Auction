@@ -13,7 +13,7 @@ namespace WebApi.App_Start
         public static void Configure(IMapperConfigurationExpression cfg)
         {
             cfg.CreateMap<LotDTO, LotModel>()
-                .ForMember(dst => dst.CreatorId, map => map.MapFrom(src => src.User.Name))
+                .ForMember(dst => dst.Creator, map => map.MapFrom(src => src.User.Name))
                 .ForMember(dst => dst.Category, map => map.MapFrom(src => src.Category.Name));
 
             cfg.CreateMap<LotModel, LotDTO>()

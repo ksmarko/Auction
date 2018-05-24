@@ -44,19 +44,19 @@ namespace BLL.Services
 
         public void CreateLot(LotDTO entity)
         {
-            var newLot = new Lot()
+            var lot = new Lot()
             {
                 Name = entity.Name,
-                Price = entity.Price,
                 Description = entity.Description,
                 Img = entity.Img,
+                IsVerified = false,
                 TradeDuration = entity.TradeDuration,
-                User = Database.Users.Get(entity.User.Id)
+                Price = entity.Price,
+                User = Database.Users.Get(entity.User.Id),
+                Category = Database.Categories.Get(1)
             };
-            
-            newLot.Category = Database.Categories.Get(1);
-
-            Database.Lots.Create(newLot);
+        
+            Database.Lots.Create(lot);
             Database.Save();
         }
 
@@ -88,6 +88,11 @@ namespace BLL.Services
         public IEnumerable<LotDTO> GetAllLots()
         {
             return Mapper.Map<IEnumerable<Lot>, List<LotDTO>>(Database.Lots.GetAll());
+        }
+
+        public IEnumerable<LotDTO> GetLotsForCategory(int categoryId)
+        {
+            return Mapper.Map<IEnumerable<Lot>, List<LotDTO>>(Database.Lots.Find(x => x.CategoryId == categoryId));
         }
 
         public LotDTO GetLot(int id)

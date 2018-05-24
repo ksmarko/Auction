@@ -1,4 +1,5 @@
-﻿using BLL.DTO;
+﻿using AutoMapper;
+using BLL.DTO;
 using BLL.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using WebApi.Models;
 
 namespace WebApi.Controllers
 {
@@ -19,9 +21,9 @@ namespace WebApi.Controllers
         }
 
         // GET api/values
-        public IEnumerable<CategoryDTO> Get()
+        public IEnumerable<CategoryModel> Get()
         {
-            return categoryService.GetAllCategories();
+            return Mapper.Map<IEnumerable<CategoryDTO>, IEnumerable<CategoryModel>>(categoryService.GetAllCategories());
         }
 
         // GET api/values/5

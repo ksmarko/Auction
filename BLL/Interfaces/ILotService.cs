@@ -15,5 +15,6 @@ namespace BLL.Interfaces
         void ChangeLotCategory(int lotId, int categoryId);
         void VerifyLot(int id);
         void Dispose();
+        IEnumerable<LotDTO> GetLotsForCategory(int categoryId);
     }
 }
