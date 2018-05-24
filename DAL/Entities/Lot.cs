@@ -18,7 +18,8 @@ namespace DAL.Entities
 
         public int TradeDuration { get; set; }
 
-        public virtual ICollection<Category> Categories { get; set; }
+        public virtual Category Category { get; set; }
+        public int CategoryId { get; set; }
 
         public bool IsVerified { get; set; }
 
@@ -28,7 +29,6 @@ namespace DAL.Entities
         public Lot()
         {
             IsVerified = false;
-            Categories = new List<Category>();
         }
     }
 }

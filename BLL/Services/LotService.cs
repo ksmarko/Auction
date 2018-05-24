@@ -54,7 +54,7 @@ namespace BLL.Services
                 User = Database.Users.Get(entity.User.Id)
             };
             
-            newLot.Categories.Add(Database.Categories.Get(1));
+            newLot.Category = Database.Categories.Get(1);
 
             Database.Lots.Create(newLot);
             Database.Save();
@@ -71,24 +71,7 @@ namespace BLL.Services
             Database.Save();
         }
 
-        public void RemoveLotFromCategory(int lotId, int categoryId)
-        {
-            Lot lot = Database.Lots.Get(lotId);
-            Category category = Database.Categories.Get(categoryId);
-
-            if (lot == null || category == null)
-                throw new ArgumentNullException();
-            
-            lot.Categories.Remove(category);
-
-            if (lot.Categories.Count == 0)
-                AddLotToCategory(lotId, 1);
-
-            Database.Lots.Update(lot);
-            Database.Save();
-        }
-
-        public void AddLotToCategory(int lotId, int categoryId)
+        public void ChangeLotCategory(int lotId, int categoryId)
         {
             Lot lot = Database.Lots.Get(lotId);
             Category category = Database.Categories.Get(categoryId);
@@ -96,7 +79,7 @@ namespace BLL.Services
             if (lot == null || category == null)
                 throw new ArgumentNullException();
 
-            lot.Categories.Add(category);
+            lot.Category = category;
                 
             Database.Lots.Update(lot);
             Database.Save();

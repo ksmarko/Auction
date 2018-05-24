@@ -1,4 +1,5 @@
-﻿using BLL.Interfaces;
+﻿using BLL.DTO;
+using BLL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,6 @@ using System.Web.Http;
 
 namespace WebApi.Controllers
 {
-    [Authorize]
     public class ValuesController : ApiController
     {
         readonly ICategoryService categoryService;
@@ -19,15 +19,15 @@ namespace WebApi.Controllers
         }
 
         // GET api/values
-        public IEnumerable<string> Get()
+        public IEnumerable<CategoryDTO> Get()
         {
-            return new string[] { "value1", "value2" };
+            return categoryService.GetAllCategories();
         }
 
         // GET api/values/5
         public string Get(int id)
         {
-            return categoryService.GetAllCategories().First().Name;
+            return categoryService.GetCategory(id).Name;
         }
 
         // POST api/values
@@ -41,8 +41,10 @@ namespace WebApi.Controllers
         }
 
         // DELETE api/values/5
-        public void Delete(int id)
+        public IHttpActionResult Delete(int id)
         {
+            categoryService.RemoveCategory(id);
+            return Ok("Successfully deleted");
         }
     }
 }
