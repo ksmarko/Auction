@@ -12,8 +12,7 @@ namespace BLL.Interfaces
         void RemoveLot(int id);
         IEnumerable<LotDTO> GetAllLots();
         LotDTO GetLot(int id);
-        void RemoveLotFromCategory(int lotId, int categoryId);
-        void AddLotToCategory(int lotId, int categoryId);
+        void ChangeLotCategory(int lotId, int categoryId);
         void VerifyLot(int id);
         void Dispose();
     }

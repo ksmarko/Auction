@@ -34,8 +34,7 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginModel model)
         {
-            if (ModelState.IsValid)
-            {
+            if (ModelState.IsValid)            {
                 UserDTO userDto = new UserDTO { Email = model.Email, Password = model.Password };
                 ClaimsIdentity claim = await userManager.Authenticate(userDto);
                 if (claim == null)

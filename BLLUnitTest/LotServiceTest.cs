@@ -5,69 +5,43 @@ using DAL.Repositories;
 using BLL.DTO;
 using DAL.Entities;
 using BLL.Services;
-
+using Moq;
+using NSubstitute;
+//using Ploeh.AutoFixture;
+using NUnit.Framework;
 using System;
 using System.Data.Entity;
 using BLL.Interfaces;
 using DAL.Interfaces;
 using System.Collections.Generic;
 using BLL.Infrastructure;
+using AutoMapper;
 
 namespace BLLUnitTest
 {
-
-    public class ServiceModule : NinjectModule
-    {
-        public override void Load()
-        {
-            Bind<ILotService>().To<LotService>();
-            Bind<ICategoryService>().To<CategoryService>();
-            Bind<ITradeService>().To<TradeService>();
-            Bind<IUserManager>().To<UserManager>();
-        }
-    }
-
-        [TestFixture]   
+    [TestFixture]
     public class LotServiceTest
     {
         private ILotService lotService;
-        private Mock<GenericRepository<Lot>> lotRepository;
-        private Mock<EFUnitOfWork> uow;
-        Mock<DAL.EF.DataContext> db;
-        List<Lot> lots;
-        static StandardKernel kernel;
+        private Mock<IUnitOfWork> uow;
+        private Mock<IRepository<Lot>> lotRepository;
 
         static LotServiceTest()
         {
-            var serviceModule = new ServiceModule();
-            kernel = new StandardKernel(serviceModule);
-            
-            AutoMapperConfig.Initialize();
-        }
+            Mapper.Initialize(cfg =>
+            BLL.Infrastructure.AutoMapperConfig.Configure(cfg)
+            );
+        } 
 
         [SetUp]
         public void Load()
         {
-            uow = new Mock<EFUnitOfWork>("defaultbd");
-            db = new Mock<DAL.EF.DataContext>("defaultbd");
+            uow = new Mock<IUnitOfWork>();
+            lotRepository = new Mock<IRepository<Lot>>();
 
-            lotRepository = new Mock<GenericRepository<Lot>>(db.Object as IUnitOfWork);
-           // var rep = kernel.Get<GenericRepository<Lot>>();
+            uow.Setup(x => x.Lots).Returns(lotRepository.Object);
+            uow.Setup(x => x.Categories.Get(It.IsAny<int>())).Returns(It.IsAny<Category>());
 
-            lots = new List<Lot> {
-                new Lot{ Name = "Lot1" , Price = 1, TradeDuration = 1},
-                new Lot{ Name = "Lot2" , Price = 1, TradeDuration = 1},
-                new Lot{ Name = "Lot3" , Price = 1, TradeDuration = 1},
-                new Lot{ Name = "Lot4" , Price = 1, TradeDuration = 1}
-            };
-            uow.Setup(x => x.Lots).Returns(lotRepository.Object as IRepository<Lot>);
-
-            foreach (var el in lots)
-                lotRepository.Setup(x => x.Create(el));
-                //rep.Create(el);
-
-            
-            
             lotService = new LotService(uow.Object);
         }
 
@@ -78,25 +52,35 @@ namespace BLLUnitTest
             Assert.Throws<ArgumentNullException>(() => lotService.CreateLot(null));
         }
 
+
         [Test]
-        public void GetLot_TryToGetNullValue_ShoulThrow()
+        public void CreateLot_TryToCreateLot_ShouldRepositoryCreateOnce()
+        {
+            var lot = new LotDTO { Name = It.IsAny<string>(), Price = It.IsAny<double>(), TradeDuration = It.IsAny<int>()};
+            
+            // act
+            lotService.CreateLot(lot);
+
+            //assert
+            lotRepository.Verify(x => x.Create(It.IsAny<Lot>()), Times.Once);
+        }
+
+
+        [Test]
+        public void GetLot_TryToGetNullValue_ShouldThrow()
         {
             // act & assert
-            Assert.Throws<ArgumentNullException>(() => lotService.GetLot(It.IsAny<int>()), null);
+            Assert.IsNull(lotService.GetLot(It.IsAny<int>()));
         }
 
         [Test]
-        public void GetLot_TryToGetValue_ShouldGetRealValue()
+        public void GetLot_TryToGetValue_ShouldReturnSomeValue()
         {
-            // act & assert
-            Assert.AreEqual(lotService.GetLot(1).Name, "Try1");
-            //Assert.Throws<NullReferenceException>(() => lotService.GetLot(5));
-        }
+            var lot = new Lot { Name = It.IsAny<string>(), Price = It.IsAny<double>(), TradeDuration = It.IsAny<int>() };
 
-        [Test]
-        public void GetAllLotsTest()
-        {
-            Assert.AreEqual(6, 6);
+            uow.Setup(x => x.Lots.Get(It.IsAny<int>())).Returns(lot);
+
+            Assert.IsNotNull(lotService.GetLot(It.IsAny<int>()));
         }
 
         
