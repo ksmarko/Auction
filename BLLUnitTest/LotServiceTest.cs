@@ -1,21 +1,14 @@
-﻿using Ninject;
-using Ninject.Modules;
-using System.Configuration;
-using DAL.Repositories;
+﻿using AutoMapper;
 using BLL.DTO;
-using DAL.Entities;
+using BLL.Interfaces;
+using BLL.Infrastructure;
 using BLL.Services;
+using DAL.Entities;
+using DAL.Interfaces;
 using Moq;
-using NSubstitute;
-//using Ploeh.AutoFixture;
 using NUnit.Framework;
 using System;
-using System.Data.Entity;
-using BLL.Interfaces;
-using DAL.Interfaces;
 using System.Collections.Generic;
-using BLL.Infrastructure;
-using AutoMapper;
 
 namespace BLLUnitTest
 {
@@ -40,7 +33,7 @@ namespace BLLUnitTest
             lotRepository = new Mock<IRepository<Lot>>();
 
             uow.Setup(x => x.Lots).Returns(lotRepository.Object);
-            uow.Setup(x => x.Categories.Get(It.IsAny<int>())).Returns(It.IsAny<Category>());
+            uow.Setup(x => x.Categories.Get(It.IsAny<int>())).Returns(new Category { Name = It.IsAny<string>()});
 
             lotService = new LotService(uow.Object);
         }
@@ -69,6 +62,8 @@ namespace BLLUnitTest
         [Test]
         public void GetLot_TryToGetNullValue_ShouldThrow()
         {
+            lotRepository.Setup(x => x.Get(It.IsAny<int>())).Returns<Lot>(null);
+
             // act & assert
             Assert.IsNull(lotService.GetLot(It.IsAny<int>()));
         }
@@ -80,9 +75,131 @@ namespace BLLUnitTest
 
             uow.Setup(x => x.Lots.Get(It.IsAny<int>())).Returns(lot);
 
+            // act & assert
             Assert.IsNotNull(lotService.GetLot(It.IsAny<int>()));
         }
 
+        [Test]
+        public void EditLot_TryToPutInEditNullElement_ShouldThrow()
+        {
+            // act & assert
+            Assert.Throws<ArgumentNullException>(() => lotService.EditLot(null));
+        }
+
+        [Test]
+        public void EditLot_TryToEditNullElement_ShouldThrow()
+        {
+            var lot = new LotDTO { Name = It.IsAny<string>(), Price = It.IsAny<double>(), TradeDuration = It.IsAny<int>() };
+            lotRepository.Setup(x => x.Get(It.IsAny<int>())).Returns<Lot>(null);
+
+            //act & assert
+            Assert.Throws<ArgumentNullException>(() => lotService.EditLot(lot));
+        }
+
+        [Test]
+        public void EditLot_TryToEditVerifiedLot_ShouldThrow()
+        {
+            var lot = new LotDTO { Name = It.IsAny<string>(), Price = It.IsAny<double>(), TradeDuration = It.IsAny<int>() };
+            lotRepository.Setup(x => x.Get(It.IsAny<int>())).Returns(new Lot { Name = It.IsAny<string>(), Price = It.IsAny<double>(), TradeDuration = It.IsAny<int>(), IsVerified = true });
+
+            //act & assert
+            Assert.Throws<AuctionException>(() => lotService.EditLot(lot));
+            Assert.AreEqual(Assert.Throws<AuctionException>(() => lotService.EditLot(lot)).Message, "You can`t change the information about the lot after the start of the bidding");
+        }
+
+        [Test]
+        public void EditLot_EditLot_ShoudRepositoryEditOnce()
+        {
+            var lot = new LotDTO { Name = It.IsAny<string>(), Price = It.IsAny<double>(), TradeDuration = It.IsAny<int>() };
+            lotRepository.Setup(x => x.Get(It.IsAny<int>())).Returns(new Lot { Name = It.IsAny<string>(), Price = It.IsAny<double>(), TradeDuration = It.IsAny<int>()});
+
+            //act
+            lotService.EditLot(lot);
+
+            //assert
+            lotRepository.Verify(x => x.Update(It.IsAny<Lot>()), Times.Once);
+        }
+
+        [Test]
+        public void DeleteLot_DeleteNullValue()
+        {
+            lotRepository.Setup(x => x.Get(It.IsAny<int>())).Returns<Lot>(null);
+
+            //act & assert
+            Assert.Throws<ArgumentNullException>(() => lotService.RemoveLot(It.IsAny<int>()));
+        }
+
+        [Test]
+        public void DeleteLot_DeleteRepositoryShouldCallsOnce()
+        {
+            lotRepository.Setup(x => x.Get(It.IsAny<int>())).Returns(new Lot { Name = It.IsAny<string>(), Price = It.IsAny<double>(), TradeDuration = It.IsAny<int>() });
+
+            //act
+            lotService.RemoveLot(It.IsAny<int>());
+
+            //assert
+            lotRepository.Verify(x => x.Delete(It.IsAny <int>()));
+        }
         
+        [Test]
+        public void VarifyLot_TryToVarifyNullLot_ShouldThrow()
+        {
+            lotRepository.Setup(x => x.Get(It.IsAny<int>())).Returns<Lot>(null);
+
+            //act & assert
+            Assert.Throws<ArgumentNullException>(() => lotService.VerifyLot(It.IsAny<int>()));
+        }
+
+        [Test]
+        public void VarifyLot_TryToVirifySomeLot_ShouldCallOnce()
+        {
+            lotRepository.Setup(x => x.Get(It.IsAny<int>())).Returns(new Lot { Name = It.IsAny<string>(), Price = It.IsAny<double>(), TradeDuration = It.IsAny<int>() });
+
+            //act 
+            lotService.VerifyLot(It.IsAny<int>());
+
+            //assert
+            lotRepository.Verify(x => x.Update(It.IsAny<Lot>()), Times.Once);
+        }
+
+        [Test]
+        public void ChangeLotCategory_TryToChangeWithNullCategory_ShouldThrow()
+        {
+            uow.Setup(x => x.Categories.Get(It.IsAny<int>())).Returns<Category>(null);
+
+            //act & assert
+            Assert.Throws<ArgumentNullException>(() => lotService.ChangeLotCategory(It.IsAny<int>(), It.IsAny<int>()));
+        }
+
+        [Test]
+        public void ChangeLotCategory_TryToChangeWithNullLot_ShouldThrow()
+        {
+            lotRepository.Setup(x => x.Get(It.IsAny<int>())).Returns<Lot>(null);
+
+            //act & assert
+            Assert.Throws<ArgumentNullException>(() => lotService.ChangeLotCategory(It.IsAny<int>(), It.IsAny<int>()));
+        }
+
+        [Test]
+        public void ChangeLotCategory_TryToChange_ShouldCallsOnce()
+        {
+            lotRepository.Setup(x => x.Get(It.IsAny<int>())).Returns(new Lot { Name = It.IsAny<string>(), Price = It.IsAny<double>(), TradeDuration = It.IsAny<int>() });
+
+            //act
+            lotService.ChangeLotCategory(It.IsAny<int>(), It.IsAny<int>());
+
+            //assert
+            lotRepository.Verify(x => x.Update(It.IsAny<Lot>()), Times.Once);
+        }
+
+        [Test]
+        public void GetAllLots_TryToGetSomeList_ShouldRepositoryCallOnce_ShouldReturnNotNullList()
+        {
+            lotRepository.Setup(x => x.GetAll()).Returns(new List<Lot>() { });
+
+            //act & assert
+            Assert.IsNotNull(lotService.GetAllLots());
+            lotRepository.Verify(x => x.GetAll());
+        }
     } 
 }
