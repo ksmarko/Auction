@@ -13,6 +13,10 @@ namespace BLL.DTO
         public string UserName { get; set; }
         public string Role { get; set; }
 
-        public UserDTO() => Lots = new List<LotDTO>();
+        public UserDTO()
+        {
+            Lots = new List<LotDTO>();
+            Trades = new List<TradeDTO>();
+        }
     }
 }
