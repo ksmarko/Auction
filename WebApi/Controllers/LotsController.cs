@@ -23,10 +23,11 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [Route("api/lots/create")]
         public IHttpActionResult AddLot(LotModel model)
         {
-            var user = userManager.GetUsers().First();
+            var user = userManager.GetUsers().Where(x => x.UserName == User.Identity.Name).FirstOrDefault();
             var lot = Mapper.Map<LotModel, LotDTO>(model);
             lot.User = user;
             lotService.CreateLot(lot);
@@ -35,6 +36,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [Route("api/lots/edit")]
         public IHttpActionResult EditLot(LotModel model)
         {
@@ -45,6 +47,7 @@ namespace WebApi.Controllers
         }
 
         [HttpDelete]
+        [Authorize]
         [Route("api/lots/remove/{id}")]
         public IHttpActionResult DeleteLot(int id)
         {
@@ -73,6 +76,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         [Route("api/lots/{id}/verify")]
         public IHttpActionResult VerifyLot(int id)
         {
@@ -82,6 +86,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [Route("api/lots/change")]
         public IHttpActionResult ChangeCategory(ChangeCategoryModel model)
         {

@@ -40,7 +40,7 @@ namespace BLL.Services
                     return new OperationDetails(false, result.Errors.FirstOrDefault(), "");
 
                 await DatabaseIdentity.UserManager.AddToRoleAsync(user.Id, userDto.Role);
-                User clientProfile = new User { Id = user.Id, Name = userDto.Name };
+                User clientProfile = new User { Id = user.Id, Name = userDto.UserName };
                 DatabaseIdentity.ClientManager.Create(clientProfile);
                 await DatabaseIdentity.SaveAsync();
                 return new OperationDetails(true, "Регистрация успешно пройдена", "");
