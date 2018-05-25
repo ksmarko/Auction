@@ -76,7 +76,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPut]
-        [Authorize]
+        [Authorize(Roles="admin, moderator")]
         [Route("api/lots/{id}/verify")]
         public IHttpActionResult VerifyLot(int id)
         {
