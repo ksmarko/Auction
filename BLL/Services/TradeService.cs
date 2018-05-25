@@ -63,8 +63,8 @@ namespace BLL.Services
 
             bool isNew = true;
             
-            foreach (var el in user.Lots)
-                if (el.Id == trade.Lot.Id)
+            foreach (var el in user.Trades)
+                if (el.Id == trade.Id)
                     isNew = false;
 
             if (trade.LastPrice < price)
@@ -72,7 +72,7 @@ namespace BLL.Services
                 trade.LastPrice = price;
                 trade.LastRateUserId = userId;
                 if (isNew)
-                    user.Lots.Add(trade.Lot);
+                    user.Trades.Add(trade);
             }
             else
                 throw new AuctionException($"Your price should be greater than: {trade.LastPrice}");

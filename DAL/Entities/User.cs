@@ -15,6 +15,8 @@ namespace DAL.Entities
 
         public virtual ICollection<Lot> Lots { get; set; }
 
+        public virtual ICollection<Trade> Trades { get; set; }
+
         public virtual ApplicationUser ApplicationUser { get; set; }
 
         public User() => Lots = new List<Lot>();

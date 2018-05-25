@@ -27,7 +27,48 @@ namespace BLL.Services
             DatabaseIdentity = uowi;
             DatabaseDomain = uow;
         }
-        
+
+        public IEnumerable<TradeDTO> GetAllUserTrades(UserDTO userDTO)
+        {
+            var user = DatabaseDomain.Users.Get(userDTO.Id);
+
+            if (user == null)
+                throw new ArgumentNullException();
+
+            return Mapper.Map<IEnumerable<Trade>, List<TradeDTO>>(user.Trades);
+        }
+
+        public IEnumerable<TradeDTO> GetUsersWinTrades(UserDTO userDTO)
+        {
+            var user = DatabaseDomain.Users.Get(userDTO.Id);
+
+            if (user == null)
+                throw new ArgumentNullException();
+
+            var tradeWin = new List<Trade>();
+            foreach (var el in user.Trades)
+                if (DateTime.Now.CompareTo(el.TradeEnd) >= 0 && el.LastRateUserId == user.Id)
+                    tradeWin.Add(el);
+
+            return Mapper.Map<List<Trade>, List<TradeDTO>>(tradeWin);
+        }
+
+        public IEnumerable<TradeDTO> GetUserLoseTrade(UserDTO userDTO)
+        {
+            var user = DatabaseDomain.Users.Get(userDTO.Id);
+
+            if (user == null)
+                throw new ArgumentNullException();
+
+            var tradeLose = new List<Trade>();
+            foreach (var el in user.Trades)
+                if (DateTime.Now.CompareTo(el.TradeEnd) >= 0 && el.LastRateUserId != user.Id)
+                    tradeLose.Add(el);
+
+            return new List<TradeDTO>();
+        }
+
+
         public async Task<OperationDetails> Create(UserDTO userDto)
         {
             var user = await DatabaseIdentity.UserManager.FindByEmailAsync(userDto.Email);
@@ -101,6 +142,21 @@ namespace BLL.Services
             var role = DatabaseIdentity.RoleManager.Roles.Where(x => x.Id == roleId).Single().Name;
 
             return role;
+        }
+
+        public Task<ClaimsIdentity> Authenticate(UserDTO userDto)
+        {
+            throw new NotImplementedException();
+        }
+
+        public UserDTO GetUserById(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<UserDTO> FindByIdAsync(string id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

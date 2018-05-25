@@ -10,7 +10,13 @@ namespace BLL.Interfaces
     public interface IUserManager : IDisposable
     {
         Task<OperationDetails> Create(UserDTO userDto);
+        Task<ClaimsIdentity> Authenticate(UserDTO userDto);
+        UserDTO GetUserById(string id);
         IEnumerable<UserDTO> GetUsers();
+        IEnumerable<TradeDTO> GetAllUserTrades(UserDTO userDTO);
+        IEnumerable<TradeDTO> GetUsersWinTrades();
+
         Task<Tuple<ClaimsIdentity, ClaimsIdentity>> FindAsync(string username, string password);
+        Task<UserDTO> FindByIdAsync(string id);
     }
 }
