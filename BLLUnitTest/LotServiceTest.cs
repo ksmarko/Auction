@@ -39,7 +39,7 @@ namespace BLLUnitTest
         }
 
         [Test]
-        public void CreateLot_TryToCreateNullValue_ShouldThrow()
+        public void CreateLot_TryToCreateNullValue_ShouldThrowException()
         {
             // act & assert
             Assert.Throws<ArgumentNullException>(() => lotService.CreateLot(null));
@@ -49,6 +49,7 @@ namespace BLLUnitTest
         [Test]
         public void CreateLot_TryToCreateLot_ShouldRepositoryCreateOnce()
         {
+            //arrange
             var lot = new LotDTO { Name = It.IsAny<string>(), Price = It.IsAny<double>(), TradeDuration = It.IsAny<int>()};
             
             // act
@@ -60,8 +61,9 @@ namespace BLLUnitTest
 
 
         [Test]
-        public void GetLot_TryToGetNullValue_ShouldThrow()
+        public void GetLot_TryToGetNullValue_ShouldThrowException()
         {
+            //arrange
             lotRepository.Setup(x => x.Get(It.IsAny<int>())).Returns<Lot>(null);
 
             // act & assert
@@ -71,8 +73,8 @@ namespace BLLUnitTest
         [Test]
         public void GetLot_TryToGetValue_ShouldReturnSomeValue()
         {
+            //arrange
             var lot = new Lot { Name = It.IsAny<string>(), Price = It.IsAny<double>(), TradeDuration = It.IsAny<int>() };
-
             uow.Setup(x => x.Lots.Get(It.IsAny<int>())).Returns(lot);
 
             // act & assert
@@ -80,15 +82,16 @@ namespace BLLUnitTest
         }
 
         [Test]
-        public void EditLot_TryToPutInEditNullElement_ShouldThrow()
+        public void EditLot_TryToPutInEditNullElement_ShouldThrowException()
         {
             // act & assert
             Assert.Throws<ArgumentNullException>(() => lotService.EditLot(null));
         }
 
         [Test]
-        public void EditLot_TryToEditNullElement_ShouldThrow()
+        public void EditLot_TryToEditNullElement_ShouldThrowException()
         {
+            //arrange
             var lot = new LotDTO { Name = It.IsAny<string>(), Price = It.IsAny<double>(), TradeDuration = It.IsAny<int>() };
             lotRepository.Setup(x => x.Get(It.IsAny<int>())).Returns<Lot>(null);
 
@@ -97,19 +100,21 @@ namespace BLLUnitTest
         }
 
         [Test]
-        public void EditLot_TryToEditVerifiedLot_ShouldThrow()
+        public void EditLot_TryToEditVerifiedLot_ShouldThrowException()
         {
+            //arrange
             var lot = new LotDTO { Name = It.IsAny<string>(), Price = It.IsAny<double>(), TradeDuration = It.IsAny<int>() };
             lotRepository.Setup(x => x.Get(It.IsAny<int>())).Returns(new Lot { Name = It.IsAny<string>(), Price = It.IsAny<double>(), TradeDuration = It.IsAny<int>(), IsVerified = true });
 
             //act & assert
-            Assert.Throws<AuctionException>(() => lotService.EditLot(lot));
-            Assert.AreEqual(Assert.Throws<AuctionException>(() => lotService.EditLot(lot)).Message, "You can`t change the information about the lot after the start of the bidding");
+            var ex = Assert.Throws<AuctionException>(() => lotService.EditLot(lot));
+            Assert.AreEqual(ex.Message, "You can`t change the information about the lot after the start of the bidding");
         }
 
         [Test]
         public void EditLot_EditLot_ShoudRepositoryEditOnce()
         {
+            //arrange
             var lot = new LotDTO { Name = It.IsAny<string>(), Price = It.IsAny<double>(), TradeDuration = It.IsAny<int>() };
             lotRepository.Setup(x => x.Get(It.IsAny<int>())).Returns(new Lot { Name = It.IsAny<string>(), Price = It.IsAny<double>(), TradeDuration = It.IsAny<int>()});
 
@@ -123,6 +128,7 @@ namespace BLLUnitTest
         [Test]
         public void DeleteLot_DeleteNullValue()
         {
+            //arrange
             lotRepository.Setup(x => x.Get(It.IsAny<int>())).Returns<Lot>(null);
 
             //act & assert
@@ -132,6 +138,7 @@ namespace BLLUnitTest
         [Test]
         public void DeleteLot_DeleteRepositoryShouldCallsOnce()
         {
+            //arrange
             lotRepository.Setup(x => x.Get(It.IsAny<int>())).Returns(new Lot { Name = It.IsAny<string>(), Price = It.IsAny<double>(), TradeDuration = It.IsAny<int>() });
 
             //act
@@ -142,8 +149,9 @@ namespace BLLUnitTest
         }
         
         [Test]
-        public void VarifyLot_TryToVarifyNullLot_ShouldThrow()
+        public void VarifyLot_TryToVarifyNullLot_ShouldThrowException()
         {
+            //arrange
             lotRepository.Setup(x => x.Get(It.IsAny<int>())).Returns<Lot>(null);
 
             //act & assert
@@ -153,6 +161,7 @@ namespace BLLUnitTest
         [Test]
         public void VarifyLot_TryToVirifySomeLot_ShouldCallOnce()
         {
+            //arrange
             lotRepository.Setup(x => x.Get(It.IsAny<int>())).Returns(new Lot { Name = It.IsAny<string>(), Price = It.IsAny<double>(), TradeDuration = It.IsAny<int>() });
 
             //act 
@@ -163,8 +172,9 @@ namespace BLLUnitTest
         }
 
         [Test]
-        public void ChangeLotCategory_TryToChangeWithNullCategory_ShouldThrow()
+        public void ChangeLotCategory_TryToChangeWithNullCategory_ShouldThrowException()
         {
+            //arrange
             uow.Setup(x => x.Categories.Get(It.IsAny<int>())).Returns<Category>(null);
 
             //act & assert
@@ -172,8 +182,9 @@ namespace BLLUnitTest
         }
 
         [Test]
-        public void ChangeLotCategory_TryToChangeWithNullLot_ShouldThrow()
+        public void ChangeLotCategory_TryToChangeWithNullLot_ShouldThrowException()
         {
+            //arrange
             lotRepository.Setup(x => x.Get(It.IsAny<int>())).Returns<Lot>(null);
 
             //act & assert
@@ -183,6 +194,7 @@ namespace BLLUnitTest
         [Test]
         public void ChangeLotCategory_TryToChange_ShouldCallsOnce()
         {
+            //arrange
             lotRepository.Setup(x => x.Get(It.IsAny<int>())).Returns(new Lot { Name = It.IsAny<string>(), Price = It.IsAny<double>(), TradeDuration = It.IsAny<int>() });
 
             //act
@@ -195,6 +207,7 @@ namespace BLLUnitTest
         [Test]
         public void GetAllLots_TryToGetSomeList_ShouldRepositoryCallOnce_ShouldReturnNotNullList()
         {
+            //arrange
             lotRepository.Setup(x => x.GetAll()).Returns(new List<Lot>() { });
 
             //act & assert
@@ -203,3 +216,4 @@ namespace BLLUnitTest
         }
     } 
 }
+    
