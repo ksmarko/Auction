@@ -8,9 +8,6 @@
 <link rel="stylesheet" media="screen" type="text/css" href="css/style.css" title="">
 <link rel="stylesheet" media="screen" type="text/css" href="css/portable_style.css" title="">
 <script src='js/jquery-11.0.min.js' type="text/javascript"></script>
-
-
-
 </head>
 <body onload="$('#mainform').focus();">
 <div class="top_nav">
@@ -188,20 +185,16 @@ var rTimer=setTimeout(function() {var meta = document.createElement('meta'); met
 </div>
 
 <div id="wrapContent">
-
-
 <div class="white_button" onclick="$('#left').is(':visible')?$('#left').hide():$('#left').show();$('#left').is(':visible')?$(this).text('Скрыть фильтры'):$(this).text('Показать фильтры')">Показать фильтры</div>
 <div id="left">
 <div id="categories" class="departments searchdep">
 <h1 class=like_ht><div style="max-width:185px;">Категории</div><span style="position:absolute;top:12px;right:15px;">
 </span></h1>
 </div>
-<div id="lots-list-my" class="searchparams">
-    <div style="display:inline-block;width:200px;padding-right:10px;" onmouseover="$('#rem_28645').css('display','inline-block');" onmouseout="$('#rem_28645').hide()">
-        <a class="sp_href" style="" href="c28645/Mobilnye-telefony-Smartfony/indexd41d.html?">Мобильные телефоны, Смартфоны</a>
-    </div>
-    <br style="line-height:25px;">
+
+<div id="cats-list-my" class="searchparams">
 </div>
+
 <div id="categories" class="departments searchdep" style="margin-top:10px;">
 <h2>Параметры</h2>
 </div>
@@ -280,62 +273,14 @@ var rTimer=setTimeout(function() {var meta = document.createElement('meta'); met
 
 <div class=rsearch>
     <div id="description" style="border-radius:4px;">
-        <h2 class=search_sort>Сортировать по:</h2>
-        <div style="height:60px;"></div>
-        <a href="#?" onclick="$('div[name=more]').show()">
-            <div class=spos>
-                <div class=sort_button>
-                    <b>Соответствие:</b> наивысшее<img src="img/adown.png" style="float:right;position:relative;right:2px;top:6px;">
-                </div>
-            </div>
-        </a>
-        <div class=spos style="display:none;z-index:1000001" name="more">
-            <div class=sort_button>
-                <a href="#?" onclick="javascript:$('div[name=more]').hide()" style="color:#585858;text-decoration:none">
-                    <b>Соответствие:</b> наивысшее
-                    <img src="img/aup.png" style="float:right;position:relative;right:2px;top:6px;">
-                </a>
-                <div style="border-top:0px dotted darkgray;width:100%;position:relative;top:7px;margin-bottom:15px"></div>
-                <b>Цена:</b> &nbsp; <span style="position:absolute;left:160px;"><a href="#?" onclick="window.location.href='searchd348.html?&amp;catid=0&amp;orderby=1'">от самой низкой</a></span><br>
-                <span style="position:absolute;left:160px;"><a href="#?" onclick="window.location.href='search0c95.html?&amp;catid=0&amp;orderby=2'">от самой высокой</a></span><br>
-                <div style="border-top:1px dotted darkgray;width:100%;position:relative;top:5px;margin-bottom:10px"></div>
-                <b>Число ставок:</b> &nbsp; <span style="position:absolute;left:160px;"><a href="#?" onclick="window.location.href='searchf247.html?&amp;catid=0&amp;orderby=3'">от меньшего</a></span><br>
-                <span style="position:absolute;left:160px;"><a href="#?" onclick="window.location.href='search05ce.html?&amp;catid=0&amp;orderby=4'">от большего</a></span><br>
-                <div style="border-top:1px dotted darkgray;width:100%;position:relative;top:5px;margin-bottom:10px"></div>
-                <b>Время выставления::</b><span style="position:absolute;left:160px;"><a href="#?" onclick="window.location.href='searchb809.html?&amp;catid=0&amp;orderby=7'">от меньшего</a></span><br>
-                <span style="position:absolute;left:160px;"><a href="#?" onclick="window.location.href='search67d5.html?&amp;catid=0&amp;orderby=8'">от большего</a></span><br>
-                <div style="border-top:1px dotted darkgray;width:100%;position:relative;top:5px;margin-bottom:10px"></div>
-                <b>Время окончания:</b><span style="position:absolute;left:160px;"><a href="#?" onclick="window.location.href='search08b6.html?&amp;catid=0&amp;orderby=5'">от меньшего</a></span><br>
-                <span style="position:absolute;left:160px;"><a href="#?" onclick="window.location.href='search0ef2.html?&amp;catid=0&amp;orderby=6'">от большего</a></span><br>
-                <div style="border-top:1px dotted darkgray;width:100%;position:relative;top:5px;margin-bottom:10px"></div>
-                <b>Название:</b><span style="position:absolute;left:160px;"><a href="#?" onclick="window.location.href='search123e.html?&amp;catid=0&amp;orderby=9'">от А до Я</a></span><br>
-                <span style="position:absolute;left:160px;"><a href="#?" onclick="window.location.href='search5787.html?&amp;catid=0&amp;orderby=10'">от Я до А</a></span><br>
-                <div style="border-top:1px dotted darkgray;width:100%;position:relative;top:5px;margin-bottom:10px"></div>
-                <b>Продавец:</b><span style="position:absolute;left:160px;"><a href="#?" onclick="window.location.href='search1ba5.html?&amp;catid=0&amp;orderby=13'">от А до Я</a></span><br>
-                <span style="position:absolute;left:160px;"><a href="#?" onclick="window.location.href='searchad28.html?&amp;catid=0&amp;orderby=14'">от Я до А</a></span><br>
-                <div style="border-top:1px dotted darkgray;width:100%;position:relative;top:5px;margin-bottom:10px"></div>
-                <b>Соответствие:</b><span style="position:absolute;left:160px;"><a href="#?" onclick="window.location.href='search5955.html?&amp;catid=0&amp;orderby=0'">наивысшее</a></span>
-            </div>
+        <div class="search_lot" style="background: transparent url('images/DDR2.jpg'); background-repeat:no-repeat">
+            <div class="search_lot_title" style=""><a href="lot.html" title="DDR2 2GB 800 MHz (PC2-6400) разные производители">DDR2 2GB 800 MHz (PC2-6400) разные производители</a></div>
+            <div class="search_lot_timetoend"><span><strong></strong><span class="toend">До окончания: </span><strong>4 дн.</strong></span></div>
+            <div class="search_lot_price"><b>155.00 </b>грн.</div>
+            <div class="search_lot_buynow">купить сейчас</div>
         </div>
-        <span>
-            <div class=search_lot style="background: transparent url('images/DDR2.jpg'); background-repeat:no-repeat">
-                <div style="position:absolute;left:232px;height:225px;margin-top:-25px;" class="dotted_h_hr fullsize_hid"></div>
-                <div class=search_lot_title style=""><a href="lot.html" title="DDR2 2GB 800 MHz (PC2-6400) разные производители">DDR2 2GB 800 MHz (PC2-6400) разные производители</a></div>
-                <div class=search_lot_place><span>Одесса</span></div>
-                <div class="like" onclick="
-	 	 window.open('register.html');
-	 	 "></div>
-                <div class=search_lot_timetoend><span><strong></strong><span class=toend>До окончания: </span><strong>4 дн.</strong></span></div>
-                <div class=search_lot_seller_rating onmouseover="$('#srem_6539403254').show()" onmouseout="$('#srem_6539403254').hide()">
-                    </font> &nbsp;
-                </div>
-                <div class=search_lot_price><b>155.00 </b>грн.</div>
-                <div class="search_lot_buynow">купить сейчас</div>
-                <div class="search_lot_delimiter"></div>
-                <div class="search_lot_delivery"><b>доставка</b>: 25 грн.&nbsp;<span class="search_lot_info" onmouseover="$('#6539403254_del_info').show()" onmouseout="$('#6539403254_del_info').hide()"></span></div>
-            </div>
-        </span>
-
+    </div>
+</div>
 
         <script type="text/javascript">
             $(document).ready(function () {
@@ -343,16 +288,62 @@ var rTimer=setTimeout(function() {var meta = document.createElement('meta'); met
                     .done(function (data) {
                         var text = "";
                         $.each(data, function (key, item) {
-                            // Add a list item for the product.
-
-                            console.log($(item)[0].Name);
-
-                            text += "<div style='display: inline-block; width: 200px; padding-right:10px;' onmouseover='$('#rem_28645').css('display', 'inline-block');' onmouseout='$('#rem_28645').hide()'>" +
-                                "<a class='sp_href' style= '' href='#' >" + $(item)[0].Name + "</a ></div > <br style='line-height:25px;'>";
+                            text += "<div onclick='GetLotsForCategory("+ $(item)[0].Id +")' style='display: inline-block;cursor: pointer; width: 200px; padding-right:10px;'><a class='sp_href cat-name' style= '' >" + $(item)[0].Name + "</a ></div > <br style='line-height:25px;'>";
                         });
-                        $("#lots-list-my").html(text);
+                        $("#cats-list-my").html(text);
+                    });
+
+                $.getJSON("http://localhost:49351/api/lots")
+                    .done(function (data) {
+                        var text = "";
+                        if ($(data).length <= 0) {
+                            text = "<h3>No results</h3>";
+                        }
+                        else {
+                            var counter = 0;
+                            $.each(data, function (key, item) {
+                                if (counter >= 10) {
+                                    return;
+                                }
+                                counter++;
+                                text += "<div class='search_lot' style='background: transparent url(" + "images/DDR2.jpg" + "); background-repeat: no-repeat'>" +
+                                    "<div class='search_lot_title' style='' onclick='GetLot(" + $(item)[0].Id + ")'><a href='#' title=" + $(item)[0].Name + ">" + $(item)[0].Name + "</a></div>" +
+                                    "<div class='search_lot_timetoend'><span><strong></strong><span class='toend'>До окончания: </span><strong>4 дн.</strong></span></div>" +
+                                    "<div class='search_lot_price'><b>" + $(item)[0].Price + "</b>грн.</div>" +
+                                    "<div class='search_lot_buynow'>купить сейчас</div></div ><br/><hr><br/>";
+                            });
+                        }
+                        $("#description").html(text);
                     });
             });
+
+            function GetLotsForCategory(id) {
+                $.getJSON("http://localhost:49351/api/categories/" + id +"/lots")
+                    .done(function (data) {
+                        var text = "";
+                        if ($(data).length <= 0) {
+                            text = "<h3>No results</h3>";
+                        }
+                        else {
+                            $.each(data, function (key, item) {
+                                text += "<div class='search_lot' style='background: transparent url(" + "images/DDR2.jpg" + "); background-repeat: no-repeat'>" +
+                                    "<div class='search_lot_title' style='' onclick='GetLot(" + $(item)[0].Id + ")'><a href='#' title=" + $(item)[0].Name + ">" + $(item)[0].Name + "</a></div>" +
+                                    "<div class='search_lot_timetoend'><span><strong></strong><span class='toend'>До окончания: </span><strong>4 дн.</strong></span></div>" +
+                                    "<div class='search_lot_price'><b>" + $(item)[0].Price + "</b>грн.</div>" +
+                                    "<div class='search_lot_buynow'>купить сейчас</div></div ><br/><hr><br/>";
+                            });
+                        }
+                        $("#description").html(text);
+                    });
+            }
+
+            function GetLot(id) {
+                $.getJSON("http://localhost:49351/api/lots/" + id)
+                    .done(function (data) {
+                        location.href = 'lot.html';
+                        $(document).getElementById("lot-name").val($(data).Name);
+                    });
+            }
         </script>
 
 

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <head>
 <meta name="viewport" content="width=device-width">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700,800&amp;subset=latin,cyrillic" rel="stylesheet">
 <script src='js/jquery-11.0.min.js' type="text/javascript"></script>
 </head>
-<body onload="$('#mainform').focus();scrollup();">
+<body onload="$('#mainform').focus();">
 <div class="top_nav">
 	<div class="container">
 		<div class="menu fullsize">
@@ -187,7 +187,7 @@ var rTimer=setTimeout(function() {var meta = document.createElement('meta'); met
 <div class="bodywrapper">
 <div style="margin-top:20px;max-width:80%;">
 <div class="lot_hc">
-<h1 class="subhead" style="font-weight:600;" itemprop="name">DDR2 1GB 800 MHz (PC2-6400) разные производители</h1> 
+<h1 id="lot-name" class="subhead" style="font-weight:600;" itemprop="name">DDR2 1GB 800 MHz (PC2-6400) разные производители</h1> 
 </div>
 </div>
 
@@ -202,7 +202,6 @@ var rTimer=setTimeout(function() {var meta = document.createElement('meta'); met
 </div>
 <div class="fullsize_hid" style="position:absolute;float:right; margin-top:-42px; left:1023px;width:166px;">
 <div class="share42init" style="display:inline-block"></div>
-<script type="text/javascript" src="/styles/share42.js"></script>
 
 </div>
 <div class="lotrblock">
@@ -288,26 +287,7 @@ $(document).keyup(function(e) {
 			gw=410;
 			gh=380;
 		}
-		jQuery(document).ready(function(){
-
-			api =jQuery("#gallery").unitegallery({ 
-				theme_enable_fullscreen_button: true,	//show, hide the theme fullscreen button. The position in the theme is constant
-				slider_scale_mode_fullscreen: "down",
-				theme_enable_play_button: false,			//show, hide the theme play button. The position in the theme is constant
-				theme_enable_hidepanel_button: false,	//show, hide the hidepanel button
-				theme_enable_text_panel: true,			//enable the panel text panel. 
-				theme_text_type: "title",				//title, description - text that will be shown on the text panel, title or description
-				slider_scale_mode: "fit",
-				slider_textpanel_bg_opacity: 0.0,
-				thumb_color_overlay_effect: false,	
-				gridpanel_vertical_scroll: false,						
-				thumb_loader_type:"light", 
-				theme_hide_panel_under_width: 570,		//hide panel under certain browser width, if null, don't hide			
-				gallery_width:gw,							//gallery width		
-				gallery_height:gh	 
 		
-			});  
-		});  
 		$(window).on('resize', function(){
 			var win = $(this); 
 			gw=480;

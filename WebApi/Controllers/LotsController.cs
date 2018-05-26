@@ -79,6 +79,15 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
+        [Route("api/lots/{id}")]
+        public LotModel GetLot(int id)
+        {
+            var lot = lotService.GetLot(id);
+
+            return Mapper.Map<LotDTO, LotModel>(lot);
+        }
+
+        [HttpGet]
         [Route("api/categories/{id}/lots")]
         public IEnumerable<LotModel> GetLots(int id)
         {
