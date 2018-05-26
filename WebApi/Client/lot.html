@@ -1,301 +1,243 @@
 ﻿<!DOCTYPE html>
 <head>
-<meta name="viewport" content="width=device-width">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<title>Аукцион</title>
-<link rel="icon" href="favicon.ico">	
-<link rel="stylesheet" media="screen" type="text/css" href="css/style.css" title="">
-<link rel="stylesheet" media="screen" type="text/css" href="css/portable_style.css" title="">
-<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700,800&amp;subset=latin,cyrillic" rel="stylesheet">
-<script src='js/jquery-11.0.min.js' type="text/javascript"></script>
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Аукцион</title>
+    <link rel="icon" href="favicon.ico">
+    <link rel="stylesheet" media="screen" type="text/css" href="css/style.css" title="">
+    <link rel="stylesheet" media="screen" type="text/css" href="css/portable_style.css" title="">
+    <script src='js/jquery-11.0.min.js' type="text/javascript"></script>
 </head>
-<body onload="$('#mainform').focus();">
-<div class="top_nav">
-	<div class="container">
-		<div class="menu fullsize">
-			<ul>
-				<li><a href="login.html">Войти</a></li><div class="arrow"></div>
-				<li><a href="register.html">Регистрация</a></li> 
-			</ul>
-		</div>
-	</div>
-</div>
-<div class="ddmenu" id="ddm">
-	<li><a href="login.html">Войти</a></li><div class="arrow"></div>
-	<li><a href="register.html">Регистрация</a></li>
-	<hr style="margin-top:10px;margin-bottom:10px;border:0; border-top: #FFF dashed  1px;">
-</div>
-<div id="pagewrapper">
-	<a href="index.html"><div class="skylogo"></div></a>
-<div class="search_form">
-<form method="GET" action="index.html" autocomplete="off">
-<input onfocus="this.selectionStart = this.selectionEnd = this.value.length;" onclick="firstfocus=0;(this.value.length)>0?$('#suggestions').show():0;" onkeypress="(event.keyCode==32 && firstfocus==1)?($('#mainform').blur()):0;firstfocus=0;" oninput="(this.value.length)>0?get_suggestions(this.value):$('#suggestions').hide()" type=text name=search id="mainform" placeholder="Что будем искать? " value="" class="top_search">
-<!-- Скрипт отвечает за поиск -->
-<script> 
-var cur_loc=window.location.href;
-cur_loc=cur_loc.replace(/\?t=[0-9]+/g,"");  
-function get_suggestions(query){
-	if($(window).width()>880)
-		$.ajax({
-		  url: "/suggestions.php",
-		  type: "post", //отправить его методом get
-		  data:{q: query},
-		  dataType:'json',
-		  success: function(response) {
-			suggestions=response;
-			if(suggestions.length==0){
-				$('#suggest_container').empty(); 
-			}else{
-				$('#suggest_container').empty();   
-				for(var i=0;i<suggestions.length;i++){ 
-					if(suggestions[i][1]==0)
-						$('#suggest_container').append("<div class=\"suggest\" onclick=\"$('#mainform').val('"+suggestions[i][0]+"');window.location.replace('/c"+parseInt(suggestions[i][2])+"/s/')\"><span style='color:#606060;font-weight:normal;padding-right:2px;'>Категория</span>&nbsp;"+suggestions[i][3]+""+suggestions[i][0]+"&nbsp;<img src='/styles/goto.png' style='width:11px;'></div>")	
-					else
-						if(suggestions[i][1]==3)
-								$('#suggest_container').append("<div class=\"suggest\" onclick=\"$('#mainform').val('"+suggestions[i][0]+"');window.location.replace('/"+encodeURIComponent(suggestions[i][2])+"/')\"><span style='color:#606060;font-weight:normal;padding-right:2px;'>Лот</span>&nbsp;"+suggestions[i][0]+"&nbsp;<span style='color:#606060;font-weight:normal;padding-right:2px;'>("+suggestions[i][2]+")</span>&nbsp;<img src='/styles/goto.png' style='width:11px;'></div>")	
-						else
-							if(suggestions[i][1]==2)
-									$('#suggest_container').append("<div class=\"suggest\" onclick=\"$('#mainform').val('"+suggestions[i][0]+"');window.location.replace('/"+encodeURIComponent(suggestions[i][0])+"')\"><span style='color:#606060;font-weight:normal;padding-right:2px;'>Пользователь</span>&nbsp;"+suggestions[i][3]+""+suggestions[i][0]+"&nbsp;<img src='/styles/goto.png' style='width:11px;'></div>")	
-							else
-								$('#suggest_container').append("<div class=\"suggest\" onclick=\"$('#mainform').val('"+suggestions[i][0]+"');window.location.replace('/search.php?search="+encodeURIComponent(suggestions[i][0])+"')\">"+suggestions[i][0]+"</div>")	
-				}
-				$('#suggestions').show()	
-			} 
-		  },
-		  error: function(xhr) { 
-		  }
-		});
-} 
-var rp=45*60*1000;
-$(window).bind('focus', function() { 
-; 
+<body">
+    <div class="top_nav">
+        <div class="container">
+            <div class="menu fullsize">
+                <ul>
+                    <li><a href="login.html">Войти</a></li>
+                    <div class="arrow"></div>
+                    <li><a href="register.html">Регистрация</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="ddmenu" id="ddm">
+        <li><a href="login.html">Войти</a></li><div class="arrow"></div>
+        <li><a href="register.html">Регистрация</a></li>
+        <hr style="margin-top:10px;margin-bottom:10px;border:0; border-top: #FFF dashed  1px;">
+    </div>
+    <div id="pagewrapper">
+        <a href="index.html"><div class="skylogo"></div></a>
+        <div class="search_form">
+            <input type=text name=search id="search-lots" placeholder="Что будем искать? " value="" class="top_search">
+            <input onclick="SearchLots()" type=submit>
+        </div>
+        </form>
+        <div class="topcats">
+            <div id="tmp0" class="topmenu">
+                <a href="#" class=link_first>Авто</a><br>
+                <a href="#" class=link_second>мото</a>
+            </div>
+            <div id="more0" class="topmore">
+                <a href="#" class=link_first>Авто</a><br>
+                <a href="#" class=link_second>мото</a>
+            </div>
+            <div class="delim"></div>
+            <div id="tmp1" class="topmenu">
+                <a href="#" class=link_first>Телефоны</a><br>
+                <a href="#" class=link_second>смартфоны</a>
+            </div>
+            <div id="more1" class="topmore">
+                <a href="#" class=link_first>Телефоны</a><br>
+                <a href="#" class=link_second>смартфоны</a>
+            </div>
+            <div class="delim"></div>
+            <div id="tmp2" class="topmenu">
+                <a href="#" class=link_first>Ноутбуки</a><br>
+                <a href="#" class=link_second>ПК и планшеты</a>
+            </div>
+            <div id="more2" class="topmore">
+                <a href="#" class=link_first>Ноутбуки</a><br>
+                <a href="#" class=link_second>ПК и планшеты</a>
+            </div>
+            <div class="delim"></div>
+            <div id="tmp3" class="topmenu">
+                <a href="#" class=link_first>Техника</a><br>
+                <a href="#" class=link_second>и электроника</a>
+            </div>
+            <div id="more3" class="topmore">
+                <a href="#" class=link_first>Техника</a><br>
+                <a href="#" class=link_second>и электроника</a>
+            </div>
+            <div class="delim"></div>
+            <div id="tmp4" class="topmenu">
+                <a href="#" class=link_first>Спорт</a><br>
+                <a href="#" class=link_second>здоровье</a>
+            </div>
+            <div id="more4" class="topmore">
+                <a href="#" class=link_first>Спорт</a><br>
+                <a href="#" class=link_second>здоровье</a>
+            </div>
+            <div class="delim"></div>
+            <div id="tmp5" class="topmenu">
+                <a href="#" class=link_first>Одежда</a><br>
+                <a href="#" class=link_second>мода красота</a>
+            </div>
+            <div id="more5" class="topmore">
+                <a href="#" class=link_first>Одежда</a><br>
+                <a href="#" class=link_second>мода красота</a>
+            </div>
+            <div class="delim"></div>
+            <div id="tmp6" class="topmenu">
+                <a href="#" class=link_first>Детский</a><br>
+                <a href="#" class=link_second>мир</a>
+            </div>
+            <div id="more6" class="topmore">
+                <a href="#" class=link_first>Детский</a><br>
+                <a href="#" class=link_second>мир</a>
+            </div>
+            <div class="delim"></div>
+            <div id="tmp7" class="topmenu">
+                <a href="#" class=link_first>Дом</a><br>
+                <a href="#" class=link_second>досуг</a>
+            </div>
+            <div id="more7" class="topmore">
+                <a href="#" class=link_first>Дом</a><br>
+                <a href="#" class=link_second>досуг</a>
+            </div>
+            <div class="delim"></div>
+            <div id="tmp8" class="topmenu">
+                <a href="#" class=link_first>Бакалея</a><br>
+            </div>
+            <div id="more8" class="topmore">
+                <a href="#" class=link_first>Бакалея</a><br>
+            </div>
+            <div class="delim"></div>
+            <div id="tmp9" class="topmenu">
+                <a href="#" class=link_first>Колекции</a><br>
+                <a href="#" class=link_second>антиквариат</a>
+            </div>
+            <div id="more9" class="topmore">
+                <a href="#" class=link_first>Колекции</a><br>
+                <a href="#" class=link_second>антиквариат</a>
+            </div>
+            <div class="delim"></div>
+            <div id="tmp10" class="topmenu">
+                <a href="#" class=link_first>Спец.</a><br>
+                <a href="#" class=link_second>проекты</a>
+            </div>
+            <div id="more10" class="topmore">
+                <a href="#" class=link_first>Спец.</a><br>
+                <a href="#" class=link_second>проекты</a>
+            </div>
+        </div>
+        <div class="bodywrapper">
+            <div style="margin-top:20px;max-width:80%;">
+                <div class="lot_hc">
+                    <h1 id="lot-name" class="subhead" style="font-weight:600;" itemprop="name">DDR2 1GB 800 MHz (PC2-6400) разные производители</h1>
+                </div>
+            </div>
+            <div class="lothr"></div>
+            <br>
 
-window.clearTimeout(rTimer);
-rTimer=setTimeout(function() {var meta = document.createElement('meta'); meta.name = "referrer"; meta.content = "no-referrer"; document.getElementsByTagName('head')[0].appendChild(meta); window.location.href = cur_loc+'?t='+1}, rp)
- });
+            <img style="display: block; width: 320px; height: 250px; left: 14px; position: absolute; margin:0px; opacity: 1;" src="images/DDR2(2).jpg">
 
-var rTimer=setTimeout(function() {var meta = document.createElement('meta'); meta.name = "referrer"; meta.content = "no-referrer"; document.getElementsByTagName('head')[0].appendChild(meta); window.location.href = cur_loc+'?t='+1}, rp);
-  
-</script>
-<input id='checkbox_hidden' type='hidden' value='0' name='desc_check'>
-<input id='cat_hidden' type='hidden' value='0' name='catid'>
-<input type=submit>
-</div>
-<div class="suggestions" style="display:none" id="suggestions">
+        </div>
+        <div class="fullsize_hid" style="position:absolute;float:right; margin-top:-42px; left:1023px;width:166px;">
+            <div class="share42init" style="display:inline-block"></div>
+        </div>
+        <div class="lotrblock">
+            <div class="lotmenu" style="margin-top:-3px;">
+                <ul><li class="smaller"><img src="img/peoples.png" style="float:left;position: relative; bottom:-1px;"> &nbsp; <span><strong>61 пользователь</strong></span> купили <strong>316</strong> лотов </li></li></ul>
+            </div>
+            <div class="lotendtime ">
+                <ul>
+                    <li class="smaller">
+                        <img src="img/clock.png" style="float:left;position: relative; bottom:2px;"> &nbsp; <span style="position:relative;top:-3px;">
+                            <strong>
+                                <span id="timetoend"></span>
+                                14 дн.
+                            </strong><span> (20 мая 2018 19:25:59) </span>
+                        </span>
+                    </li></li>
+                </ul>
+            </div>
+            <div class=buymenu>
+                <form method=POST action="/prebuy.php">
+                    <div class=lotbuttons>
+                        <input type=hidden name="id" value="6537142894">
+                        <input type=hidden name="s" value="a4162095d374d1ef383db81ed0852ff4e441785e">
+                        <input type=hidden name="lot" value="6537142894">
+                        <input type=hidden name="num" value="1" id="hidnum">
+                        <input type=hidden name="lotpage" value="1">
+                        <input type="submit" name="buynow" value="Купить сейчас!" class=button style="margin-bottom:3px;">
+                </form><form method=POST action="/addtobasket.php" style="" id="hidden_button">
+                    <input type=hidden name="num" value="1" id="hidnum2">
+                    <div style="margin-top:5px;"></div>
+                    <input type=hidden name=s value="a4162095d374d1ef383db81ed0852ff4e441785e">
+                    <input type=hidden name="id" value="6537142894">
+                </form>
+            </div>
+            <div class="stakemenu">
+                <font color="#fe3c10" style="font-size: 1.35em;font-family:'Open Sans';"><span class="lot_price">54 грн.</span></font> &nbsp; &nbsp; &nbsp; <span class=fullsize>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; </span>
+                <input type=text name="num" class="lot_num" value="1" size=4 id="textnum" onchange="$('#hidnum').val($('#textnum').val());$('#hidnum2').val($('#textnum').val())">&nbsp; из <strong>135</strong><span class=fullsize> лотов</span>
+            </div>
+        </div>
 
-</div>
-</form>
-<div class="topcats">
-	<div id="tmp0" class="topmenu" onmouseover="funcDelay=setTimeout('$(\'#tmp0\').hide();$(\'#more0\').show()',300)" onmouseout="clearTimeout(funcDelay);">
-		<a href="#" class=link_first>Авто</a><br>
-		<a href="#" class=link_second>мото</a>
-	</div>
-	<div id="more0" class="topmore" onmouseleave="$('#more0').hide();$('#tmp0').show();">
-		<a href="#" class=link_first>Авто</a><br>
-		<a href="#" class=link_second>мото</a>
-	</div>
-<div class="delim"></div>
-	<div id="tmp1" class="topmenu" onmouseover="funcDelay=setTimeout('$(\'#tmp1\').hide();$(\'#more1\').show()',300)" onmouseout="clearTimeout(funcDelay);">
-		<a href="#" class=link_first>Телефоны</a><br>
-		<a href="#" class=link_second>смартфоны</a>
-	</div>
-	<div id="more1" class="topmore" onmouseleave="$('#more1').hide();$('#tmp1').show();">
-		<a href="#" class=link_first>Телефоны</a><br>
-		<a href="#" class=link_second>смартфоны</a>
-	</div>
-<div class="delim"></div>
-	<div id="tmp2" class="topmenu" onmouseover="funcDelay=setTimeout('$(\'#tmp2\').hide();$(\'#more2\').show()',300)" onmouseout="clearTimeout(funcDelay);">
-		<a href="#" class=link_first>Ноутбуки</a><br>
-		<a href="#" class=link_second>ПК и планшеты</a>
-	</div>
-	<div id="more2" class="topmore" onmouseleave="$('#more2').hide();$('#tmp2').show();">
-		<a href="#" class=link_first>Ноутбуки</a><br>
-		<a href="#" class=link_second>ПК и планшеты</a>
-	</div>
-<div class="delim"></div>
-	<div id="tmp3" class="topmenu" onmouseover="funcDelay=setTimeout('$(\'#tmp3\').hide();$(\'#more2\').show()',300)" onmouseout="clearTimeout(funcDelay);">
-		<a href="#" class=link_first>Техника</a><br>
-		<a href="#" class=link_second>и электроника</a>
-	</div>
-	<div id="more3" class="topmore" onmouseleave="$('#more3').hide();$('#tmp3').show();">
-		<a href="#" class=link_first>Техника</a><br>
-		<a href="#" class=link_second>и электроника</a>
-	</div>
-<div class="delim"></div>
-	<div id="tmp4" class="topmenu" onmouseover="funcDelay=setTimeout('$(\'#tmp4\').hide();$(\'#more4\').show()',300)" onmouseout="clearTimeout(funcDelay);">
-		<a href="#" class=link_first>Спорт</a><br>
-		<a href="#" class=link_second>здоровье</a>
-	</div>
-	<div id="more4" class="topmore" onmouseleave="$('#more4').hide();$('#tmp4').show();">
-		<a href="#" class=link_first>Спорт</a><br>
-		<a href="#" class=link_second>здоровье</a>
-	</div>
-<div class="delim"></div>
-	<div id="tmp5" class="topmenu" onmouseover="funcDelay=setTimeout('$(\'#tmp5\').hide();$(\'#more5\').show()',300)" onmouseout="clearTimeout(funcDelay);">
-		<a href="#" class=link_first>Одежда</a><br>
-		<a href="#" class=link_second>мода красота</a>
-	</div>
-	<div id="more5" class="topmore" onmouseleave="$('#more5').hide();$('#tmp5').show();">
-		<a href="#" class=link_first>Одежда</a><br>
-		<a href="#" class=link_second>мода красота</a>
-	</div>
-<div class="delim"></div>
-	<div id="tmp6" class="topmenu" onmouseover="funcDelay=setTimeout('$(\'#tmp6\').hide();$(\'#more6\').show()',300)" onmouseout="clearTimeout(funcDelay);">
-		<a href="#" class=link_first>Детский</a><br>
-		<a href="#" class=link_second>мир</a>
-	</div>
-	<div id="more6" class="topmore" onmouseleave="$('#more6').hide();$('#tmp6').show();">
-		<a href="#" class=link_first>Детский</a><br>
-		<a href="#" class=link_second>мир</a>
-	</div>
-<div class="delim"></div>
-	<div id="tmp7" class="topmenu" onmouseover="funcDelay=setTimeout('$(\'#tmp7\').hide();$(\'#more7\').show()',300)" onmouseout="clearTimeout(funcDelay);">
-		<a href="#" class=link_first>Дом</a><br>
-		<a href="#" class=link_second>досуг</a>
-	</div>
-	<div id="more7" class="topmore" onmouseleave="$('#more7').hide();$('#tmp7').show();">
-		<a href="#" class=link_first>Дом</a><br>
-		<a href="#" class=link_second>досуг</a>
-	</div>
-<div class="delim"></div>
-	<div id="tmp8" class="topmenu" onmouseover="funcDelay=setTimeout('$(\'#tmp8\').hide();$(\'#more8\').show()',300)" onmouseout="clearTimeout(funcDelay);">
-		<a href="#" class=link_first>Бакалея</a><br>
-	</div>
-	<div id="more8" class="topmore" onmouseleave="$('#more8').hide();$('#tmp8').show();">
-		<a href="#" class=link_first>Бакалея</a><br>
-	</div>
-<div class="delim"></div>
-	<div id="tmp9" class="topmenu" onmouseover="funcDelay=setTimeout('$(\'#tmp9\').hide();$(\'#more9\').show()',300)" onmouseout="clearTimeout(funcDelay);">
-		<a href="#" class=link_first>Колекции</a><br>
-		<a href="#" class=link_second>антиквариат</a>
-	</div>
-	<div id="more9" class="topmore" onmouseleave="$('#more9').hide();$('#tmp9').show();">
-		<a href="#" class=link_first>Колекции</a><br>
-		<a href="#" class=link_second>антиквариат</a>
-	</div>
-<div class="delim"></div>
-	<div id="tmp10" class="topmenu" onmouseover="funcDelay=setTimeout('$(\'#tmp10\').hide();$(\'#more10\').show()',300)" onmouseout="clearTimeout(funcDelay);">
-		<a href="#" class=link_first>Спец.</a><br>
-		<a href="#" class=link_second>проекты</a>
-	</div>
-	<div id="more10" class="topmore" onmouseleave="$('#more10').hide();$('#tmp10').show();">
-		<a href="#" class=link_first>Спец.</a><br>
-		<a href="#" class=link_second>проекты</a>
-	</div>
-</div>
-<div class="bodywrapper">
-<div style="margin-top:20px;max-width:80%;">
-<div class="lot_hc">
-<h1 id="lot-name" class="subhead" style="font-weight:600;" itemprop="name">DDR2 1GB 800 MHz (PC2-6400) разные производители</h1> 
-</div>
-</div>
+        <a href="#?" onclick="javascript:$('div[name=more]').show();">
+            <div class=seller_button>
+                <div class=seller_button_style>
+                    <b>Продавец</b> prake
+                </div>
+            </div>
+        </a>
 
-<div class="lothr"></div>
+        <div class=seller_button style="z-index:100;display:none;" name="more">
+        </div>
 
-<br>
+        <span class=fullsize>
+            <div style="position:absolute;float:right;top:133px;right:370px;width:320px;font-family: Open Sans;color:#444444">
+                <table>
+                    <tr><td>Состояние:</td> <td>&nbsp; <b>Б/У</b></td></tr>
+                    <tr><td>Тех. Состояние:</td>&nbsp; <td>&nbsp; <b>Исправное</b></td></tr>
+                    <tr><td>Наличие:</td> <td>&nbsp; <b>В наличии</b></td></tr>
+                    <tr><td>Местоположение:</td> <td>&nbsp; <b>Одесса</b></td></tr>
+                </table>
+            </div>
+        </span>
+    </div>
+    <script>
+        $(document).keyup(function (e) {
+            if (e.keyCode == 27) { // escape key maps to keycode `27`
+                api.exitFullscreen();
+            }
+        });
+    </script>
+    <div>
+        <div class=lot_img_align style="margin: 300px;">
+        </div>
+    </div>
+    </body>
+    </html>
+    </div>
+    <script type="text/javascript">
+        var api;
+        var num_imgs = 3;
+        var gw = 480;
+        var gh = 410;
+        if ($(window).width() < 880) {
+            gw = 410;
+            gh = 380;
+        }
 
-
-<img style="display: block; width: 320px; height: 250px; left: 14px; position: absolute; margin:0px; opacity: 1;" src="images/DDR2(2).jpg">
-
-
-</div>
-<div class="fullsize_hid" style="position:absolute;float:right; margin-top:-42px; left:1023px;width:166px;">
-<div class="share42init" style="display:inline-block"></div>
-
-</div>
-<div class="lotrblock">
-<div class="lotmenu" style="margin-top:-3px;">
-<ul><li class="smaller"><img src="img/peoples.png" style="float:left;position: relative; bottom:-1px;"> &nbsp; <span><strong>61 пользователь</strong></span> купили <strong>316</strong> лотов </li></li></ul>
-</div>
-<div class="lotendtime ">
-<ul><li class="smaller"><img src="img/clock.png" style="float:left;position: relative; bottom:2px;"> &nbsp; <span style="position:relative;top:-3px;"><strong><span id="timetoend"></span>
-14 дн.</strong><span> (20 мая 2018 19:25:59) </span></span>
-</li></li></ul>
-</div>
-
-<div class=buymenu>
-<form method=POST action="/prebuy.php">
-<div class=lotbuttons>
-<input type=hidden name="id" value="6537142894">
-<input type=hidden name="s" value="a4162095d374d1ef383db81ed0852ff4e441785e">
-<input type=hidden name="lot" value="6537142894">
-<input type=hidden name="num" value="1" id="hidnum">
-<input type=hidden name="lotpage" value="1">
-<input type="submit" name="buynow" value="Купить сейчас!" class=button style="margin-bottom:3px;">
-</form><form method=POST action="/addtobasket.php" style="" id="hidden_button">
-<input type=hidden name="num" value="1" id="hidnum2">
-<div style="margin-top:5px;"></div>
-<input type=hidden name=s value="a4162095d374d1ef383db81ed0852ff4e441785e">
-<input type=hidden name="id" value="6537142894">
-</form>
-</div>
-<div class="stakemenu">
-<font color="#fe3c10" style="font-size: 1.35em;font-family:'Open Sans';"><span class="lot_price">54 грн.</span></font> &nbsp; &nbsp; &nbsp; <span class=fullsize>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; </span>
-<input type=text name="num" class="lot_num" value="1" size=4 id="textnum" onchange="$('#hidnum').val($('#textnum').val());$('#hidnum2').val($('#textnum').val())">&nbsp; из <strong>135</strong><span class=fullsize> лотов</span>
-</div>
-</div>
-
-
-<a href="#?" onclick="javascript:$('div[name=more]').show();"><div class=seller_button>
-<div class=seller_button_style>
-<b>Продавец</b> prake 
-</div>
-</div></a>
-
-
-<div class=seller_button style="z-index:100;display:none;" name="more">
-
-</div>
-
-
-
-<span class=fullsize>
-
-<div style="position:absolute;float:right;top:133px;right:370px;width:320px;font-family: Open Sans;color:#444444">
-<table>
-<tr><td>Состояние:</td> <td>&nbsp; <b>Б/У</b></td></tr>
-<tr><td>Тех. Состояние:</td>&nbsp; <td>&nbsp; <b>Исправное</b></td></tr>
-<tr><td>Наличие:</td> <td>&nbsp; <b>В наличии</b></td></tr>
- <tr><td>Местоположение:</td> <td>&nbsp; <b>Одесса</b></td></tr>
-</table>
-</div>
-</span>
-
-</div>
-<script>
-$(document).keyup(function(e) {
-     if (e.keyCode == 27) { // escape key maps to keycode `27`
-	api.exitFullscreen();
-    }
-});
-</script>
-<div>
-<div class=lot_img_align style="margin: 300px;">
-
-</div>
-</div>
-</body>
-</html>
-</div>
-<script type="text/javascript">
-		var api;
-		var	num_imgs=3;
-		var gw=480;
-		var gh=410;
-		if($(window).width()<880){
-			gw=410;
-			gh=380;
-		}
-		
-		$(window).on('resize', function(){
-			var win = $(this); 
-			gw=480;
-			gh=410;
-			if(win.width()<880){ 
-				gw=410;
-				gh=380;
-			}
-			api.resize(gw,gh)  
-		})
-	</script>
+        $(window).on('resize', function () {
+            var win = $(this);
+            gw = 480;
+            gh = 410;
+            if (win.width() < 880) {
+                gw = 410;
+                gh = 380;
+            }
+            api.resize(gw, gh)
+        })
+    </script>
