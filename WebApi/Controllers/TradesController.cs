@@ -21,17 +21,28 @@ namespace WebApi.Controllers
             this.tradeService = tradeService;
         }
 
-        [HttpGet]
+        [HttpPut]
+        [Route("api/trades/start/{id}")]
         [Authorize(Roles = "admin, moderator")]
-        public IHttpActionResult StartTrade(LotModel model)
+        public IHttpActionResult StartTrade(int id)
         {
-            var user = userManager.GetUserByName(User.Identity.Name);
-            var lot = Mapper.Map<LotModel, LotDTO>(model);
-            tradeService.StartTrade(lot.Id);
+            tradeService.StartTrade(id);
 
             return Ok("Trade started");
         }
 
+        [HttpPut]
+        [Route("api/trades/rate")]
+        public void Rate(RateModel model)
+        {
+            var user = userManager.GetUserByName(User.Identity.Name).Id;
+            tradeService.Rate(model.TradeId, user, model.Price);
+        }
 
+        [HttpGet]
+        public IEnumerable<TradeModel> GetTrades()
+        {
+            return Mapper.Map<IEnumerable<TradeDTO>, IEnumerable<TradeModel>>(tradeService.GetAllTrades());
+        }
     }
 }

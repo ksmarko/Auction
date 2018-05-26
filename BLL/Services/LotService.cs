@@ -25,18 +25,22 @@ namespace BLL.Services
 
         public void EditLot(LotDTO entity)
         {
-            if (new TradeService(Database).GetTradeByLot(entity.Id) != null)
-                throw new AuctionException("You can`t change the information about the lot after the start of the bidding");
+            if (entity == null)
+                throw new ArgumentNullException();
 
             var lot = Database.Lots.Get(entity.Id);
 
             if (lot == null)
                 throw new ArgumentNullException();
 
+            if (lot.IsVerified)
+                throw new AuctionException("You can`t change the information about the lot after the start of the bidding");
+
             lot.Name = entity.Name;
             lot.Description = entity.Description;
             lot.Img = entity.Img;
             lot.TradeDuration = entity.TradeDuration;
+
 
             Database.Lots.Update(lot);
             Database.Save();
@@ -44,6 +48,9 @@ namespace BLL.Services
 
         public void CreateLot(LotDTO entity)
         {
+            if (entity == null || entity.User == null)
+                throw new ArgumentNullException();
+
             var lot = new Lot()
             {
                 Name = entity.Name,
@@ -87,12 +94,12 @@ namespace BLL.Services
 
         public IEnumerable<LotDTO> GetAllLots()
         {
-            return Mapper.Map<IEnumerable<Lot>, List<LotDTO>>(Database.Lots.GetAll());
+            return Mapper.Map<IEnumerable<Lot>, IEnumerable<LotDTO>>(Database.Lots.GetAll());
         }
 
         public IEnumerable<LotDTO> GetLotsForCategory(int categoryId)
         {
-            return Mapper.Map<IEnumerable<Lot>, List<LotDTO>>(Database.Lots.Find(x => x.CategoryId == categoryId));
+            return Mapper.Map<IEnumerable<Lot>, IEnumerable<LotDTO>>(Database.Lots.Find(x => x.CategoryId == categoryId));
         }
 
         public LotDTO GetLot(int id)

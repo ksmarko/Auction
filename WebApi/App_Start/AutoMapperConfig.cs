@@ -20,6 +20,9 @@ namespace WebApi.App_Start
                 .ForMember(x => x.IsVerified, opt => opt.Ignore())
                 .ForMember(x => x.Category, opt => opt.Ignore())
                 .ForMember(x => x.User, opt => opt.Ignore());
+
+            cfg.CreateMap<TradeDTO, TradeModel>()
+                .ForMember(dst => dst.DaysLeft, map => map.MapFrom(src => src.TradeEnd.Subtract(src.TradeStart).Days));
         }
     }
 }

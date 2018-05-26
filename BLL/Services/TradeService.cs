@@ -51,7 +51,7 @@ namespace BLL.Services
         {
             Trade trade = Database.Trades.Get(tradeId);
             User user = Database.Users.Get(userId);
-          
+
             if (trade == null || user == null)
                 throw new ArgumentNullException();
 
@@ -62,9 +62,9 @@ namespace BLL.Services
                 throw new AuctionException("This trade is over");
 
             bool isNew = true;
-            
-            foreach (var el in user.Lots)
-                if (el.Id == trade.Lot.Id)
+
+            foreach (var el in user.Trades)
+                if (el.Id == trade.Id)
                     isNew = false;
 
             if (trade.LastPrice < price)
@@ -72,7 +72,7 @@ namespace BLL.Services
                 trade.LastPrice = price;
                 trade.LastRateUserId = userId;
                 if (isNew)
-                    user.Lots.Add(trade.Lot);
+                    user.Trades.Add(trade);
             }
             else
                 throw new AuctionException($"Your price should be greater than: {trade.LastPrice}");
@@ -97,5 +97,28 @@ namespace BLL.Services
             return Mapper.Map<Trade, TradeDTO>(Database.Trades.Find(x => x.LotId == id).FirstOrDefault());
         }
 
+        public IEnumerable<TradeDTO> GetUserLoseTrades(string userId)
+        {
+            var user = Database.Users.Get(userId);
+
+            if (user == null)
+                throw new ArgumentNullException();
+
+            var list = user.Trades.Where(x => DateTime.Now.CompareTo(x.TradeEnd) >= 0 && x.LastRateUserId == user.Id);
+
+            return Mapper.Map<IEnumerable<Trade>, List<TradeDTO>>(list);
+        }
+
+        public IEnumerable<TradeDTO> GetUserWinTrades(string userId)
+        {
+            var user = Database.Users.Get(userId);
+
+            if (user == null)
+                throw new ArgumentNullException();
+
+            var list = user.Trades.Where(x => DateTime.Now.CompareTo(x.TradeEnd) >= 0 && x.LastRateUserId != user.Id);
+
+            return Mapper.Map<IEnumerable<Trade>, List<TradeDTO>>(list);
+        }
     }
 }

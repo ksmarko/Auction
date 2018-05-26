@@ -16,11 +16,13 @@ namespace WebApi.Controllers
     {
         readonly IUserManager userManager;
         readonly ICategoryService categoryService;
+        readonly ITradeService tradeService;
 
-        public ManagementController(IUserManager userManager, ICategoryService categoryService)
+        public ManagementController(IUserManager userManager, ICategoryService categoryService, ITradeService tradeService)
         {
             this.userManager = userManager;
             this.categoryService = categoryService;
+            this.tradeService = tradeService;
         }
 
         [HttpGet]
