@@ -98,12 +98,9 @@ namespace BLL.Services
             return Mapper.Map<Trade, TradeDTO>(Database.Trades.Find(x => x.LotId == id).FirstOrDefault());
         }
 
-        public IEnumerable<TradeDTO> GetUserLoseTrades(UserDTO userDTO)
+        public IEnumerable<TradeDTO> GetUserLoseTrades(string Id)
         {
-            if (userDTO == null)
-                throw new ArgumentNullException();
-
-            var user = Database.Users.Get(userDTO.Id);
+            var user = Database.Users.Get(Id);
             var winList = new List<Trade>();
 
             if (user == null)
@@ -116,12 +113,10 @@ namespace BLL.Services
             return Mapper.Map<IEnumerable<Trade>, List<TradeDTO>>(winList);
         }
 
-        public IEnumerable<TradeDTO> GetUserWinTrades(UserDTO userDTO)
+        public IEnumerable<TradeDTO> GetUserWinTrades(string Id)
         {
-            if (userDTO == null)
-                throw new ArgumentNullException();
 
-            var user = Database.Users.Get(userDTO.Id);
+            var user = Database.Users.Get(Id);
             var loseList = new List<Trade>();
 
             if (user == null)
@@ -134,12 +129,9 @@ namespace BLL.Services
             return Mapper.Map<IEnumerable<Trade>, List<TradeDTO>>(loseList);
         }
 
-        public IEnumerable<TradeDTO> GetUserActiveTrades(UserDTO userDTO)
+        public IEnumerable<TradeDTO> GetUserActiveTrades(string Id)
         {
-            if (userDTO == null)
-                throw new ArgumentNullException();
-
-            var user = Database.Users.Get(userDTO.Id);
+            var user = Database.Users.Get(Id);
             var activeList = new List<Trade>();
 
             if (user == null)

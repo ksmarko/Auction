@@ -170,10 +170,10 @@ namespace BLLUnitTest.Service
         {
             //arrange
             uow.Setup(x => x.Users.Get(It.IsAny<string>())).Returns<User>(null);
-            var user = new UserDTO();
+            
 
             //act & assert
-            Assert.Throws<ArgumentNullException>(() => tradeService.GetUserWinTrades(user));
+            Assert.Throws<ArgumentNullException>(() => tradeService.GetUserWinTrades(It.IsAny<string>()));
         }
 
         [Test]
@@ -181,10 +181,9 @@ namespace BLLUnitTest.Service
         {
             //arrange
             uow.Setup(x => x.Users.Get(It.IsAny<string>())).Returns<User>(null);
-            var user = new UserDTO();
 
             //act & assert
-            Assert.Throws<ArgumentNullException>(() => tradeService.GetUserActiveTrades(user));
+            Assert.Throws<ArgumentNullException>(() => tradeService.GetUserActiveTrades(It.IsAny<string>()));
         }
 
         [Test]
@@ -192,32 +191,12 @@ namespace BLLUnitTest.Service
         {
             //arrange
             uow.Setup(x => x.Users.Get(It.IsAny<string>())).Returns<User>(null);
-            var user = new UserDTO();
-
+            
             //act & assert
-            Assert.Throws<ArgumentNullException>(() => tradeService.GetUserLoseTrades(user));
+            Assert.Throws<ArgumentNullException>(() => tradeService.GetUserLoseTrades(It.IsAny<string>()));
         }
 
-        [Test]
-        public void GetUserActiveTrade_TryToGetNullUserTradeFromAll_ShouldThrowException()
-        {
-            //act & assert
-            Assert.Throws<ArgumentNullException>(() => tradeService.GetUserActiveTrades(null));
-        }
-
-        [Test]
-        public void GetUserWinTrade_TryToGetNullUserTradeFromAll_ShouldThrowException()
-        {
-            //act & assert
-            Assert.Throws<ArgumentNullException>(() => tradeService.GetUserWinTrades(null));
-        }
-        [Test]
-        public void GetUserLoseTrade_TryToGetNullUserTradeFromAll_ShouldThrowException()
-        {
-            //act & assert
-            Assert.Throws<ArgumentNullException>(() => tradeService.GetUserLoseTrades(null));
-        }
-
+       
         [Test]
         public void GetUserActiveTrade_TryToGetActiveTrades()
         {
@@ -229,7 +208,7 @@ namespace BLLUnitTest.Service
             uow.Setup(x => x.Users.Get(It.IsAny<string>())).Returns(user);
 
             //act
-            List<TradeDTO> list = tradeService.GetUserActiveTrades(new UserDTO ()) as List<TradeDTO>;
+            List<TradeDTO> list = tradeService.GetUserActiveTrades(It.IsAny<string>()) as List<TradeDTO>;
 
             //assert
             Assert.AreEqual(list.Count, 2);
@@ -248,7 +227,7 @@ namespace BLLUnitTest.Service
             uow.Setup(x => x.Users.Get(It.IsAny<string>())).Returns(user);
 
             //act
-            List<TradeDTO> list = tradeService.GetUserWinTrades(new UserDTO()) as List<TradeDTO>;
+            List<TradeDTO> list = tradeService.GetUserWinTrades(It.IsAny<string>()) as List<TradeDTO>;
 
             //assert
             Assert.AreEqual(list.Count, 1);
@@ -267,7 +246,7 @@ namespace BLLUnitTest.Service
             uow.Setup(x => x.Users.Get(It.IsAny<string>())).Returns(user);
 
             //act
-            List<TradeDTO> list = tradeService.GetUserLoseTrades(new UserDTO()) as List<TradeDTO>;
+            List<TradeDTO> list = tradeService.GetUserLoseTrades(It.IsAny<string>()) as List<TradeDTO>;
 
             //assert
             Assert.AreEqual(list.Count, 1);
