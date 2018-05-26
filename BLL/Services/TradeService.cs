@@ -97,5 +97,44 @@ namespace BLL.Services
             return Mapper.Map<Trade, TradeDTO>(Database.Trades.Find(x => x.LotId == id).FirstOrDefault());
         }
 
+        public IEnumerable<TradeDTO> GetUserLoseTradess(UserDTO userDTO)
+        {
+            var user = Database.Users.Get(userDTO.Id);
+            var winList = new List<Trade>();
+
+            if (user == null)
+                throw new ArgumentNullException();
+
+            foreach (var el in user.Trades)
+                if (DateTime.Now.CompareTo(el.TradeEnd) >= 0 && el.LastRateUserId == user.Id)
+                    winList.Add(el);
+
+            return Mapper.Map<IEnumerable<Trade>, List<TradeDTO>>(winList);
+        }
+
+        public IEnumerable<TradeDTO> GetAllUserTrades(UserDTO userDTO)
+        {
+            var user = Database.Users.Get(userDTO.Id);
+           
+            if (user == null)
+                throw new ArgumentNullException();
+
+            return Mapper.Map<IEnumerable<Trade>, List<TradeDTO>>(user.Trades);
+        }
+
+        public IEnumerable<TradeDTO> GetUserWinTrades(UserDTO userDTO)
+        {
+            var user = Database.Users.Get(userDTO.Id);
+            var loseList = new List<Trade>();
+
+            if (user == null)
+                throw new ArgumentNullException();
+
+            foreach (var el in user.Trades)
+                if (DateTime.Now.CompareTo(el.TradeEnd) >= 0 && el.LastRateUserId != user.Id)
+                    loseList.Add(el);
+
+            return Mapper.Map<IEnumerable<Trade>, List<TradeDTO>>(loseList);
+        }
     }
 }

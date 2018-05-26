@@ -10,6 +10,9 @@ namespace BLL.Interfaces
         IEnumerable<TradeDTO> GetAllTrades();
         TradeDTO GetTrade(int id);        
         TradeDTO GetTradeByLot(int id);
+        IEnumerable<TradeDTO> GetUserLoseTradess(UserDTO userDTO);
+        IEnumerable<TradeDTO> GetAllUserTrades(UserDTO userDTO);
+        IEnumerable<TradeDTO> GetUserWinTrades(UserDTO userDTO);
         void Dispose();
     }
 }
