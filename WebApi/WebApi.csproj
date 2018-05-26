@@ -296,6 +296,7 @@
     <Content Include="Client\img\skylots.png" />
     <Content Include="Client\img\star4.png" />
     <Content Include="Client\index.html" />
+    <Content Include="Client\js\domain.js" />
     <Content Include="Client\js\jquery-11.0.min.js" />
     <Content Include="Client\js\jquery.lazyload.min.js" />
     <Content Include="Client\js\ServerDate.js" />
@@ -307,9 +308,7 @@
     <Content Include="Client\onsale.html" />
     <Content Include="Client\purchase.html" />
     <Content Include="Client\register.html" />
-    <Content Include="Client\sale.html" />
     <Content Include="Client\sell.html" />
-    <Content Include="Client\сompleted.html" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />

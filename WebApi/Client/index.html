@@ -1,303 +1,206 @@
 ﻿<!DOCTYPE html>
+<html>
 <head>
-<meta name="viewport" content="width=device-width">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<title>Аукцион</title>
-<link rel="icon" href="favicon.ico">	
-<link rel="stylesheet" media="screen" type="text/css" href="css/style.css" title="">
-<link rel="stylesheet" media="screen" type="text/css" href="css/portable_style.css" title="">
-<script src='js/jquery-11.0.min.js' type="text/javascript"></script>
+    <meta content="width=device-width" name="viewport">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta charset="utf-8">
+    <title>Аукцион</title>
+    <link href="favicon.ico" rel="icon">
+    <link href="css/style.css" media="screen" rel="stylesheet" title="" type="text/css">
+    <link href="css/portable_style.css" media="screen" rel="stylesheet" title="" type="text/css">
+    <script src='js/jquery-11.0.min.js' type="text/javascript"></script>
+    <script src='js/domain.js' type="text/javascript"></script>
 </head>
-<body">
-<div class="top_nav">
-	<div class="container">
-		<div class="menu fullsize">
-			<ul>
-				<li><a href="login.html">Войти</a></li><div class="arrow"></div>
-				<li><a href="register.html">Регистрация</a></li> 
-			</ul>
-		</div>
-	</div>
-</div>
-<div class="ddmenu" id="ddm">
-	<li><a href="login.html">Войти</a></li><div class="arrow"></div>
-	<li><a href="register.html">Регистрация</a></li>
-	<hr style="margin-top:10px;margin-bottom:10px;border:0; border-top: #FFF dashed  1px;">
-</div>
-<div id="pagewrapper">
-	<a href="index.html"><div class="skylogo"></div></a>
-<div class="search_form">
-<input type=text name=search id="search-lots" placeholder="Что будем искать? " value="" class="top_search">
-<input onclick="SearchLots()" type=submit>
-</div>
-
-</form>
-<div class="topcats">
-	<div id="tmp0" class="topmenu">
-		<a href="#" class=link_first>Авто</a><br>
-		<a href="#" class=link_second>мото</a>
-	</div>
-	<div id="more0" class="topmore">
-		<a href="#" class=link_first>Авто</a><br>
-		<a href="#" class=link_second>мото</a>
-	</div>
-<div class="delim"></div>
-	<div id="tmp1" class="topmenu">
-		<a href="#" class=link_first>Телефоны</a><br>
-		<a href="#" class=link_second>смартфоны</a>
-	</div>
-	<div id="more1" class="topmore">
-		<a href="#" class=link_first>Телефоны</a><br>
-		<a href="#" class=link_second>смартфоны</a>
-	</div>
-<div class="delim"></div>
-	<div id="tmp2" class="topmenu">
-		<a href="#" class=link_first>Ноутбуки</a><br>
-		<a href="#" class=link_second>ПК и планшеты</a>
-	</div>
-	<div id="more2" class="topmore">
-		<a href="#" class=link_first>Ноутбуки</a><br>
-		<a href="#" class=link_second>ПК и планшеты</a>
-	</div>
-<div class="delim"></div>
-	<div id="tmp3" class="topmenu">
-		<a href="#" class=link_first>Техника</a><br>
-		<a href="#" class=link_second>и электроника</a>
-	</div>
-	<div id="more3" class="topmore">
-		<a href="#" class=link_first>Техника</a><br>
-		<a href="#" class=link_second>и электроника</a>
-	</div>
-<div class="delim"></div>
-	<div id="tmp4" class="topmenu">
-		<a href="#" class=link_first>Спорт</a><br>
-		<a href="#" class=link_second>здоровье</a>
-	</div>
-	<div id="more4" class="topmore">
-		<a href="#" class=link_first>Спорт</a><br>
-		<a href="#" class=link_second>здоровье</a>
-	</div>
-<div class="delim"></div>
-	<div id="tmp5" class="topmenu">
-		<a href="#" class=link_first>Одежда</a><br>
-		<a href="#" class=link_second>мода красота</a>
-	</div>
-	<div id="more5" class="topmore">
-		<a href="#" class=link_first>Одежда</a><br>
-		<a href="#" class=link_second>мода красота</a>
-	</div>
-<div class="delim"></div>
-	<div id="tmp6" class="topmenu">
-		<a href="#" class=link_first>Детский</a><br>
-		<a href="#" class=link_second>мир</a>
-	</div>
-	<div id="more6" class="topmore">
-		<a href="#" class=link_first>Детский</a><br>
-		<a href="#" class=link_second>мир</a>
-	</div>
-<div class="delim"></div>
-	<div id="tmp7" class="topmenu">
-		<a href="#" class=link_first>Дом</a><br>
-		<a href="#" class=link_second>досуг</a>
-	</div>
-	<div id="more7" class="topmore">
-		<a href="#" class=link_first>Дом</a><br>
-		<a href="#" class=link_second>досуг</a>
-	</div>
-<div class="delim"></div>
-	<div id="tmp8" class="topmenu">
-		<a href="#" class=link_first>Бакалея</a><br>
-	</div>
-	<div id="more8" class="topmore">
-		<a href="#" class=link_first>Бакалея</a><br>
-	</div>
-<div class="delim"></div>
-	<div id="tmp9" class="topmenu">
-		<a href="#" class=link_first>Колекции</a><br>
-		<a href="#" class=link_second>антиквариат</a>
-	</div>
-	<div id="more9" class="topmore">
-		<a href="#" class=link_first>Колекции</a><br>
-		<a href="#" class=link_second>антиквариат</a>
-	</div>
-<div class="delim"></div>
-	<div id="tmp10" class="topmenu">
-		<a href="#" class=link_first>Спец.</a><br>
-		<a href="#" class=link_second>проекты</a>
-	</div>
-	<div id="more10" class="topmore">
-		<a href="#" class=link_first>Спец.</a><br>
-		<a href="#" class=link_second>проекты</a>
-	</div>
-</div>
-
-<div id="wrapContent">
-    <div class="white_button" onclick="$('#left').is(':visible')?$('#left').hide():$('#left').show();$('#left').is(':visible')?$(this).text('Скрыть фильтры'):$(this).text('Показать фильтры')">Показать фильтры</div>
-    <div id="left">
-        <div id="categories" class="departments searchdep">
-            <h1 class=like_ht>
-                <div style="max-width:185px;">Категории</div><span style="position:absolute;top:12px;right:15px;">
-                </span>
-            </h1>
-        </div>
-        <div id="cats-list-my" class="searchparams">
-        </div>
-        <div id="categories" class="departments searchdep" style="margin-top:10px;">
-            <h2>Параметры</h2>
-        </div>
-        <div class="searchparams">
-            <b>Цена:</b>&nbsp;<a href="searchae12.html?&amp;catid=0" style="display:none"></a><br>
-            <div style="padding-left:10px;padding-top:5px;">
-                <input id="price-from" type="text" style="width:38px;height:15px;" value="" placeholder="   от" name="price_from"> &nbsp; – &nbsp;
-                <input id="price-to" type="text" style="width:38px;height:15px;" value="" placeholder="   до" name="price_to"> &nbsp;грн.
-            </div>
-            <br>
-
-            <div style="float:right;padding-top:10px;padding-right:5px;">
-                <input type="submit" onclick="FilterLots()" class="form-submit" value="Найти" style="height: 25px;width:70px;
-    background:  -webkit-linear-gradient(top, #fbfbfb 0%,#c9c9c9 100%);
-    background:  -moz-linear-gradient(top, #fbfbfb 0%,#c9c9c9 100%);
-    background:  linear-gradient(top, #fbfbfb 0%,#c9c9c9 100%) border: 1px solid #747474;
-    cursor: pointer;
-    padding: 3px 10px 4px 10px;
-	margin-left:5px;
-	font-family:'open sans';
- ">
-            </div><br>
-            <br>
-        </div>
-    </div>
-
-    <div class=rsearch>
-        <div id="description" style="border-radius:4px;">
-            <div class="search_lot" style="background: transparent url('images/DDR2.jpg'); background-repeat:no-repeat">
-                <div class="search_lot_title" style=""><a href="lot.html" title="DDR2 2GB 800 MHz (PC2-6400) разные производители">DDR2 2GB 800 MHz (PC2-6400) разные производители</a></div>
-                <div class="search_lot_timetoend"><span><strong></strong><span class="toend">До окончания: </span><strong>4 дн.</strong></span></div>
-                <div class="search_lot_price"><b>155.00 </b>грн.</div>
-                <div class="search_lot_buynow">купить сейчас</div>
+<body>
+    <div class="top_nav">
+        <div class="container">
+            <div class="menu fullsize">
+                <ul>
+                    <li>
+                        <a href="login.html">Войти</a>
+                    </li>
+                    <li style="list-style: none; display: inline">
+                        <div class="arrow"></div>
+                    </li>
+                    <li>
+                        <a href="register.html">Регистрация</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $.getJSON("http://localhost:49351/api/home")
-                .done(function (data) {
-                    var text = "";
-                    $.each(data, function (key, item) {
-                        text += "<div onclick='GetLotsForCategory(" + $(item)[0].Id + ")' style='display: inline-block;cursor: pointer; width: 200px; padding-right:10px;'><a class='sp_href cat-name' style= '' >" + $(item)[0].Name + "</a ></div > <br style='line-height:25px;'>";
-                    });
-                    $("#cats-list-my").html(text);
+    <div class="ddmenu" id="ddm">
+        <ul>
+            <li>
+                <a href="login.html">Войти</a>
+            </li>
+            <li style="list-style: none; display: inline">
+                <div class="arrow"></div>
+            </li>
+            <li>
+                <a href="register.html">Регистрация</a>
+            </li>
+            <li style="list-style: none; display: inline">
+                <hr style="margin-top:10px;margin-bottom:10px;border:0; border-top: #FFF dashed 1px;">
+            </li>
+        </ul>
+    </div>
+    <div id="pagewrapper">
+        <a href="index.html">
+            <div class="skylogo"></div>
+        </a>
+        <div class="search_form">
+            <input class="top_search" id="search-lots" name="search" placeholder="Что будем искать?" type="text" value=""> <input onclick="SearchLots()" type="submit">
+        </div>
+        <div class="topcats">
+            <div class="topmenu" id="tmp0">
+                <a class="link_first" href="#">Авто</a><br>
+                <a class="link_second" href="#">мото</a>
+            </div>
+            <div class="topmore" id="more0">
+                <a class="link_first" href="#">Авто</a><br>
+                <a class="link_second" href="#">мото</a>
+            </div>
+            <div class="delim"></div>
+            <div class="topmenu" id="tmp1">
+                <a class="link_first" href="#">Телефоны</a><br>
+                <a class="link_second" href="#">смартфоны</a>
+            </div>
+            <div class="topmore" id="more1">
+                <a class="link_first" href="#">Телефоны</a><br>
+                <a class="link_second" href="#">смартфоны</a>
+            </div>
+            <div class="delim"></div>
+            <div class="topmenu" id="tmp2">
+                <a class="link_first" href="#">Ноутбуки</a><br>
+                <a class="link_second" href="#">ПК и планшеты</a>
+            </div>
+            <div class="topmore" id="more2">
+                <a class="link_first" href="#">Ноутбуки</a><br>
+                <a class="link_second" href="#">ПК и планшеты</a>
+            </div>
+            <div class="delim"></div>
+            <div class="topmenu" id="tmp3">
+                <a class="link_first" href="#">Техника</a><br>
+                <a class="link_second" href="#">и электроника</a>
+            </div>
+            <div class="topmore" id="more3">
+                <a class="link_first" href="#">Техника</a><br>
+                <a class="link_second" href="#">и электроника</a>
+            </div>
+            <div class="delim"></div>
+            <div class="topmenu" id="tmp4">
+                <a class="link_first" href="#">Спорт</a><br>
+                <a class="link_second" href="#">здоровье</a>
+            </div>
+            <div class="topmore" id="more4">
+                <a class="link_first" href="#">Спорт</a><br>
+                <a class="link_second" href="#">здоровье</a>
+            </div>
+            <div class="delim"></div>
+            <div class="topmenu" id="tmp5">
+                <a class="link_first" href="#">Одежда</a><br>
+                <a class="link_second" href="#">мода красота</a>
+            </div>
+            <div class="topmore" id="more5">
+                <a class="link_first" href="#">Одежда</a><br>
+                <a class="link_second" href="#">мода красота</a>
+            </div>
+            <div class="delim"></div>
+            <div class="topmenu" id="tmp6">
+                <a class="link_first" href="#">Детский</a><br>
+                <a class="link_second" href="#">мир</a>
+            </div>
+            <div class="topmore" id="more6">
+                <a class="link_first" href="#">Детский</a><br>
+                <a class="link_second" href="#">мир</a>
+            </div>
+            <div class="delim"></div>
+            <div class="topmenu" id="tmp7">
+                <a class="link_first" href="#">Дом</a><br>
+                <a class="link_second" href="#">досуг</a>
+            </div>
+            <div class="topmore" id="more7">
+                <a class="link_first" href="#">Дом</a><br>
+                <a class="link_second" href="#">досуг</a>
+            </div>
+            <div class="delim"></div>
+            <div class="topmenu" id="tmp8">
+                <a class="link_first" href="#">Бакалея</a><br>
+            </div>
+            <div class="topmore" id="more8">
+                <a class="link_first" href="#">Бакалея</a><br>
+            </div>
+            <div class="delim"></div>
+            <div class="topmenu" id="tmp9">
+                <a class="link_first" href="#">Колекции</a><br>
+                <a class="link_second" href="#">антиквариат</a>
+            </div>
+            <div class="topmore" id="more9">
+                <a class="link_first" href="#">Колекции</a><br>
+                <a class="link_second" href="#">антиквариат</a>
+            </div>
+            <div class="delim"></div>
+            <div class="topmenu" id="tmp10">
+                <a class="link_first" href="#">Спец.</a><br>
+                <a class="link_second" href="#">проекты</a>
+            </div>
+            <div class="topmore" id="more10">
+                <a class="link_first" href="#">Спец.</a><br>
+                <a class="link_second" href="#">проекты</a>
+            </div>
+        </div>
+        <div id="wrapContent">
+            <div class="white_button" onclick="$('#left').is(':visible')?$('#left').hide():$('#left').show();$('#left').is(':visible')?$(this).text('Скрыть фильтры'):$(this).text('Показать фильтры')">
+                Показать фильтры
+            </div>
+            <div id="left">
+                <div class="departments searchdep" id="categories">
+                    <h1 class="like_ht"></h1>
+                    <div style="max-width:185px;">
+                        <h1 class="like_ht">Категории <span style="position:absolute;top:12px;right:15px;"></span></h1>
+                    </div>
+                </div>
+                <div class="searchparams" id="cats-list-my"></div>
+                <div class="departments searchdep" id="categories" style="margin-top:10px;">
+                    <h2>Параметры</h2>
+                </div>
+                <div class="searchparams">
+                    <b>Цена:</b>&nbsp;<a href="searchae12.html?&amp;catid=0" style="display:none"></a><br>
+                    <div style="padding-left:10px;padding-top:5px;">
+                        <input id="price-from" name="price_from" placeholder=" от" style="width:38px;height:15px;" type="text" value=""> &nbsp; – &nbsp; <input id="price-to" name="price_to" placeholder=" до" style="width:38px;height:15px;" type="text" value=""> &nbsp;грн.
+                    </div><br>
+                    <div style="float:right;padding-top:10px;padding-right:5px;">
+                        <input class="form-submit" onclick="FilterLots()" style="height: 25px;width:70px; background: -webkit-linear-gradient(top, #fbfbfb 0%,#c9c9c9 100%); background: -moz-linear-gradient(top, #fbfbfb 0%,#c9c9c9 100%); background: linear-gradient(top, #fbfbfb 0%,#c9c9c9 100%) border: 1px solid #747474; cursor: pointer; padding: 3px 10px 4px 10px; margin-left:5px; font-family:'open sans';" type="submit" value="Найти">
+                    </div><br>
+                    <br>
+                </div>
+            </div>
+            <div class="rsearch">
+                <div id="description" style="border-radius:4px;">
+                    <div class="search_lot" style="background: transparent url('images/DDR2.jpg'); background-repeat:no-repeat">
+                        <div class="search_lot_title" style="">
+                            <a href="lot.html" title="DDR2 2GB 800 MHz (PC2-6400) разные производители">DDR2 2GB 800 MHz (PC2-6400) разные производители</a>
+                        </div>
+                        <div class="search_lot_timetoend">
+                            <span><strong></strong><span class="toend">До окончания:</span> <strong>4 дн.</strong></span>
+                        </div>
+                        <div class="search_lot_price">
+                            <b>155.00</b> грн.
+                        </div>
+                        <div class="search_lot_buynow">
+                            купить сейчас
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    GetMainLots(),
+                    GetMainCats()
                 });
-
-            $.getJSON("http://localhost:49351/api/lots")
-                .done(function (data) {
-                    var text = "";
-                    if ($(data).length <= 0) {
-                        text = "<h3>No results</h3>";
-                    }
-                    else {
-                        var counter = 0;
-                        $.each(data, function (key, item) {
-                            if (counter >= 10) {
-                                return;
-                            }
-                            counter++;
-                            text += "<div class='search_lot' style='background: transparent url(" + "images/DDR2.jpg" + "); background-repeat: no-repeat'>" +
-                                "<div class='search_lot_title' style='' onclick='GetLot(" + $(item)[0].Id + ")'><a href='#' title=" + $(item)[0].Name + ">" + $(item)[0].Name + "</a></div>" +
-                                "<div class='search_lot_timetoend'><span><strong></strong><span class='toend'>До окончания: </span><strong>4 дн.</strong></span></div>" +
-                                "<div class='search_lot_price'><b>" + $(item)[0].Price + "</b>грн.</div>" +
-                                "<div class='search_lot_buynow'>купить сейчас</div></div ><br/><hr><br/>";
-                        });
-                    }
-                    $("#description").html(text);
-                });
-        });
-
-        function GetLotsForCategory(id) {
-            $.getJSON("http://localhost:49351/api/categories/" + id + "/lots")
-                .done(function (data) {
-                    var text = "";
-                    if ($(data).length <= 0) {
-                        text = "<h3>No results</h3>";
-                    }
-                    else {
-                        $.each(data, function (key, item) {
-                            text += "<div class='search_lot' style='background: transparent url(" + "images/DDR2.jpg" + "); background-repeat: no-repeat'>" +
-                                "<div class='search_lot_title' style='' onclick='GetLot(" + $(item)[0].Id + ")'><a href='#' title=" + $(item)[0].Name + ">" + $(item)[0].Name + "</a></div>" +
-                                "<div class='search_lot_timetoend'><span><strong></strong><span class='toend'>До окончания: </span><strong>4 дн.</strong></span></div>" +
-                                "<div class='search_lot_price'><b>" + $(item)[0].Price + "</b>грн.</div>" +
-                                "<div class='search_lot_buynow'>купить сейчас</div></div ><br/><hr><br/>";
-                        });
-                    }
-                    $("#description").html(text);
-                });
-        }
-
-        function GetLot(id) {
-            $.getJSON("http://localhost:49351/api/lots/" + id)
-                .done(function (data) {
-                    location.href = 'lot.html';
-                    $(document).getElementById("lot-name").val($(data).Name);
-                });
-        }
-
-        function FilterLots() {
-            $.getJSON("http://localhost:49351/api/lots/")
-                .done(function (data) {
-                    var text = "";
-                    if ($(data).length <= 0) {
-                        text = "<h3>No results</h3>";
-                    }
-                    else {
-                        var from = $("#price-from").val() ? $("#price-from").val() : 0;
-                        var to = $("#price-to").val() ? $("#price-to").val() : 9999999999999;
-                        $.each(data, function (key, item) {
-                            if ($(item)[0].Price >= from && $(item)[0].Price <= to) {
-                                text += "<div class='search_lot' style='background: transparent url(" + "images/DDR2.jpg" + "); background-repeat: no-repeat'>" +
-                                    "<div class='search_lot_title' style='' onclick='GetLot(" + $(item)[0].Id + ")'><a href='#' title=" + $(item)[0].Name + ">" + $(item)[0].Name + "</a></div>" +
-                                    "<div class='search_lot_timetoend'><span><strong></strong><span class='toend'>До окончания: </span><strong>4 дн.</strong></span></div>" +
-                                    "<div class='search_lot_price'><b>" + $(item)[0].Price + "</b>грн.</div>" +
-                                    "<div class='search_lot_buynow'>купить сейчас</div></div ><br/><hr><br/>";
-                            }
-                        });
-                    }
-                    $("#description").html(text);
-                });
-        }
-
-        function SearchLots() {
-            $.getJSON("http://localhost:49351/api/lots/")
-                .done(function (data) {
-                    var text = "";
-                    if ($(data).length <= 0) {
-                        text = "<h3>No results</h3>";
-                    }
-                    else {
-                        var term = $("#search-lots").val().toLowerCase();
-                        $.each(data, function (key, item) {
-                            if ($(item)[0].Name.toLowerCase().includes(term) || $(item)[0].Description.toLowerCase().includes(term)) {
-                                text += "<div class='search_lot' style='background: transparent url(" + "images/DDR2.jpg" + "); background-repeat: no-repeat'>" +
-                                    "<div class='search_lot_title' style='' onclick='GetLot(" + $(item)[0].Id + ")'><a href='#' title=" + $(item)[0].Name + ">" + $(item)[0].Name + "</a></div>" +
-                                    "<div class='search_lot_timetoend'><span><strong></strong><span class='toend'>До окончания: </span><strong>4 дн.</strong></span></div>" +
-                                    "<div class='search_lot_price'><b>" + $(item)[0].Price + "</b>грн.</div>" +
-                                    "<div class='search_lot_buynow'>купить сейчас</div></div ><br/><hr><br/>";
-                            }
-                        });
-                    }
-                    if ($(text).length <= 2) {
-                        text = "<h3>No results</h3>";
-                    }
-                    $("#description").html(text);
-                });
-        }
-
-    </script>
-
-    
-
+            </script>
+        </div>
+    </div>
 </body>
-
-
 </html>
