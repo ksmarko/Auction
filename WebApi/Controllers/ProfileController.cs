@@ -27,7 +27,7 @@ namespace WebApi.Controllers
         [Route("api/profile/lots")]
         public IEnumerable<LotModel> GetUserLots()
         {
-            var user = userManager.GetUsers().Where(x => x.UserName == User.Identity.Name).FirstOrDefault();
+            var user = userManager.GetUserByName(User.Identity.Name);
             var lots = Mapper.Map<IEnumerable<LotDTO>, IEnumerable<LotModel>>(user.Lots);
 
             return lots;

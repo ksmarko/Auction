@@ -251,14 +251,18 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LotsController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\ManagementController.cs" />
+    <Compile Include="Controllers\TradesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountBindingModels.cs" />
+    <Compile Include="Models\RegisterBindingModel.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Models\ChangeCategoryModel.cs" />
+    <Compile Include="Models\EditRoleModel.cs" />
     <Compile Include="Models\LotModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
@@ -268,6 +272,7 @@
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Client\css\portable_style.css" />
     <Content Include="Client\css\style.css" />
+    <Content Include="Client\favicon.ico" />
     <Content Include="Client\images\DDR2%282%29.jpg" />
     <Content Include="Client\images\DDR2.jpg" />
     <Content Include="Client\img\000.png" />
@@ -290,17 +295,23 @@
     <Content Include="Client\img\skylots.png" />
     <Content Include="Client\img\star4.png" />
     <Content Include="Client\index.html" />
+    <Content Include="Client\js\jquery-1.12.4.min.js" />
     <Content Include="Client\js\jquery-11.0.min.js" />
     <Content Include="Client\js\jquery.lazyload.min.js" />
+    <Content Include="Client\js\jquery.validate.min.js" />
+    <Content Include="Client\js\jquery.validate.unobtrusive.min.js" />
     <Content Include="Client\js\ServerDate.js" />
     <Content Include="Client\js\ug-theme-carouseleccb.js" />
     <Content Include="Client\js\ug-theme-defaulteccb.js" />
     <Content Include="Client\js\unitegallery.js" />
     <Content Include="Client\login.html" />
+    <Content Include="Client\login_new.html" />
     <Content Include="Client\lot.html" />
+    <Content Include="Client\management.html" />
     <Content Include="Client\onsale.html" />
     <Content Include="Client\purchase.html" />
     <Content Include="Client\register.html" />
+    <Content Include="Client\register_new.html" />
     <Content Include="Client\sale.html" />
     <Content Include="Client\sell.html" />
     <Content Include="Client\сompleted.html" />

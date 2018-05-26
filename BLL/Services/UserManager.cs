@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BLL.DTO;
+using BLL.Exceptions;
 using BLL.Infrastructure;
 using BLL.Interfaces;
 using DAL.Entities;
@@ -39,7 +40,7 @@ namespace BLL.Services
                 if (result.Errors.Count() > 0)
                     return new OperationDetails(false, result.Errors.FirstOrDefault(), "");
 
-                await DatabaseIdentity.UserManager.AddToRoleAsync(user.Id, userDto.Role);
+                await DatabaseIdentity.UserManager.AddToRoleAsync(user.Id, "user");
                 User clientProfile = new User { Id = user.Id, Name = userDto.UserName };
                 DatabaseIdentity.ClientManager.Create(clientProfile);
                 await DatabaseIdentity.SaveAsync();
@@ -79,6 +80,39 @@ namespace BLL.Services
             ClaimsIdentity cookiesIdentity = await DatabaseIdentity.UserManager.CreateIdentityAsync(appUser, CookieAuthenticationDefaults.AuthenticationType);
 
             return new Tuple<ClaimsIdentity, ClaimsIdentity>(oAuthIdentity, cookiesIdentity);
+        }
+
+        public UserDTO GetUserByName(string name)
+        {
+            ApplicationUser appUser = DatabaseIdentity.UserManager.FindByName(name);
+
+            if (appUser == null)
+                throw new UserNotFoundException();
+
+            return CreateUserDTO(appUser);
+        }
+
+        public async Task EditRole(string userId, string newRoleName)
+        {
+            var user = await DatabaseIdentity.UserManager.FindByIdAsync(userId);
+
+            if (user == null)
+                throw new UserNotFoundException();
+
+            var oldRole = GetRoleForUser(userId);
+
+            if (oldRole != newRoleName)
+            {
+                await DatabaseIdentity.UserManager.RemoveFromRoleAsync(userId, oldRole);
+                await DatabaseIdentity.UserManager.AddToRoleAsync(userId, newRoleName);
+
+                await DatabaseIdentity.UserManager.UpdateAsync(user);
+            }
+        }
+
+        public IEnumerable<string> GetRoles()
+        {
+            return DatabaseIdentity.RoleManager.Roles.Select(x => x.Name);
         }
 
         private UserDTO CreateUserDTO(ApplicationUser user)

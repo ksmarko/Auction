@@ -8,6 +8,7 @@ using WebApi.Models;
 using System.Web.Http;
 using AutoMapper;
 using BLL.DTO;
+using System.IO;
 
 namespace WebApi.Controllers
 {
@@ -27,9 +28,20 @@ namespace WebApi.Controllers
         [Route("api/lots/create")]
         public IHttpActionResult AddLot(LotModel model)
         {
-            var user = userManager.GetUsers().Where(x => x.UserName == User.Identity.Name).FirstOrDefault();
+            var user = userManager.GetUserByName(User.Identity.Name);
             var lot = Mapper.Map<LotModel, LotDTO>(model);
+
+            byte[] array = null;
+
+            if (model.File != null)
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    model.File.InputStream.CopyTo(ms);
+                    array = ms.GetBuffer();
+                }
+
             lot.User = user;
+            lot.Img = array;
             lotService.CreateLot(lot);
 
             return Ok("Lot created");
@@ -67,7 +79,7 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("api/lots/category/{id}")]
+        [Route("api/categories/{id}/lots")]
         public IEnumerable<LotModel> GetLots(int id)
         {
             var lots = lotService.GetLotsForCategory(id);

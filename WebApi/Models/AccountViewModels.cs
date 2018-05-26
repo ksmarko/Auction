@@ -25,15 +25,6 @@ namespace WebApi.Models
         public IEnumerable<ExternalLoginViewModel> ExternalLoginProviders { get; set; }
     }
 
-    public class UserInfoViewModel
-    {
-        public string Email { get; set; }
-
-        public bool HasRegistered { get; set; }
-
-        public string LoginProvider { get; set; }
-    }
-
     public class UserLoginInfoViewModel
     {
         public string LoginProvider { get; set; }
