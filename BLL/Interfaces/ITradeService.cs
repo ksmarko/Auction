@@ -6,13 +6,13 @@ namespace BLL.Interfaces
     public interface ITradeService
     {
         void StartTrade(int lotId);
-        void Rate(int lotId, string userId, double price);
+        void Rate(int tradeId, string userId, double price);
         IEnumerable<TradeDTO> GetAllTrades();
         TradeDTO GetTrade(int id);        
         TradeDTO GetTradeByLot(int id);
-        IEnumerable<TradeDTO> GetUserLoseTradess(UserDTO userDTO);
-        IEnumerable<TradeDTO> GetAllUserTrades(UserDTO userDTO);
+        IEnumerable<TradeDTO> GetUserLoseTrades(UserDTO userDTO);
         IEnumerable<TradeDTO> GetUserWinTrades(UserDTO userDTO);
+        IEnumerable<TradeDTO> GetUserActiveTrades(UserDTO userDTO);
         void Dispose();
     }
 }

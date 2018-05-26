@@ -77,8 +77,9 @@ namespace BLL.Services
             else
                 throw new AuctionException($"Your price should be greater than: {trade.LastPrice}");
 
-            Database.Lots.Update(trade.Lot);
+            
             Database.Users.Update(user);
+            Database.Trades.Update(trade);
             Database.Save();
         }
 
@@ -97,8 +98,11 @@ namespace BLL.Services
             return Mapper.Map<Trade, TradeDTO>(Database.Trades.Find(x => x.LotId == id).FirstOrDefault());
         }
 
-        public IEnumerable<TradeDTO> GetUserLoseTradess(UserDTO userDTO)
+        public IEnumerable<TradeDTO> GetUserLoseTrades(UserDTO userDTO)
         {
+            if (userDTO == null)
+                throw new ArgumentNullException();
+
             var user = Database.Users.Get(userDTO.Id);
             var winList = new List<Trade>();
 
@@ -112,18 +116,11 @@ namespace BLL.Services
             return Mapper.Map<IEnumerable<Trade>, List<TradeDTO>>(winList);
         }
 
-        public IEnumerable<TradeDTO> GetAllUserTrades(UserDTO userDTO)
-        {
-            var user = Database.Users.Get(userDTO.Id);
-           
-            if (user == null)
-                throw new ArgumentNullException();
-
-            return Mapper.Map<IEnumerable<Trade>, List<TradeDTO>>(user.Trades);
-        }
-
         public IEnumerable<TradeDTO> GetUserWinTrades(UserDTO userDTO)
         {
+            if (userDTO == null)
+                throw new ArgumentNullException();
+
             var user = Database.Users.Get(userDTO.Id);
             var loseList = new List<Trade>();
 
@@ -135,6 +132,24 @@ namespace BLL.Services
                     loseList.Add(el);
 
             return Mapper.Map<IEnumerable<Trade>, List<TradeDTO>>(loseList);
+        }
+
+        public IEnumerable<TradeDTO> GetUserActiveTrades(UserDTO userDTO)
+        {
+            if (userDTO == null)
+                throw new ArgumentNullException();
+
+            var user = Database.Users.Get(userDTO.Id);
+            var activeList = new List<Trade>();
+
+            if (user == null)
+                throw new ArgumentNullException();
+
+            foreach (var el in user.Trades)
+                if (DateTime.Now.CompareTo(el.TradeEnd) < 0)
+                    activeList.Add(el);
+
+            return Mapper.Map<IEnumerable<Trade>, List<TradeDTO>>(activeList);
         }
     }
 }

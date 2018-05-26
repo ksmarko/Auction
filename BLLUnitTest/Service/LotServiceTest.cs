@@ -10,7 +10,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 
-namespace BLLUnitTest
+namespace BLLUnitTest.Service
 {
     [TestFixture]
     public class LotServiceTest
@@ -21,9 +21,13 @@ namespace BLLUnitTest
 
         static LotServiceTest()
         {
-            Mapper.Initialize(cfg =>
-            BLL.Infrastructure.AutoMapperConfig.Configure(cfg)
-            );
+            try
+            {
+                Mapper.Initialize(cfg =>
+                AutoMapperConfig.Configure(cfg)
+                );
+            }
+            catch { }
         } 
 
         [SetUp]
@@ -45,13 +49,24 @@ namespace BLLUnitTest
             Assert.Throws<ArgumentNullException>(() => lotService.CreateLot(null));
         }
 
+        [Test]
+        public void Createlot_TryToCreateElementWithNullUser()
+        {
+            //arrange
+            var lot = new LotDTO { Name = It.IsAny<string>(), Price = It.IsAny<double>(), TradeDuration = It.IsAny<int>(), User = It.IsAny<UserDTO>() };
+            uow.Setup(x => x.Users.Get(It.IsAny<string>())).Returns<User>(null);
+
+            var ex = Assert.Throws<AuctionException>(() => lotService.CreateLot(lot));
+            Assert.AreEqual(ex.Message, "Lot must have owner");
+        }
 
         [Test]
         public void CreateLot_TryToCreateLot_ShouldRepositoryCreateOnce()
         {
             //arrange
-            var lot = new LotDTO { Name = It.IsAny<string>(), Price = It.IsAny<double>(), TradeDuration = It.IsAny<int>()};
-            
+            var lot = new LotDTO { Name = It.IsAny<string>(), Price = It.IsAny<double>(), TradeDuration = It.IsAny<int>(), User = new UserDTO { Name = It.IsAny<string>() } };
+            uow.Setup(x => x.Users.Get(It.IsAny<string>())).Returns(new User { Name = It.IsAny<string>() });
+
             // act
             lotService.CreateLot(lot);
 
