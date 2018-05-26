@@ -35,11 +35,7 @@ function SendRequest(url) {
         success: function (data) {
             var text = "";
             $.each(data, function (key, item) {
-                text += "<div class='search_lot' style='background: transparent url(" + "images/DDR2.jpg" + "); background-repeat: no-repeat'>" +
-                    "<div class='search_lot_title' style='' onclick='GetLot(" + $(item)[0].Id + ")'><a href='#' title=" + $(item)[0].Name + ">" + $(item)[0].Name + "</a></div>" +
-                    "<div class='search_lot_timetoend'><span><strong></strong><span class='toend'>До окончания: </span><strong>4 дн.</strong></span></div>" +
-                    "<div class='search_lot_price'><b>" + $(item)[0].Price + "</b>грн.</div>" +
-                    "</div ><br/><hr><br/>";
+                text = AddLotContent(text, $(item)[0].Id, $(item)[0].Name, $(item)[0].Price);
             });
             $("#lots-content").html(text);
         },
@@ -58,11 +54,7 @@ function GetLotsForCategory(id) {
             }
             else {
                 $.each(data, function (key, item) {
-                    text += "<div class='search_lot' style='background: transparent url(" + "images/DDR2.jpg" + "); background-repeat: no-repeat'>" +
-                        "<div class='search_lot_title' style='' onclick='GetLot(" + $(item)[0].Id + ")'><a href='#' title=" + $(item)[0].Name + ">" + $(item)[0].Name + "<\/a><\/div>" +
-                        "<div class='search_lot_timetoend'><span><strong><\/strong><span class='toend'>До окончания: <\/span><strong>4 дн.<\/strong><\/span><\/div>" +
-                        "<div class='search_lot_price'><b>" + $(item)[0].Price + "<\/b>грн.<\/div>" +
-                        "<div class='search_lot_buynow'>купить сейчас<\/div><\/div ><br/><hr><br/>";
+                    text = AddLotContent(text, $(item)[0].Id, $(item)[0].Name, $(item)[0].Price);
                 });
             }
             $("#description").html(text);
@@ -89,11 +81,7 @@ function FilterLots() {
                 var to = $("#price-to").val() ? $("#price-to").val() : 9999999999999;
                 $.each(data, function (key, item) {
                     if ($(item)[0].Price >= from && $(item)[0].Price <= to) {
-                        text += "<div class='search_lot' style='background: transparent url(" + "images/DDR2.jpg" + "); background-repeat: no-repeat'>" +
-                            "<div class='search_lot_title' style='' onclick='GetLot(" + $(item)[0].Id + ")'><a href='#' title=" + $(item)[0].Name + ">" + $(item)[0].Name + "<\/a><\/div>" +
-                            "<div class='search_lot_timetoend'><span><strong><\/strong><span class='toend'>До окончания: <\/span><strong>4 дн.<\/strong><\/span><\/div>" +
-                            "<div class='search_lot_price'><b>" + $(item)[0].Price + "<\/b>грн.<\/div>" +
-                            "<div class='search_lot_buynow'>купить сейчас<\/div><\/div ><br/><hr><br/>";
+                        text = AddLotContent(text, $(item)[0].Id, $(item)[0].Name, $(item)[0].Price);
                     }
                 });
             }
@@ -112,11 +100,7 @@ function SearchLots() {
                 var term = $("#search-lots").val().toLowerCase();
                 $.each(data, function (key, item) {
                     if ($(item)[0].Name.toLowerCase().includes(term) || $(item)[0].Description.toLowerCase().includes(term)) {
-                        text += "<div class='search_lot' style='background: transparent url(" + "images/DDR2.jpg" + "); background-repeat: no-repeat'>" +
-                            "<div class='search_lot_title' style='' onclick='GetLot(" + $(item)[0].Id + ")'><a href='#' title=" + $(item)[0].Name + ">" + $(item)[0].Name + "<\/a><\/div>" +
-                            "<div class='search_lot_timetoend'><span><strong><\/strong><span class='toend'>До окончания: <\/span><strong>4 дн.<\/strong><\/span><\/div>" +
-                            "<div class='search_lot_price'><b>" + $(item)[0].Price + "<\/b>грн.<\/div>" +
-                            "<div class='search_lot_buynow'>купить сейчас<\/div><\/div ><br/><hr><br/>";
+                        text = AddLotContent(text, $(item)[0].Id, $(item)[0].Name, $(item)[0].Price);
                     }
                 });
             }
@@ -125,6 +109,36 @@ function SearchLots() {
             }
             $("#description").html(text);
         });
+}
+
+function AddLotContent(text, id, name, price) {
+    text += "<div class='search_lot' style='background: transparent url(" + "img/nophoto.png" + "); background-repeat: no-repeat'>" +
+        "<div class='search_lot_title' style='' onclick='GetLot(" + id + ")'><a href='#' title=" + name + ">" + name + "<\/a><\/div>" +
+        "<div class='search_lot_timetoend'><span><strong><\/strong><span class='toend'>До окончания: <\/span><strong>4 дн.<\/strong><\/span><\/div>" +
+        "<div class='search_lot_price'><b>" + price + "<\/b>грн.<\/div>" +
+        "<div class='search_lot_buynow'>купить сейчас<\/div>"/* + "<button onclick='RemoveLot(" + id + ")'>Remove</button>"*/ + "<\/div ><br/><hr><br/>";
+
+    return text;
+}
+
+function RemoveLot(id) {
+    var tokenKey = "tokenInfo";
+
+    $.ajax({
+        type: 'DELETE',
+        url: "http://localhost:49351/api/lots/remove/" + id,
+        contentType: 'application/json; charset=utf-8',
+        beforeSend: function (xhr) {
+            var token = sessionStorage.getItem(tokenKey);
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        },
+        success: function (data) {
+            alert(data);
+        },
+        fail: function (data) {
+            alert(data);
+        }
+    });
 }
 
 function GetMainLots() {
@@ -141,11 +155,7 @@ function GetMainLots() {
                         return;
                     }
                     counter++;
-                    text += "<div class='search_lot' style='background: transparent url(" + "images/DDR2.jpg" + "); background-repeat: no-repeat'>" +
-                        "<div class='search_lot_title' style='' onclick='GetLot(" + $(item)[0].Id + ")'><a href='#' title=" + $(item)[0].Name + ">" + $(item)[0].Name + "<\/a><\/div>" +
-                        "<div class='search_lot_timetoend'><span><strong><\/strong><span class='toend'>До окончания: <\/span><strong>4 дн.<\/strong><\/span><\/div>" +
-                        "<div class='search_lot_price'><b>" + $(item)[0].Price + "<\/b>грн.<\/div>" +
-                        "<div class='search_lot_buynow'>купить сейчас<\/div><\/div ><br/><hr><br/>";
+                    text = AddLotContent(text, $(item)[0].Id, $(item)[0].Name, $(item)[0].Price);
                 });
             }
             $("#description").html(text);
@@ -161,4 +171,44 @@ function GetMainCats() {
             });
             $("#cats-list-my").html(text);
         });
+}
+
+function LoadOptions() {
+    $.getJSON("http://localhost:49351/api/home")
+        .done(function (data) {
+            var text = "";
+            $.each(data, function (key, item) {
+                text += "<option value=" + $(item)[0].Id + ">" + $(item)[0].Name + "</option >";
+            });
+            $("#cat0").html(text);
+        });
+}
+
+function AddLot() {
+    var tokenKey = "tokenInfo";
+    var data = {
+        Name: $('#lot-name').val(),
+        Description: $('#lot-descr').val(),
+        Price: $('#lot-price').val(),
+        TradeDuration: $('#trade-duration').val(),
+        Category: $('#cat0').val()
+    };
+
+    $.ajax({
+        type: 'POST',
+        url: "http://localhost:49351/api/lots/create",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify(data),
+        beforeSend: function (xhr) {
+            var token = sessionStorage.getItem(tokenKey);
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        },
+        success: function (data) {
+            alert(data);
+            location.href = 'onsale.html';
+        },
+        fail: function (data) {
+            alert(data);
+        }
+    });
 }

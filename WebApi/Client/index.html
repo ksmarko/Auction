@@ -151,15 +151,13 @@
             </div>
         </div>
         <div id="wrapContent">
-            <div class="white_button" onclick="$('#left').is(':visible')?$('#left').hide():$('#left').show();$('#left').is(':visible')?$(this).text('Скрыть фильтры'):$(this).text('Показать фильтры')">
-                Показать фильтры
-            </div>
+            <div class="white_button" onclick="$('#left').is(':visible')?$('#left').hide():$('#left').show();$('#left').is(':visible')?$(this).text('Скрыть фильтры'):$(this).text('Показать фильтры')">Показать фильтры</div>
             <div id="left">
-                <div class="departments searchdep" id="categories">
-                    <h1 class="like_ht"></h1>
-                    <div style="max-width:185px;">
-                        <h1 class="like_ht">Категории <span style="position:absolute;top:12px;right:15px;"></span></h1>
-                    </div>
+                <div id="categories" class="departments searchdep">
+                    <h1 class=like_ht>
+                        <div style="max-width:185px;">Категории</div><span style="position:absolute;top:12px;right:15px;">
+                        </span>
+                    </h1>
                 </div>
                 <div class="searchparams" id="cats-list-my"></div>
                 <div class="departments searchdep" id="categories" style="margin-top:10px;">
@@ -197,7 +195,7 @@
             <script type="text/javascript">
                 $(document).ready(function () {
                     GetMainLots(),
-                    GetMainCats()
+                        GetMainCats()
                 });
             </script>
         </div>
