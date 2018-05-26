@@ -1,0 +1,1275 @@
+@media screen and (max-width: 880px) {
+	.fullsize_hid{
+		visibility:hidden;
+		display:none  !important;
+	}
+	
+	.search_lot_bn_block {
+		display:none;
+		
+	} 
+	
+	.search_lot_delimiter {
+		display:none;
+	}
+	
+	.search_lot_delivery {
+		display:none;
+		
+	} 
+	
+	.lot_hc {
+		width:118%;
+		text-align:justify;
+	}
+	
+	.subhead { 
+		font-size: 16px; 
+		display:inline; 
+		text-align:justify;
+	}
+
+	.top_nav { 
+		min-width:100px; 
+	}
+
+	#pagewrapper {
+		width: 100%;
+	}
+	.container {	
+		width: 100%;  
+	}
+	.top_nav  .menu{ 
+		float:none; 
+		text-align:center;
+	}
+	.topcats {
+		display:none; 
+	}
+	.topbanner { 
+		margin-top:5px;
+		display:none;
+	} 
+	
+	.news { 
+		width:910px;
+	}
+	
+	.head {
+		margin-left:25px; 
+	} 
+
+	.news .head {
+		margin-left:17px;
+	}	
+	.lots, .similar .lots {
+		margin-top:15px; 
+		margin-left:25px;
+		padding-bottom:15px;
+	}
+	.similar .lots {
+		margin-left:5px;
+	}
+	.lots .lot, .similar .lots .lot{ 
+		width:110px;
+		height:160px;
+		margin-left:2px;
+		overflow:hidden;
+	} 
+
+	.lots .lot .lot_title, .similar .lots .lot .lot_title{ 
+	 margin-top:10px;
+	  max-height:20px;
+	  overflow:hidden;
+	}
+
+	.lots .lot .lot_image, .similar  .lots .lot .lot_image{
+		margin-top:5px;margin-right:auto;margin-left:auto;width:105px; height:100px;
+	}
+
+	.lots .lot .buy_now , .similar .lots .lot .buy_now {
+		display:none;
+	}
+	
+	.lots .lot .price , .similar .lots .lot .price {
+		font-size:12px;
+	}
+	
+	.lots .lot .lot_title a:link,.lot_title a:active , .similar .lots .lot .lot_title a:link,.lot_title a:active {
+	  font-size: 12px;  
+	}
+	.lots .lot .lot_date , .similar .lots .lot .lot_date {
+		display:none;
+	}
+	
+	.recomended {
+		margin-top:5px;
+		margin-left:30px; 
+	}
+	.basket {
+		display:none;
+	}
+	.fav_ico{ 
+		display:none;
+	}
+	.basket_ico{ 
+		margin-left:30px;
+	}
+	
+	.rleft { 
+		margin-left:20px;
+	}
+	
+	.rright { 
+		left:930px;
+	}
+	
+	#recomended, #recf1 { 
+		width:865px;
+		overflow:hidden;
+	}
+	.safe { 
+		width:910px;
+		margin-left:30px;
+		margin-bottom:50px;
+	}
+	
+	.tech, .support {
+		display:none
+	}
+	
+	.footer {
+		margin-top:15px;
+		width:900px; 
+	}
+	
+	.ddmenu { 
+		background: #333333; 
+		width: 90%; 
+		height: auto;
+		padding-left:5%; 
+		padding-right:5%; 
+		padding-bottom:20px;
+		display: none;
+	}
+	
+	
+	.ddmenu li { 
+		list-style-type:none;
+	}
+	
+	.ddmenu a{ 
+		font-size:14px;
+		line-height:2;
+		color: #FFF;
+	}
+	
+	.ddmenu_ico {
+		position:absolute;
+		right:20px;
+		top:5px;
+		display:inline-block;
+		background: url("../img/ddown.png");
+		width:32px;
+		height:32px;
+		cursor:pointer;
+	}
+
+	.rsearch {
+		float:left;
+		position:relative;
+		margin-left:10px;
+		width:715px; 
+		z-index:0;
+	}
+	
+	.search_lot_boughts {
+		display:none;
+	}
+		
+	.search_lot_title {  
+		max-width:40%;
+		white-space:normal;
+		overflow:hidden;
+	} 
+	.search_lot_place { 
+		float:none;
+		position:absolute;
+		left:auto;
+		right:26px;
+		margin-top:60px; 
+	}
+	
+	.toend {
+		display:none;
+	}
+	
+	.lotmenu_bought {  
+		width:250px;
+		position:absolute; 
+		right:0px; 
+		top:12px;
+	}
+	
+	
+	.lotmenu {  
+		font-size:12px;
+		width:335px;
+		position:absolute; 
+		right:0px; 
+		top:12px;
+	}
+	
+
+	.lotbuttons {
+		position:absolute;
+		right:1px;
+		top:18px;
+		right:30px;
+		z-index:5
+	}
+	
+	.stakemenu {
+		position:absolute;
+		right:1px;
+		top:23px;
+		left:385px;
+	}
+	
+	.fullsize {
+		visibility:hidden;
+	}
+	
+	.lotendtime {
+		font-size:12px;
+		position:absolute;
+		right:338px;
+		top:15px;
+		width:72px;
+		z-index:10;
+		background:#FFF
+	}
+	.bodywrapper {  
+		display:inline-block;
+		width:95%;
+		text-align:left;
+	}  
+	.mcenter {
+		text-align:center;
+	}
+	.lotbutton { 
+		right:2.5%;
+	}
+	.price_reserv {
+		margin-left:405px; 
+	}
+	#description {
+		width: calc(100%-5px);
+		padding-left:0px;
+		padding-right:0px;
+	}
+	
+	.nfullsize {
+		display:inline;
+	}	 	
+	
+	.tr_nfullsize {
+		display:table-row;
+	}
+	
+	.msg_red {
+		width:345px; 
+		padding-top:5px;
+		padding-bottom:5px;		
+		font-size:12px; 
+		min-height:27px;
+	}
+
+	.msg_green {
+		width:345px;
+		padding-top:5px;
+		padding-bottom:5px;	
+		min-height:27px;
+		font-size:12px;
+	}
+
+	.suggest_container {
+		position:absolute;
+		width:0px;
+		visibility:hidden;
+	}
+	.suggestions {
+		position:absolute;
+		width:0px;		
+		visibility:hidden;
+	}
+	.suggest {
+		position:absolute;
+		width:0px;		
+		visibility:hidden;
+	}
+	 
+	.itemListing .listFeatured th,
+	.itemListing .listStandard th {
+			display:none;
+	} 
+		
+	.itemListing .listFeatured td,
+	.itemListing .listStandard td {
+			display: block; 
+			border:0px;
+			padding-left:20px;
+			padding-top:3px;
+			padding-bottom:3px;
+	} 
+	.itemListing .listStandard td.lt_td{ 		 
+		padding-bottom:20px;
+		border-bottom:1px solid lightgray;
+	}
+}  
+
+
+
+@media screen and (max-width: 880px) {   
+	.news {
+		margin-top:20px;
+		width:800px;
+		background:none;
+		margin-bottom:20px;
+		height:auto;
+	}
+	
+	.content{
+		margin-left:20px; ;
+	}
+	
+	.lots {
+		margin-top:15px;
+	}
+	.recomended {
+		margin-top:5px;
+		margin-left:150px;
+	}
+	.basket {
+		display:none;
+	}
+	.fav_ico{ 
+		display:none;
+	}
+	.basket_ico{ 
+		display:none;
+	}
+	
+	.rleft { 
+		margin-left:120px;
+		margin-top:10px;
+	}
+	
+	.rright { 
+		left:789px;
+	}
+	
+	#recomended, #recf1 {
+		width:590px;
+		overflow:hidden;
+	}
+	
+	.safe { 
+		width:800px;
+		margin-left:30px;
+		margin-bottom:50px;
+	}
+	
+	.footer {
+		width:800px; 
+	}
+	
+	.tech, .support {
+		display:none
+	}
+	
+	.rsearch {
+		float:left;
+		position:relative;
+		margin-left:10px;
+		width:68%;
+		min-width:602px;
+		z-index:0;
+	}
+	 
+	.search_sort {
+		display:none;
+	} 
+	.spos {
+		left:15px;
+	}
+}
+
+
+
+@media screen and (max-width: 880px) {  
+ 
+	#pagewrapper {
+		width: 95%;
+		min-width:300px;
+	}   
+	.skylogo{
+		display:block; 
+		margin: 0 auto;
+		margin-top:30px;
+	}
+	.cat_mselect{  
+		font-size:12px;
+		margin-top:50px;
+		left:55%;  
+		min-width:80px;  
+		max-width:110px;
+		white-space: nowrap;
+		overflow:hidden;
+	}
+	.multisearch_ico{  
+		margin-top:50px;
+		left:75%;   
+	}
+	.catlist {  
+		margin-top:50px;
+		margin-left:-80px;
+		left:55%;
+	}
+	.cat_mselect .down {
+		visibility: hidden
+	}	
+	.cat_mselect .up {
+		visibility: hidden
+	}	
+	.suggestions {
+	visibility: hidden
+	}
+	::-webkit-input-placeholder { /* WebKit browsers */
+    color:    transparent;
+	
+	}
+	:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+	   color:    transparent; 
+	}
+	::-moz-placeholder { /* Mozilla Firefox 19+ */
+	   color:    transparent; 
+	}
+	:-ms-input-placeholder { /* Internet Explorer 10+ */
+	   color:    transparent;
+	}
+	
+	.search_form {
+		margin-top:50px;
+		margin-left:0;   
+		width:100%;
+		text-align:center;
+	}
+	.search_form input[type=text] { 
+		padding-right:0px;
+		padding-right:30%;
+		width:45%;   
+		min-width:10px;
+	}
+	.news {
+		width:100%;
+		overflow:hidden;
+	}
+	
+	.lots {
+		margin-top:15px;
+	}
+	.recomended {
+		margin-top:5px;
+		margin-left:5px;
+	} 
+	.fav_ico{ 
+		display:none;
+	}
+	.basket {
+		display:none;
+	}
+	.basket_ico{ 
+		display:none;
+	}
+	
+	.rleft { 
+		display:none;
+	}
+	
+	.rright { 
+		display:none;
+	}
+	
+	#recomended, #recf1 {
+		width:90%;
+		overflow-x:scroll;
+	}
+	
+	.safe {  
+		width:90%;  
+		text-align:center;
+	}
+	
+	.footer {
+		width:95%; 
+	}
+	
+	.tech, .support {
+		display:none
+	}
+	.similar .subhead {display:block;
+		font-size: 14px; 
+		margin-left:0px;
+		padding-right:20px;
+	}
+	.head { 
+		font-size: 18px; 
+	}
+ 
+	.searchdep {
+		width:100%;
+	}
+	.left_logo{
+		display:none;
+	}
+	.footer .right{
+		float:left;
+		text-align:left;
+	}
+	.footer .right a:link, .footer  .right a:active ,.footer  .right a:visited{ 
+		font-size:11px;
+	}
+	.searchparams { 
+		padding-right:0px;
+		width:100%;   
+		width: -webkit-calc(100% - 16px);
+		width: -moz-calc(100% - 16px);
+		width: -o-calc(100% - 16px);
+	}	
+	
+	#left {
+		display:none;
+		float:none;
+		width:100%;
+	}
+	#wrapContent{
+		margin-top:0px; 
+	}
+	.searchcat { 
+		margin-top:0px
+	}
+	
+	.white_button { 
+		display:block;
+	}
+
+	.rsearch {
+		min-height:none;
+		float:none;
+		min-width:100px;
+		width:95%;   
+		z-index:0;
+	}	
+	
+	.search_lot_title {  
+		max-width:30%;
+		font-size:16px;
+		max-width: -webkit-calc(60% - 135px);
+		max-width: -moz-calc(60% - 135px);
+		max-width: -o-calc(60% - 135px);
+		white-space:normal;
+		overflow:hidden;
+	} 
+
+	.search_lot_price {
+		margin-top:3px;
+		font-size:17px;
+	}
+	.search_lot_price b{
+		font-size:19px;
+	}
+	.search_lot_place { 
+		margin-top:58px;
+	}
+	.spos {
+		left: 50%;
+		transform: translate(-50%, 0);
+		-webkit-transform: translate(-50%, 0);
+		-moz-transform: translate(-50%, 0);
+		-ms-transform: translate(-50%, 0);
+		-o-transform: translate(-50%, 0);
+	} 
+	.lotbutton {
+		margin-top:-45px;
+		float:left;
+		position: relative; 
+		left: 50%;
+		transform: translate(-50%, 0);
+		-webkit-transform: translate(-50%, 0);
+		-moz-transform: translate(-50%, 0);
+		-ms-transform: translate(-50%, 0);
+		-o-transform: translate(-50%, 0);
+	} 
+	.search_lot_buynow {
+		margin-top:35px; 
+		font-size:11px;
+	}
+	
+	.rpagination{ 
+		top:auto;
+		right:auto;
+		position:relative;
+		display:inline-block;
+	}
+	
+	.limgborder { 
+		position:absolute;
+		border:1px solid lightgray;
+		width:100%;
+		height:380px;
+		border-radius:4px;
+		z-index:10;
+		pointer-events:none
+	}
+	.lotendtime{
+		font-size:11px;
+		top:401px;
+		right:220px;
+		width:175px; 
+	}
+	.lotmenu{
+		top:400px;
+		right:-120px;		
+	}
+	
+	
+	
+	#scrollup {
+		visibility:hidden;
+	}
+	.lothr {
+		margin-top:15px;
+		margin-bottom:40px;
+		border-bottom:1px solid rgb(230, 230, 230);
+	} 
+	
+	.buymenu {  
+		position:absolute;
+		right:1px;
+		top:430px;
+		width:795px;
+		height:128px;
+		background:#FFF;
+		border:none;
+		border-radius:3px;
+	}
+	
+	.lotbody {
+		position:absolute;
+		overflow-x: hidden;
+		top:1000px;
+		width:100%;
+		height:auto;
+		padding-top:15px;
+		background: #FFF;
+	}
+	
+	.lot_about_menu {
+		position:absolute; 
+		top:590px;
+		right:-10px;
+		width:400px;
+		z-index:10;
+	}
+	
+	.seller_button {
+		position:absolute;
+		float:right;
+		top:550px;
+		right:0px;
+	}
+
+	.seller_button_style {
+		background:#FFF; 
+		background: -webkit-linear-gradient(360deg, #FAFAFA, #FFF 100%); 
+		background: -moz-linear-gradient(360deg, #FAFAFA, #FFF 100%); 
+		background: -ms-linear-gradient(360deg, #FAFAFA, #FFF 100%); 
+		background: -o-linear-gradient(360deg, #FAFAFA, #FFF 100%); 
+		background: linear-gradient(360deg, #FAFAFA, #FFF 100%); 
+		border:1px solid rgb(230, 230, 230);
+		border-radius:3px;
+		padding:5px 10px 5px 10px;
+		width:380px;height:22px;
+		font-family:'Open Sans';
+		color:#585858;
+		font-size:12px;
+	}
+	
+	.lot_green_line { 
+		width:345px;
+		font-size:12px;
+		
+	}
+
+
+	.lot_sell_rate {
+		width:348px;
+	} 
+	
+	.lotrblock {
+		position:relative;
+		float:left;
+		left:88.5%;
+	}
+	
+	.lot_img_align {
+		text-align: -webkit-center;text-align: -moz-center;
+	}
+	.lot_num {
+		width:30px;
+	}
+	
+	.halfsize {
+		display:none;
+	}
+	
+	.profile_title {
+		font-size:19px;
+	}
+	
+	.user_info { 
+		padding:1%;
+		width:91%; 
+		padding-left:5px;
+		padding-right:5px;
+		border:none;		
+		float:left;
+		right:none;
+		left:15px;
+	}
+	
+	.user_rating {
+		margin-top:83px;
+		margin-bottom:140px;
+		width:98%;
+	}	
+	
+	.pos_reviews {
+		font-size:14px;
+		text-align:center;
+		width:100%;
+		padding-left:0;
+		padding-right:0;
+	}
+
+	.last_n_rating {
+		float:none;
+		display:inline-block;
+		text-align:center;
+		padding-left:0;
+		padding-right:0;
+		width:100%;
+	}
+	
+	.sell_rate { 
+		font-size:12px;
+		padding-left:5px;
+		padding-right:5px;
+		float:none; 
+		top:180px;
+		left:6px;
+		width:97%;
+	}
+	
+	.searchcat {
+		text-align:center;		
+	}
+	
+	.search_subscribe {
+		float:none;
+		margin-bottom:10px;
+		text-align:center;
+	}
+	
+	.search_body_subscribe {
+		float:none;
+		position:relative; 
+		right:auto;
+		top:60px;
+		margin-bottom:10px;
+		text-align:center;
+	}
+}
+
+
+
+@media screen and (max-width: 600px) {
+	
+	.leftmenu {
+		visibility:hidden;
+	}
+	.title {
+		margin-left:10px;
+	}
+	.content {
+		margin-left:15px;
+		font-size:13px;
+	}
+	
+	.cat_mselect {   
+		font-size:11px;
+		margin-top:36px; 
+		height:10px;
+		min-width:40px; 
+		left:43%;
+		max-width:70px;
+		white-space: nowrap;
+	}
+	.catlist {  
+		margin-top:50px;
+		margin-left:-80px;
+		left:35%;
+	}
+
+
+	.search_form input[type=submit] {
+		width:50px;
+		height:50px;
+		background: rgb(255, 130, 41) url('msearchico.png') no-repeat center; 
+	}	
+	
+	.container {
+		display:none;
+	}
+	.recomended { 
+		margin-left:-15px;
+	}
+	.search_form {
+		margin-top:50px;
+		margin-left:0px;  
+		width:100%;
+	}
+	.search_form input[type=text] { 
+		padding-right:40%;
+		width:35%;   
+	}
+	
+	.footer {
+		width:90%;
+	}
+	.left_logo { 
+		display:none;
+	}
+	
+	.head { 
+	  font-size: 16px;   
+	}
+	
+	.safe {
+		display:none;
+	}
+	.skylogo {
+		background: transparent url('skylots.png') no-repeat;
+		background-size: 135px 33px;
+		width:135px;
+		height:33px;
+	} 
+	 
+
+	.search_lot_price {
+		margin-top:3px;
+		font-size:15px;
+	}
+	.search_lot_price b{
+		font-size:17px;
+	}
+	
+	.search_lot_place { 
+		margin-top:65px;
+		font-size:11px;
+	}
+	
+	.search_lot_buynow {
+		margin-top:20px; 
+		font-size:11px;
+	}
+	
+	.search_lot {
+		margin-top:30px;
+	}
+	.search_lot_title {
+		left:16px;
+		positoin:absolute;
+		font-size:13px;
+		margin-top:-30px;
+		white-space:pre;
+		overflow:hidden;
+		max-width:90%;
+	}
+	.searchimg {
+		width:140px;
+		height:105px;
+	}
+
+	.searchimgborder {
+		border:1px solid rgb(238, 238, 238);
+		border-radius: 3px;
+		padding:5px;
+		width:140px;
+		height:105px;
+	}
+	.search_lot_buynow {
+		margin-top:30px;
+	}
+	.like {
+		float:right;
+		position:absolute;
+		left:auto;
+		right:20px;
+		margin-top:121px; 
+		}
+	.alike {
+		float:right;
+		position:absolute;
+		left:auto;
+		right:20px;
+		margin-top:121px;
+	}
+	.search_lot_timetoend {
+		position:absolute;
+		left:auto;
+		right:55px;
+		margin-top:121px; 
+	}
+	.search_lot_seller_rating {
+		position:absolute;
+		left:20px;
+		margin-top:120px; 
+	}
+
+	.rsearch {
+		width:99%;
+		margin:0;
+	}	 
+	 
+	 
+	.price_reserv {
+		font-size:11px;
+		margin-left:553px; 
+		margin-top:100px; 
+	}
+	 
+	
+	.limgborder { 
+		position:absolute;
+		border:1px solid lightgray;
+		width:100%;
+		height:380px;
+		border-radius:4px;
+		z-index:10;
+		pointer-events:none
+	}
+	.lotendtime{
+		top:425px; 
+		float:none; 
+		right:50px;
+		width:200px;
+	}
+	
+	.lotendtime_ended {
+		top:445px; 
+	}
+	
+	
+	.lotmenu{
+		top:400px;		
+		width:300px;
+		right:-50px;
+		font-size:11px;
+	}
+	
+	.lot_price{
+		display:block;
+		position:absolute;
+		margin-top:22px;
+		left:20px;
+		font-size:16px;
+	}
+	
+	.lot_price_buy_now {
+		margin-top:-22px; 
+	}
+	
+	.auction_buy_now_price{
+		margin-top:none;
+		font-size:11px;
+		display:block;
+		position:absolute;
+		margin-top:18px;
+		left:20px; 
+	}
+	
+	#scrollup {
+		visibility:hidden;
+	}
+	.lothr {
+		margin-top:15px;
+		margin-bottom:40px;
+		border-bottom:1px solid rgb(230, 230, 230);
+	} 
+	
+	.buymenu {  
+		position:absolute;
+		right:1px;
+		top:430px;
+		width:795px;
+		height:128px;
+		background:#FFF;
+		border:none;
+		border-radius:3px;
+	}
+	
+	.lotbody {
+		position:absolute;
+		overflow-x: hidden;
+		top:1020px;
+		width:100%;
+		height:auto;
+		padding-top:15px;
+		background: #FFF;
+	}
+	
+	.lot_about_menu {  
+		position:absolute; 
+		top:590px; 
+		width:250px;
+		z-index:10;
+	}
+	
+	.seller_button {
+		position:absolute;
+		float:right;
+		top:550px;
+		right:0; 
+		margin-right:10%;
+	}
+
+	.seller_button_style {
+		background:#FFF; 
+		background: -webkit-linear-gradient(360deg, #FAFAFA, #FFF 100%); 
+		background: -moz-linear-gradient(360deg, #FAFAFA, #FFF 100%); 
+		background: -ms-linear-gradient(360deg, #FAFAFA, #FFF 100%); 
+		background: -o-linear-gradient(360deg, #FAFAFA, #FFF 100%); 
+		background: linear-gradient(360deg, #FAFAFA, #FFF 100%); 
+		border:1px solid rgb(230, 230, 230);
+		border-radius:3px;
+		padding:5px 10px 5px 10px;
+		height:22px; 
+		width:240px; 
+		font-family:'Open Sans';
+		color:#585858;
+		font-size:12px;
+		margin:0 auto;
+		margin-right:-10px;
+	}
+	.lot_green_line { 
+		width:205px;
+		font-size:12px;
+		margin-right:-10px;
+	}
+	
+	.lotrblock {
+		position:relative;
+		float:left;
+		left:87%;
+	}
+		
+
+	.tab {
+		margin-top:-5px; 
+		font-size: 12px;  
+		border-radius: 4px;
+		padding-top:8px;
+		width:80px; 
+		height:35px;
+		cursor:pointer;
+	}	
+	
+	.tab2 {
+		left:95px;
+	}
+	
+	.tab3 {
+		left:180px;
+	}
+	
+	.stake_form {
+		position:absolute;
+		left:20px;
+	}
+	
+	.lotbuttons {
+		position:absolute;
+		right:1px;
+		top:18px;
+		right:0px;
+		z-index:5
+	}
+	
+	
+	.bodywrapper {    
+		width:100%;
+		text-align:left;
+	}  
+	
+	.addbasket {
+		/* display:none;*/
+	}
+	
+	.stakemenu {
+		left:525px;
+	}
+	
+	.lot_num {
+		width:20px;
+	}
+
+	.filter_name { 
+		width:80%;
+		margin-top:10px;
+		display:block;
+	}
+
+	.filter_row {
+		display:block;
+	}
+	
+	.params {
+		margin-top:-20px;
+	}	
+	
+	.lotendtime { 
+		z-index:2;
+	}
+	.msg_red {  
+		width:243px;
+		padding:3px; 
+		font-size:11px;
+		min-height:40px;
+	}
+	
+	.msg_green {
+		width:243px;
+		padding:3px; 
+		font-size:11px;
+		min-height:40px;
+	}
+	
+	.minsize {
+		display:none;		
+	}
+	#title {
+		text-align:center;
+	}
+	 
+	.otab {
+		font-size:12px;
+		width:90px;
+		top:35px;
+	}
+	.rtab1 {
+		right:0px;
+	}
+	.rtab2 {
+		right:93px;
+	}
+	.rtab3 {
+		right:186px;
+	}
+	.profile_title {
+		font-size:19px;
+		color:#424242;
+		text-align:center;
+		display:inine;
+		margin-bottom:45px;
+	}
+	.grtab {
+		font-size:10px;
+		font-size:12px;
+		top:-10px;
+		width:82px; 
+	} 
+	
+		
+	.myoption {
+		background:transparent; 
+		
+		font-family:'Open Sans';
+		font-size:12px;
+		position:relative;
+		top:-15px;
+		left:-5px;
+		outline: none;
+		border-color:transparent;
+		color: #FFF;  
+		bottom:2px;
+		width:110px
+	}	
+	
+	.multisearch_ico{  
+		margin-top:35px;
+		left:72%;   
+		z-index:100000;
+	}
+	.lot_hc { 
+	}
+	
+
+
+	.lot_sell_rate {
+		float:right;
+		position:absolute;
+		top:60px;  
+		background:#FFF;  
+		border:1px solid rgb(230, 230, 230);  
+		border-bottom-right-radius:4px; 
+		border-top:1px solid #6da912;
+		font-size:11px;
+		padding-left:5px;
+		padding-right:5px;
+		float:none;  
+		left:6px;
+		width:91.5%;		
+		margin-left:4px;
+	} 
+	
+	.lot_auction_curstake_hide {
+		display:none;
+	}
+	
+	.search_lot_delivery_info {
+		visibility:hidden
+	}
+	
+}
+
+/* Lot portrait center fix */
+@media screen and (min-width: 480px) and (max-width: 600px) {
+	
+	.lotendtime{
+		right:45px;
+	}
+	.buymenu {   
+		right:50px;
+	}
+	.seller_button {
+		right:50px;
+	}
+	.lotmenu{
+		right:0px; 
+	}
+	.lot_about_menu{ 
+		right:50px;
+	}
+}
