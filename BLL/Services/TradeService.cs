@@ -110,7 +110,7 @@ namespace BLL.Services
                 throw new ArgumentNullException();
 
             foreach (var el in user.Trades)
-                if (DateTime.Now.CompareTo(el.TradeEnd) >= 0 && el.LastRateUserId == user.Id)
+                if (DateTime.Now.CompareTo(el.TradeEnd) >= 0 && el.LastRateUserId != user.Id)
                     winList.Add(el);
 
             return Mapper.Map<IEnumerable<Trade>, List<TradeDTO>>(winList);
@@ -128,7 +128,7 @@ namespace BLL.Services
                 throw new ArgumentNullException();
 
             foreach (var el in user.Trades)
-                if (DateTime.Now.CompareTo(el.TradeEnd) >= 0 && el.LastRateUserId != user.Id)
+                if (DateTime.Now.CompareTo(el.TradeEnd) >= 0 && el.LastRateUserId == user.Id)
                     loseList.Add(el);
 
             return Mapper.Map<IEnumerable<Trade>, List<TradeDTO>>(loseList);

@@ -51,6 +51,9 @@ namespace BLL.Services
             if (entity == null)
                 throw new ArgumentNullException();
 
+            if (entity.User == null)
+                throw new AuctionException("Lot must have owner");
+
             var newLot = new Lot()
             {
                 Name = entity.Name,
@@ -58,7 +61,7 @@ namespace BLL.Services
                 Description = entity.Description,
                 Img = entity.Img,
                 TradeDuration = entity.TradeDuration,
-                User = entity.User == null ? null : Database.Users.Get(entity.User.Id)
+                User = Database.Users.Get(entity.User.Id)
             };
             
             newLot.Category = Database.Categories.Get(1);

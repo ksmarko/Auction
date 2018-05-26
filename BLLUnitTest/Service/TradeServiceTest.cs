@@ -203,7 +203,6 @@ namespace BLLUnitTest.Service
         {
             //act & assert
             Assert.Throws<ArgumentNullException>(() => tradeService.GetUserActiveTrades(null));
-            
         }
 
         [Test]
@@ -217,6 +216,61 @@ namespace BLLUnitTest.Service
         {
             //act & assert
             Assert.Throws<ArgumentNullException>(() => tradeService.GetUserLoseTrades(null));
+        }
+
+        [Test]
+        public void GetUserActiveTrade_TryToGetActiveTrades()
+        {
+            //arrange
+            var allTrades = new List<Trade> { new Trade {TradeEnd = DateTime.Now.AddDays(-1) },
+            new Trade { TradeEnd = DateTime.Now.AddDays(3)},
+            new Trade { TradeEnd = DateTime.Now.AddDays(5)}};
+            var user = new User { Trades = allTrades};
+            uow.Setup(x => x.Users.Get(It.IsAny<string>())).Returns(user);
+
+            //act
+            List<TradeDTO> list = tradeService.GetUserActiveTrades(new UserDTO ()) as List<TradeDTO>;
+
+            //assert
+            Assert.AreEqual(list.Count, 2);
+        }
+
+        [Test]
+        public void GetUserWinTrade_TryToGetActiveTrades()
+        {
+            //arrange
+            var user = new User { Name = It.IsAny<string>()};
+            var allTrades = new List<Trade> { new Trade {TradeEnd = DateTime.Now.AddDays(-1), LastRateUserId = It.Is<string>( x => x == user.Id)},
+            new Trade { TradeEnd = DateTime.Now.AddDays(3)},
+            new Trade { TradeEnd = DateTime.Now.AddDays(5)}};
+            user.Trades = allTrades;
+
+            uow.Setup(x => x.Users.Get(It.IsAny<string>())).Returns(user);
+
+            //act
+            List<TradeDTO> list = tradeService.GetUserWinTrades(new UserDTO()) as List<TradeDTO>;
+
+            //assert
+            Assert.AreEqual(list.Count, 1);
+        }
+
+        [Test]
+        public void GetUserLoseTrade_TryToGetActiveTrades()
+        {
+            //arrange
+            var user = new User { Id = "winId", Name = It.IsAny<string>() };
+            var allTrades = new List<Trade> { new Trade {TradeEnd = DateTime.Now.AddDays(-1), LastRateUserId = It.Is<string>(x => x != user.Id)},
+            new Trade { TradeEnd = DateTime.Now.AddDays(3)},
+            new Trade { TradeEnd = DateTime.Now.AddDays(5)}};
+            user.Trades = allTrades;
+
+            uow.Setup(x => x.Users.Get(It.IsAny<string>())).Returns(user);
+
+            //act
+            List<TradeDTO> list = tradeService.GetUserLoseTrades(new UserDTO()) as List<TradeDTO>;
+
+            //assert
+            Assert.AreEqual(list.Count, 1);
         }
     }
 }
