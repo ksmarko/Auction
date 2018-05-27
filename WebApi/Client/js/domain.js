@@ -212,3 +212,35 @@ function AddLot() {
         }
     });
 }
+
+function GetUserRole() {
+    var tokenKey = "tokenInfo";
+
+    $.ajax({
+        type: 'GET',
+        url: "http://localhost:49351/api/users/current",
+        contentType: 'application/json; charset=utf-8',
+        beforeSend: function (xhr) {
+            var token = sessionStorage.getItem(tokenKey);
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        },
+        success: function (data) {
+            var text = "<ul>";
+
+            if (data == "admin") {
+                text += "<li><a href='#'> Управление пользователями</a ></li><li style='list-style: none; display: inline'><div class='arrow'></div></li>";
+            }
+            if (data == "manager" || data == "admin") {
+                text += "<li><a href='#'> Управление лотами</a></li><li style='list-style: none; display: inline'><div class='arrow'></div></li>";
+            }
+
+            text += "<li><a href='purchase.html'> Мой кабинет</a></li><li style='list-style: none; display: inline'><div class='arrow'></div></li>";
+            text += "<li><a href='index.html'> Выход</a></li></ul>";
+
+            $("#menu-btns").html(text);
+        },
+        fail: function (data) {
+            alert(data);
+        }
+    });
+}

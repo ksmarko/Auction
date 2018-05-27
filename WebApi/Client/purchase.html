@@ -15,7 +15,7 @@
 <body>
     <div class="top_nav">
         <div class="container">
-            <div class="menu fullsize">
+            <div id="menu-btns" class="menu fullsize">
                 <ul>
                     <li>
                         <a href="purchase.html">Мой кабинет</a>
@@ -96,5 +96,12 @@
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function (event) {
+            GetUserRole();
+        });
+    </script>
+
 </body>
 </html>

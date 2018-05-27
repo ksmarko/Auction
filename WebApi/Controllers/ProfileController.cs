@@ -31,6 +31,13 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
+        [Route("api/users/current")]
+        public string GetUserRole()
+        {
+            return CurrentUser.Role;
+        }
+
+        [HttpGet]
         [Route("api/profile/lots")]
         public IEnumerable<LotModel> GetUserLots()
         {
