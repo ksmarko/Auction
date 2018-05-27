@@ -1189,7 +1189,6 @@ select {
 }
 
 .search_lot_info {
-	background: url('info.png');
 	width: 14px;
 	height: 14px;
 	position:relative;
@@ -1282,7 +1281,6 @@ select {
 }
 
 .like {
-	background: url('like.png');
 	width:20px;
 	height:17px;
 	position:absolute;

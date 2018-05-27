@@ -1,142 +1,107 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
+<html>
 <head>
-<meta name="viewport" content="width=device-width">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<title>Мои покупки</title>
-<link rel="icon" href="favicon.ico">	
-<link rel="stylesheet" media="screen" type="text/css" href="css/style.css" title="">
-<link rel="stylesheet" media="screen" type="text/css" href="css/portable_style.css" title="">
-<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700,800&amp;subset=latin,cyrillic" rel="stylesheet">
-<script src='js/jquery-11.0.min.js' type="text/javascript"></script>
-
-
+    <meta content="width=device-width" name="viewport">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta charset="utf-8">
+    <title>Мои покупки</title>
+    <link href="favicon.ico" rel="icon">
+    <link href="css/style.css" media="screen" rel="stylesheet" title="" type="text/css">
+    <link href="css/portable_style.css" media="screen" rel="stylesheet" title="" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700,800&amp;subset=latin,cyrillic" rel="stylesheet">
+    <script src='js/jquery-11.0.min.js' type="text/javascript"></script>
+    <script src='js/domain.js' type="text/javascript"></script>
 </head>
-<body onload="$('#mainform').focus();scrollup();">
-<div class="top_nav">
-	<div class="container">
-		<div class="menu fullsize">
-			<ul>
-				<li><a href="purchase.html">Мой кабинет</a></li><div class="arrow"></div>
-				<li><a href="index.html">Выход</a></li> 
-			</ul>
-		</div>
-	</div>
-</div>
-<div class="ddmenu" id="ddm">
-	<li><a href="purchase.html">Мой кабине</a></li><div class="arrow"></div>
-	<li><a href="index.html">Выход</a></li>
-	<hr style="margin-top:10px;margin-bottom:10px;border:0; border-top: #FFF dashed  1px;">
-</div>
-<div id="pagewrapper">
-	<a href="index.html"><div class="skylogo"></div></a>
-<div class="search_form">
-<form method="GET" action="index.html" autocomplete="off">
-<input onfocus="this.selectionStart = this.selectionEnd = this.value.length;" onclick="firstfocus=0;(this.value.length)>0?$('#suggestions').show():0;" onkeypress="(event.keyCode==32 && firstfocus==1)?($('#mainform').blur()):0;firstfocus=0;" oninput="(this.value.length)>0?get_suggestions(this.value):$('#suggestions').hide()" type=text name=search id="mainform" placeholder="Что будем искать? " value="" class="top_search">
-<!-- Скрипт отвечает за поиск -->
-<script> 
-var cur_loc=window.location.href;
-cur_loc=cur_loc.replace(/\?t=[0-9]+/g,"");  
-function get_suggestions(query){
-	if($(window).width()>880)
-		$.ajax({
-		  url: "/suggestions.php",
-		  type: "post", //отправить его методом get
-		  data:{q: query},
-		  dataType:'json',
-		  success: function(response) {
-			suggestions=response;
-			if(suggestions.length==0){
-				$('#suggest_container').empty(); 
-			}else{
-				$('#suggest_container').empty();   
-				for(var i=0;i<suggestions.length;i++){ 
-					if(suggestions[i][1]==0)
-						$('#suggest_container').append("<div class=\"suggest\" onclick=\"$('#mainform').val('"+suggestions[i][0]+"');window.location.replace('/c"+parseInt(suggestions[i][2])+"/s/')\"><span style='color:#606060;font-weight:normal;padding-right:2px;'>Категория</span>&nbsp;"+suggestions[i][3]+""+suggestions[i][0]+"&nbsp;<img src='/styles/goto.png' style='width:11px;'></div>")	
-					else
-						if(suggestions[i][1]==3)
-								$('#suggest_container').append("<div class=\"suggest\" onclick=\"$('#mainform').val('"+suggestions[i][0]+"');window.location.replace('/"+encodeURIComponent(suggestions[i][2])+"/')\"><span style='color:#606060;font-weight:normal;padding-right:2px;'>Лот</span>&nbsp;"+suggestions[i][0]+"&nbsp;<span style='color:#606060;font-weight:normal;padding-right:2px;'>("+suggestions[i][2]+")</span>&nbsp;<img src='/styles/goto.png' style='width:11px;'></div>")	
-						else
-							if(suggestions[i][1]==2)
-									$('#suggest_container').append("<div class=\"suggest\" onclick=\"$('#mainform').val('"+suggestions[i][0]+"');window.location.replace('/"+encodeURIComponent(suggestions[i][0])+"')\"><span style='color:#606060;font-weight:normal;padding-right:2px;'>Пользователь</span>&nbsp;"+suggestions[i][3]+""+suggestions[i][0]+"&nbsp;<img src='/styles/goto.png' style='width:11px;'></div>")	
-							else
-								$('#suggest_container').append("<div class=\"suggest\" onclick=\"$('#mainform').val('"+suggestions[i][0]+"');window.location.replace('/search.php?search="+encodeURIComponent(suggestions[i][0])+"')\">"+suggestions[i][0]+"</div>")	
-				}
-				$('#suggestions').show()	
-			} 
-		  },
-		  error: function(xhr) { 
-		  }
-		});
-} 
-var rp=45*60*1000;
-$(window).bind('focus', function() { 
-; 
+<body>
+    <div class="top_nav">
+        <div class="container">
+            <div id="menu-btns" class="menu fullsize">
+                <ul>
+                    <li>
+                        <a href="purchase.html">Мой кабинет</a>
+                    </li>
+                    <li style="list-style: none; display: inline">
+                        <div class="arrow"></div>
+                    </li>
+                    <li>
+                        <a href="index.html">Выход</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="ddmenu" id="ddm">
+        <ul>
+            <li>
+                <a href="purchase.html">Мой кабине</a>
+            </li>
+            <li style="list-style: none; display: inline">
+                <div class="arrow"></div>
+            </li>
+            <li>
+                <a href="index.html">Выход</a>
+            </li>
+            <li style="list-style: none; display: inline">
+                <hr style="margin-top:10px;margin-bottom:10px;border:0; border-top: #FFF dashed 1px;">
+            </li>
+        </ul>
+    </div>
+    <div id="pagewrapper">
+        <a href="index.html">
+            <div class="skylogo"></div>
+        </a>
+        <div class="search_form">
+            <input class="top_search" id="search-lots" name="search" placeholder="Что будем искать?" type="text" value=""> <input onclick="SearchLots()" type="submit">
+        </div>
+        <div style="width:100%;height:53px;margin-left:2px;margin-bottom:15px;background:url('data:image/png;base64,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') no-repeat">
+            <a href="purchase.html">
+                <div style="position:absolute;left:20px;margin-top:20px;width:265px;height:15px;font-weight:600;font-family:'Arial';font-size:16px;color:#505050">
+                    Мои покупки
+                </div>
+            </a> <a href="onsale.html">
+                <div style="position:absolute;left:166px;margin-top:20px;width:265px;height:15px;font-weight:600;font-family:'Arial';font-size:16px;color:#505050">
+                    Мои продажи
+                </div>
+            </a>
+        </div>
+        <div id="wrapContent">
+            <div id="left" style="width:205px;">
+                <div class="departments" id="categories" style="position:relative;z-index:30;width:208px;">
+                    <h2>Мои покупки</h2>
+                    <ul class="no-js">
+                        <li>
+                            <h2><a href="#" onclick="GetActiveTrades()">Действующие</a></h2>
+                        </li>
+                    </ul>
+                </div><br>
+                <div class="departments graydepartments" id="categories" style="position:relative;z-index:30;width:205px;">
+                    <h2>Избранное</h2>
+                    <ul class="no-js">
+                        <li>
+                            <h2><a href="#" onclick="GetWinLots()">Выиграшные</a></h2>
+                        </li>
+                        <li>
+                            <h2><a href="#" onclick="GetLoseLots()">Завершенные</a></h2>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div style="float:right;position:relative;width:978px;z-index:0">
+                <div id="description" style="border-radius:5px;padding-bottom:50px;">
+                    <h2 id="content-header" style="color:#424242;margin-top:3px;"></h2>
+                    <hr class="dotted_s_hr">
+                    <br>
+                    <div id="lots-content"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-window.clearTimeout(rTimer);
-rTimer=setTimeout(function() {var meta = document.createElement('meta'); meta.name = "referrer"; meta.content = "no-referrer"; document.getElementsByTagName('head')[0].appendChild(meta); window.location.href = cur_loc+'?t='+1}, rp)
- });
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function (event) {
+            GetUserRole();
+        });
+    </script>
 
-var rTimer=setTimeout(function() {var meta = document.createElement('meta'); meta.name = "referrer"; meta.content = "no-referrer"; document.getElementsByTagName('head')[0].appendChild(meta); window.location.href = cur_loc+'?t='+1}, rp);
-  
-</script>
-<input id='checkbox_hidden' type='hidden' value='0' name='desc_check'>
-<input id='cat_hidden' type='hidden' value='0' name='catid'>
-<input type=submit>
-</div>
-<div class="suggestions" style="display:none" id="suggestions">
-
-</div>
-</form>
-
-<script>
-modal_multisearch=document.getElementById('modal_multisearch'); 
-</script>
-<div style="width:100%;height:53px;margin-left:2px;margin-bottom:15px;background:url('data:image/png;base64,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') no-repeat">
-<a href="purchase.html"><div style="position:absolute;left:20px;margin-top:20px;width:265px;height:15px;font-weight:600;font-family:'Arial';font-size:16px;color:#505050">Мои покупки</div></a>
-<a href="sale.html"><div style="position:absolute;left:166px;margin-top:20px;width:265px;height:15px;font-weight:600;font-family:'Arial';font-size:16px;color:#505050">Мои продажи</div></a>
-<!-- <a href="/user_data.php"><div style="position:absolute;left:314px;margin-top:20px;width:265px;height:15px;font-weight:600;font-family:'Arial';font-size:16px;color:#505050">Мой счет</div></a> -->
-</div>
-<div id="wrapContent">
-<div id="left" style="width:205px;">
-<div id="categories" class="departments" style="position:relative;z-index:30;width:208px;">
-<h2>Мои покупки</h2>
-<ul class="no-js">
-<li>
-<h2><a href="/cabinet.php?opt=now&uid=45224918">Действующие</a></h2>
-</li>
-</ul>
-</div>
-<br>
-<div id="categories" class="departments graydepartments" style="position:relative;z-index:30;width:205px;">
-<h2>Избранное</h2>
-<ul class="no-js">
-<li>
-<h2><a href="/cabinet.php?opt=fav&uid=45224918">Наблюдаемые лоты</a></h2>
-</li>
-<li>
-<h2><a href="/cabinet.php?opt=fav&ended=1&uid=45224918">Завершенные</a></h2>
-</li>
-</ul>
-</div>
-</div><div style="float:right;position:relative;width:978px;z-index:0">
-<div id="description" style="border-radius:5px;">
-<form method=GET>
-</form>
-<h2 style='color:#424242;margin-top:4px;'>Куплено</h2>
-&nbsp;&nbsp; Здесь ничего нет<br>
-</div>
-</div>
-</div>
-
-<div id="scrollup"><img src="/styles/up.png" style="width:30px "></div>
-
-<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-	</script>
-<noscript>
-	<div style="display:inline;">
-	<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/854531388/?guid=ON&amp;script=0"/>
-	</div>
-	</noscript> 
 </body>
 </html>

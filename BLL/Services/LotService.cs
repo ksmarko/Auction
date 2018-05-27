@@ -40,7 +40,6 @@ namespace BLL.Services
             lot.Description = entity.Description;
             lot.Img = entity.Img;
             lot.TradeDuration = entity.TradeDuration;
-            
 
             Database.Lots.Update(lot);
             Database.Save();
@@ -48,12 +47,9 @@ namespace BLL.Services
 
         public void CreateLot(LotDTO entity)
         {
-            if (entity == null)
+            if (entity == null || entity.User == null)
                 throw new ArgumentNullException();
-
-            if (entity.User == null)
-                throw new AuctionException("Lot must have owner");
-
+                
             var newLot = new Lot()
             {
                 Name = entity.Name,
@@ -64,8 +60,6 @@ namespace BLL.Services
                 User = Database.Users.Get(entity.User.Id),
                 Category = entity.Category == null ? Database.Categories.Get(1) : Database.Categories.Get(entity.Category.Id)
             };
-            
-            newLot.Category = Database.Categories.Get(1);
 
             Database.Lots.Create(newLot);
             Database.Save();
@@ -98,7 +92,12 @@ namespace BLL.Services
 
         public IEnumerable<LotDTO> GetAllLots()
         {
-            return Mapper.Map<IEnumerable<Lot>, List<LotDTO>>(Database.Lots.GetAll());
+            return Mapper.Map<IEnumerable<Lot>, IEnumerable<LotDTO>>(Database.Lots.GetAll());
+        }
+
+        public IEnumerable<LotDTO> GetLotsForCategory(int categoryId)
+        {
+            return Mapper.Map<IEnumerable<Lot>, IEnumerable<LotDTO>>(Database.Lots.Find(x => x.CategoryId == categoryId));
         }
 
         public LotDTO GetLot(int id)

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BLL.DTO;
+using BLL.Exceptions;
 using BLL.Infrastructure;
 using BLL.Interfaces;
 using DAL.Entities;
@@ -39,8 +40,8 @@ namespace BLL.Services
                 if (result.Errors.Count() > 0)
                     return new OperationDetails(false, result.Errors.FirstOrDefault(), "");
 
-                await DatabaseIdentity.UserManager.AddToRoleAsync(user.Id, userDto.Role);
-                User clientProfile = new User { Id = user.Id, Name = userDto.Name };
+                await DatabaseIdentity.UserManager.AddToRoleAsync(user.Id, "user");
+                User clientProfile = new User { Id = user.Id, Name = userDto.UserName };
                 DatabaseIdentity.ClientManager.Create(clientProfile);
                 await DatabaseIdentity.SaveAsync();
                 return new OperationDetails(true, "Регистрация успешно пройдена", "");
@@ -81,6 +82,39 @@ namespace BLL.Services
             return new Tuple<ClaimsIdentity, ClaimsIdentity>(oAuthIdentity, cookiesIdentity);
         }
 
+        public UserDTO GetUserByName(string name)
+        {
+            ApplicationUser appUser = DatabaseIdentity.UserManager.FindByName(name);
+
+            if (appUser == null)
+                throw new UserNotFoundException();
+
+            return CreateUserDTO(appUser);
+        }
+
+        public async Task EditRole(string userId, string newRoleName)
+        {
+            var user = await DatabaseIdentity.UserManager.FindByIdAsync(userId);
+
+            if (user == null)
+                throw new UserNotFoundException();
+
+            var oldRole = GetRoleForUser(userId);
+
+            if (oldRole != newRoleName)
+            {
+                await DatabaseIdentity.UserManager.RemoveFromRoleAsync(userId, oldRole);
+                await DatabaseIdentity.UserManager.AddToRoleAsync(userId, newRoleName);
+
+                await DatabaseIdentity.UserManager.UpdateAsync(user);
+            }
+        }
+
+        public IEnumerable<string> GetRoles()
+        {
+            return DatabaseIdentity.RoleManager.Roles.Select(x => x.Name);
+        }
+
         private UserDTO CreateUserDTO(ApplicationUser user)
         {
             return new UserDTO()
@@ -101,40 +135,6 @@ namespace BLL.Services
             var role = DatabaseIdentity.RoleManager.Roles.Where(x => x.Id == roleId).Single().Name;
 
             return role;
-        }
-
-        public Task<ClaimsIdentity> Authenticate(UserDTO userDto)
-        {
-            throw new NotImplementedException();
-        }
-
-        public UserDTO GetUserById(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<UserDTO> FindByIdAsync(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<Tuple<ClaimsIdentity, ClaimsIdentity>> FindAsync(string username, string password)
-        {
-            var appUser = await Database.UserManager.FindAsync(username, password);
-
-            //if (appUser == null)
-            //throw new AuthException("invalid_grant", "The user name or password is incorrect.");
-
-            ClaimsIdentity oAuthIdentity = await Database.UserManager.CreateIdentityAsync(appUser, OAuthDefaults.AuthenticationType);
-            ClaimsIdentity cookiesIdentity = await Database.UserManager.CreateIdentityAsync(appUser, CookieAuthenticationDefaults.AuthenticationType);
-
-            return new Tuple<ClaimsIdentity, ClaimsIdentity>(oAuthIdentity, cookiesIdentity);
-        }
-
-        public async Task<UserDTO> FindByIdAsync(string id)
-        {
-            var appUser = await Database.UserManager.FindByIdAsync(id);
-            return Mapper.Map<ApplicationUser, UserDTO>(appUser);
         }
     }
 }
