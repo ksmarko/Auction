@@ -19,30 +19,30 @@ namespace BLL.Services
 {
     public class UserManager : IUserManager
     {
-        IUnitOfWorkIdentity Database { get; set; }
-        IUnitOfWork Data { get; set; }
+        IUnitOfWorkIdentity DatabaseIdentity { get; set; }
+        IUnitOfWork DatabaseDomain { get; set; }
 
         public UserManager(IUnitOfWorkIdentity uowi, IUnitOfWork uow)
         {
-            Database = uowi;
-            Data = uow;
+            DatabaseIdentity = uowi;
+            DatabaseDomain = uow;
         }
         
         public async Task<OperationDetails> Create(UserDTO userDto)
         {
-            var user = await Database.UserManager.FindByEmailAsync(userDto.Email);
+            var user = await DatabaseIdentity.UserManager.FindByEmailAsync(userDto.Email);
             if (user == null)
             {
                 user = new ApplicationUser { Email = userDto.Email, UserName = userDto.Email };
-                var result = await Database.UserManager.CreateAsync(user, userDto.Password);
+                var result = await DatabaseIdentity.UserManager.CreateAsync(user, userDto.Password);
 
                 if (result.Errors.Count() > 0)
                     return new OperationDetails(false, result.Errors.FirstOrDefault(), "");
 
-                await Database.UserManager.AddToRoleAsync(user.Id, userDto.Role);
+                await DatabaseIdentity.UserManager.AddToRoleAsync(user.Id, userDto.Role);
                 User clientProfile = new User { Id = user.Id, Name = userDto.Name };
-                Database.ClientManager.Create(clientProfile);
-                await Database.SaveAsync();
+                DatabaseIdentity.ClientManager.Create(clientProfile);
+                await DatabaseIdentity.SaveAsync();
                 return new OperationDetails(true, "Регистрация успешно пройдена", "");
             }
             else
@@ -51,30 +51,71 @@ namespace BLL.Services
             }
         }
 
-        public async Task<ClaimsIdentity> Authenticate(UserDTO userDto)
-        {
-            ClaimsIdentity claim = null;
-            ApplicationUser user = await Database.UserManager.FindAsync(userDto.Email, userDto.Password);
-
-            if (user != null)
-                claim = await Database.UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
-            return claim;
-        }
-
-        public UserDTO GetUserById(string id)
-        {
-            var user = Data.Users.Get(id);
-            return Mapper.Map<User, UserDTO>(user);
-        }
-
         public IEnumerable<UserDTO> GetUsers()
         {
-            return Mapper.Map<IEnumerable<User>, IEnumerable<UserDTO>>(Data.Users.GetAll());
+            var appUsers = DatabaseIdentity.UserManager.Users;
+            var list = new List<UserDTO>();
+
+            if (appUsers != null)
+                foreach (var appUser in appUsers)
+                    list.Add(CreateUserDTO(appUser));
+
+            return list;
         }
 
         public void Dispose()
         {
-            Database.Dispose();
+            DatabaseIdentity.Dispose();
+        }
+
+        public async Task<Tuple<ClaimsIdentity, ClaimsIdentity>> FindAsync(string username, string password)
+        {
+            var appUser = await DatabaseIdentity.UserManager.FindAsync(username, password);
+
+            //if (appUser == null)
+            //throw new AuthException("invalid_grant", "The user name or password is incorrect.");
+
+            ClaimsIdentity oAuthIdentity = await DatabaseIdentity.UserManager.CreateIdentityAsync(appUser, OAuthDefaults.AuthenticationType);
+            ClaimsIdentity cookiesIdentity = await DatabaseIdentity.UserManager.CreateIdentityAsync(appUser, CookieAuthenticationDefaults.AuthenticationType);
+
+            return new Tuple<ClaimsIdentity, ClaimsIdentity>(oAuthIdentity, cookiesIdentity);
+        }
+
+        private UserDTO CreateUserDTO(ApplicationUser user)
+        {
+            return new UserDTO()
+            {
+                Id = user.Id,
+                Email = user.Email,
+                UserName = user.UserName,
+                Name = user.User.Name,
+                Role = GetRoleForUser(user.Id),
+                Lots = Mapper.Map<IEnumerable<Lot>, ICollection<LotDTO>>(DatabaseDomain.Lots.Find(x => x.User.Id == user.Id))
+            };
+        }
+
+        private string GetRoleForUser(string id)
+        {
+            var user = DatabaseIdentity.UserManager.FindById(id);
+            var roleId = user.Roles.Where(x => x.UserId == user.Id).Single().RoleId;
+            var role = DatabaseIdentity.RoleManager.Roles.Where(x => x.Id == roleId).Single().Name;
+
+            return role;
+        }
+
+        public Task<ClaimsIdentity> Authenticate(UserDTO userDto)
+        {
+            throw new NotImplementedException();
+        }
+
+        public UserDTO GetUserById(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<UserDTO> FindByIdAsync(string id)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<Tuple<ClaimsIdentity, ClaimsIdentity>> FindAsync(string username, string password)

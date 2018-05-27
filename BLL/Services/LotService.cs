@@ -25,18 +25,22 @@ namespace BLL.Services
 
         public void EditLot(LotDTO entity)
         {
-            if (new TradeService(Database).GetTradeByLot(entity.Id) != null)
-                throw new AuctionException("You can`t change the information about the lot after the start of the bidding");
+            if(entity == null)
+                throw new ArgumentNullException();
 
             var lot = Database.Lots.Get(entity.Id);
 
             if (lot == null)
                 throw new ArgumentNullException();
 
+            if (lot.IsVerified)
+                throw new AuctionException("You can`t change the information about the lot after the start of the bidding");
+
             lot.Name = entity.Name;
             lot.Description = entity.Description;
             lot.Img = entity.Img;
             lot.TradeDuration = entity.TradeDuration;
+            
 
             Database.Lots.Update(lot);
             Database.Save();
@@ -44,6 +48,12 @@ namespace BLL.Services
 
         public void CreateLot(LotDTO entity)
         {
+            if (entity == null)
+                throw new ArgumentNullException();
+
+            if (entity.User == null)
+                throw new AuctionException("Lot must have owner");
+
             var newLot = new Lot()
             {
                 Name = entity.Name,
@@ -51,10 +61,11 @@ namespace BLL.Services
                 Description = entity.Description,
                 Img = entity.Img,
                 TradeDuration = entity.TradeDuration,
-                User = Database.Users.Get(entity.User.Id)
+                User = Database.Users.Get(entity.User.Id),
+                Category = entity.Category == null ? Database.Categories.Get(1) : Database.Categories.Get(entity.Category.Id)
             };
             
-            newLot.Categories.Add(Database.Categories.Get(1));
+            newLot.Category = Database.Categories.Get(1);
 
             Database.Lots.Create(newLot);
             Database.Save();
@@ -71,24 +82,7 @@ namespace BLL.Services
             Database.Save();
         }
 
-        public void RemoveLotFromCategory(int lotId, int categoryId)
-        {
-            Lot lot = Database.Lots.Get(lotId);
-            Category category = Database.Categories.Get(categoryId);
-
-            if (lot == null || category == null)
-                throw new ArgumentNullException();
-            
-            lot.Categories.Remove(category);
-
-            if (lot.Categories.Count == 0)
-                AddLotToCategory(lotId, 1);
-
-            Database.Lots.Update(lot);
-            Database.Save();
-        }
-
-        public void AddLotToCategory(int lotId, int categoryId)
+        public void ChangeLotCategory(int lotId, int categoryId)
         {
             Lot lot = Database.Lots.Get(lotId);
             Category category = Database.Categories.Get(categoryId);
@@ -96,7 +90,7 @@ namespace BLL.Services
             if (lot == null || category == null)
                 throw new ArgumentNullException();
 
-            lot.Categories.Add(category);
+            lot.Category = category;
                 
             Database.Lots.Update(lot);
             Database.Save();
@@ -115,7 +109,7 @@ namespace BLL.Services
         public void VerifyLot(int id)
         {
             Lot lot = Database.Lots.Get(id);
-
+                
             if (lot == null)
                 throw new ArgumentNullException();
 

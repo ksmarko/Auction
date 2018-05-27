@@ -27,7 +27,7 @@ namespace Tests
     {
         static void Main(string[] args)
         {
-            BLL.Infrastructure.AutoMapperConfig.Initialize();
+            //BLL.Infrastructure.AutoMapperConfig.Initialize();
 
             NinjectModule serviceModule = new ConnectionModule(
                 ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);

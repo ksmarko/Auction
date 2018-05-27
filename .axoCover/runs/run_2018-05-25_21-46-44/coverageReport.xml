@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageSession xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="4.6.0.0">
+  <Summary numSequencePoints="93" visitedSequencePoints="0" numBranchPoints="28" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="4" visitedMethods="0" numMethods="28" />
+  <Modules>
+    <Module hash="7F-7E-F5-BF-C9-FC-4B-69-9C-25-77-62-EE-F1-38-18-1C-BD-97-2A">
+      <Summary numSequencePoints="93" visitedSequencePoints="0" numBranchPoints="28" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="4" visitedMethods="0" numMethods="28" />
+      <ModulePath>C:\Users\Євгеній\Documents\GitHub\Auction\BLLUnitTest\bin\Debug\BLLUnitTest.dll</ModulePath>
+      <ModuleTime>2018-05-25T18:46:43.1499853Z</ModuleTime>
+      <ModuleName>BLLUnitTest</ModuleName>
+      <Files>
+        <File uid="1" fullPath="C:\Users\Євгеній\Documents\GitHub\Auction\BLLUnitTest\LotServiceTest.cs" />
+      </Files>
+      <Classes>
+        <Class>
+          <Summary numSequencePoints="89" visitedSequencePoints="0" numBranchPoints="24" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="1" visitedMethods="0" numMethods="24" />
+          <FullName>BLLUnitTest.LotServiceTest</FullName>
+          <Methods>
+            <Method visited="false" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="0" crapScore="2" isConstructor="true" isStatic="true" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
+              <MetadataToken>100663297</MetadataToken>
+              <Name>System.Void BLLUnitTest.LotServiceTest::.cctor()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="1" ordinal="0" offset="0" sl="23" sc="9" el="23" ec="10" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="2" ordinal="1" offset="1" sl="24" sc="13" el="26" ec="15" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="3" ordinal="2" offset="23" sl="27" sc="9" el="27" ec="10" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="1" ordinal="0" offset="0" sl="23" sc="9" el="23" ec="10" bec="0" bev="0" fileid="1" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="0" crapScore="2" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="7" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
+              <MetadataToken>100663298</MetadataToken>
+              <Name>System.Void BLLUnitTest.LotServiceTest::Load()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="4" ordinal="0" offset="0" sl="31" sc="9" el="31" ec="10" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="5" ordinal="1" offset="1" sl="32" sc="13" el="32" ec="43" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="6" ordinal="2" offset="12" sl="33" sc="13" el="33" ec="58" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="7" ordinal="3" offset="23" sl="35" sc="13" el="35" ec="66" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="8" ordinal="4" offset="108" sl="36" sc="13" el="36" ec="114" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="9" ordinal="5" offset="259" sl="38" sc="13" el="38" ec="53" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="10" ordinal="6" offset="281" sl="39" sc="9" el="39" ec="10" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="4" ordinal="0" offset="0" sl="31" sc="9" el="31" ec="10" bec="0" bev="0" fileid="1" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="0" crapScore="2" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
+              <MetadataToken>100663299</MetadataToken>
+              <Name>System.Void BLLUnitTest.LotServiceTest::CreateLot_TryToCreateNullValue_ShouldThrow()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="11" ordinal="0" offset="0" sl="43" sc="9" el="43" ec="10" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="12" ordinal="1" offset="1" sl="45" sc="13" el="45" ec="84" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="13" ordinal="2" offset="19" sl="46" sc="9" el="46" ec="10" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="11" ordinal="0" offset="0" sl="43" sc="9" el="43" ec="10" bec="0" bev="0" fileid="1" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="0" crapScore="2" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="5" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
+              <MetadataToken>100663300</MetadataToken>
+              <Name>System.Void BLLUnitTest.LotServiceTest::CreateLot_TryToCreateLot_ShouldRepositoryCreateOnce()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="14" ordinal="0" offset="0" sl="51" sc="9" el="51" ec="10" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="15" ordinal="1" offset="1" sl="52" sc="13" el="52" ec="124" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="16" ordinal="2" offset="43" sl="55" sc="13" el="55" ec="39" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="17" ordinal="3" offset="56" sl="58" sc="13" el="58" ec="78" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="18" ordinal="4" offset="177" sl="59" sc="9" el="59" ec="10" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="14" ordinal="0" offset="0" sl="51" sc="9" el="51" ec="10" bec="0" bev="0" fileid="1" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="0" crapScore="2" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="4" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
+              <MetadataToken>100663301</MetadataToken>
+              <Name>System.Void BLLUnitTest.LotServiceTest::GetLot_TryToGetNullValue_ShouldThrow()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="19" ordinal="0" offset="0" sl="64" sc="9" el="64" ec="10" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="20" ordinal="1" offset="1" sl="65" sc="13" el="65" ec="81" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="21" ordinal="2" offset="116" sl="68" sc="13" el="68" ec="63" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="22" ordinal="3" offset="138" sl="69" sc="9" el="69" ec="10" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="19" ordinal="0" offset="0" sl="64" sc="9" el="64" ec="10" bec="0" bev="0" fileid="1" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="0" crapScore="2" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="5" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
+              <MetadataToken>100663302</MetadataToken>
+              <Name>System.Void BLLUnitTest.LotServiceTest::GetLot_TryToGetValue_ShouldReturnSomeValue()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="23" ordinal="0" offset="0" sl="73" sc="9" el="73" ec="10" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="24" ordinal="1" offset="1" sl="74" sc="13" el="74" ec="122" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="25" ordinal="2" offset="43" sl="76" sc="13" el="76" ec="70" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="26" ordinal="3" offset="178" sl="79" sc="13" el="79" ec="66" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="27" ordinal="4" offset="200" sl="80" sc="9" el="80" ec="10" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="23" ordinal="0" offset="0" sl="73" sc="9" el="73" ec="10" bec="0" bev="0" fileid="1" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="0" crapScore="2" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="3" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
+              <MetadataToken>100663303</MetadataToken>
+              <Name>System.Void BLLUnitTest.LotServiceTest::EditLot_TryToPutInEditNullElement_ShouldThrow()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="28" ordinal="0" offset="0" sl="84" sc="9" el="84" ec="10" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="29" ordinal="1" offset="1" sl="86" sc="13" el="86" ec="82" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="30" ordinal="2" offset="19" sl="87" sc="9" el="87" ec="10" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="28" ordinal="0" offset="0" sl="84" sc="9" el="84" ec="10" bec="0" bev="0" fileid="1" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="0" crapScore="2" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="5" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
+              <MetadataToken>100663304</MetadataToken>
+              <Name>System.Void BLLUnitTest.LotServiceTest::EditLot_TryToEditNullElement_ShouldThrow()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="31" ordinal="0" offset="13" sl="91" sc="9" el="91" ec="10" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="32" ordinal="1" offset="14" sl="92" sc="13" el="92" ec="125" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="33" ordinal="2" offset="61" sl="93" sc="13" el="93" ec="81" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="34" ordinal="3" offset="176" sl="96" sc="13" el="96" ec="81" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="35" ordinal="4" offset="194" sl="97" sc="9" el="97" ec="10" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint vc="0" uspid="36" ordinal="0" offset="0" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="0" crapScore="2" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="6" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
+              <MetadataToken>100663305</MetadataToken>
+              <Name>System.Void BLLUnitTest.LotServiceTest::EditLot_TryToEditVerifiedLot_ShouldThrow()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="37" ordinal="0" offset="13" sl="101" sc="9" el="101" ec="10" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="38" ordinal="1" offset="14" sl="102" sc="13" el="102" ec="125" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="39" ordinal="2" offset="61" sl="103" sc="13" el="103" ec="189" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="40" ordinal="3" offset="224" sl="106" sc="13" el="106" ec="76" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="41" ordinal="4" offset="242" sl="107" sc="13" el="107" ec="182" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="42" ordinal="5" offset="275" sl="108" sc="9" el="108" ec="10" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint vc="0" uspid="43" ordinal="0" offset="0" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="0" crapScore="2" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="6" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
+              <MetadataToken>100663306</MetadataToken>
+              <Name>System.Void BLLUnitTest.LotServiceTest::EditLot_EditLot_ShoudRepositoryEditOnce()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="44" ordinal="0" offset="0" sl="112" sc="9" el="112" ec="10" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="45" ordinal="1" offset="1" sl="113" sc="13" el="113" ec="125" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="46" ordinal="2" offset="43" sl="114" sc="13" el="114" ec="169" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="47" ordinal="3" offset="198" sl="117" sc="13" el="117" ec="37" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="48" ordinal="4" offset="211" sl="120" sc="13" el="120" ec="78" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="49" ordinal="5" offset="332" sl="121" sc="9" el="121" ec="10" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="44" ordinal="0" offset="0" sl="112" sc="9" el="112" ec="10" bec="0" bev="0" fileid="1" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="0" crapScore="2" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="4" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
+              <MetadataToken>100663307</MetadataToken>
+              <Name>System.Void BLLUnitTest.LotServiceTest::DeleteLot_DeleteNullValue()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="50" ordinal="0" offset="0" sl="125" sc="9" el="125" ec="10" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="51" ordinal="1" offset="1" sl="126" sc="13" el="126" ec="81" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="52" ordinal="2" offset="116" sl="129" sc="13" el="129" ec="95" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="53" ordinal="3" offset="134" sl="130" sc="9" el="130" ec="10" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="50" ordinal="0" offset="0" sl="125" sc="9" el="125" ec="10" bec="0" bev="0" fileid="1" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="0" crapScore="2" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="5" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
+              <MetadataToken>100663308</MetadataToken>
+              <Name>System.Void BLLUnitTest.LotServiceTest::DeleteLot_DeleteRepositoryShouldCallsOnce()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="54" ordinal="0" offset="0" sl="134" sc="9" el="134" ec="10" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="55" ordinal="1" offset="1" sl="135" sc="13" el="135" ec="170" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="56" ordinal="2" offset="156" sl="138" sc="13" el="138" ec="51" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="57" ordinal="3" offset="173" sl="141" sc="13" el="141" ec="67" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="58" ordinal="4" offset="282" sl="142" sc="9" el="142" ec="10" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="54" ordinal="0" offset="0" sl="134" sc="9" el="134" ec="10" bec="0" bev="0" fileid="1" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="0" crapScore="2" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="4" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
+              <MetadataToken>100663309</MetadataToken>
+              <Name>System.Void BLLUnitTest.LotServiceTest::VarifyLot_TryToVarifyNullLot_ShouldThrow()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="59" ordinal="0" offset="0" sl="146" sc="9" el="146" ec="10" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="60" ordinal="1" offset="1" sl="147" sc="13" el="147" ec="81" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="61" ordinal="2" offset="116" sl="150" sc="13" el="150" ec="95" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="62" ordinal="3" offset="134" sl="151" sc="9" el="151" ec="10" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="59" ordinal="0" offset="0" sl="146" sc="9" el="146" ec="10" bec="0" bev="0" fileid="1" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="0" crapScore="2" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="5" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
+              <MetadataToken>100663310</MetadataToken>
+              <Name>System.Void BLLUnitTest.LotServiceTest::VarifyLot_TryToVirifySomeLot_ShouldCallOnce()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="63" ordinal="0" offset="0" sl="155" sc="9" el="155" ec="10" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="64" ordinal="1" offset="1" sl="156" sc="13" el="156" ec="170" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="65" ordinal="2" offset="156" sl="159" sc="13" el="159" ec="51" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="66" ordinal="3" offset="173" sl="162" sc="13" el="162" ec="78" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="67" ordinal="4" offset="294" sl="163" sc="9" el="163" ec="10" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="63" ordinal="0" offset="0" sl="155" sc="9" el="155" ec="10" bec="0" bev="0" fileid="1" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="0" crapScore="2" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="4" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
+              <MetadataToken>100663311</MetadataToken>
+              <Name>System.Void BLLUnitTest.LotServiceTest::ChangeLotCategory_TryToChangeWithNullCategory_ShouldThrow()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="68" ordinal="0" offset="0" sl="167" sc="9" el="167" ec="10" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="69" ordinal="1" offset="1" sl="168" sc="13" el="168" ec="87" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="70" ordinal="2" offset="136" sl="171" sc="13" el="171" ec="120" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="71" ordinal="3" offset="154" sl="172" sc="9" el="172" ec="10" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="68" ordinal="0" offset="0" sl="167" sc="9" el="167" ec="10" bec="0" bev="0" fileid="1" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="0" crapScore="2" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="4" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
+              <MetadataToken>100663312</MetadataToken>
+              <Name>System.Void BLLUnitTest.LotServiceTest::ChangeLotCategory_TryToChangeWithNullLot_ShouldThrow()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="72" ordinal="0" offset="0" sl="176" sc="9" el="176" ec="10" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="73" ordinal="1" offset="1" sl="177" sc="13" el="177" ec="81" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="74" ordinal="2" offset="116" sl="180" sc="13" el="180" ec="120" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="75" ordinal="3" offset="134" sl="181" sc="9" el="181" ec="10" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="72" ordinal="0" offset="0" sl="176" sc="9" el="176" ec="10" bec="0" bev="0" fileid="1" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="0" crapScore="2" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="5" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
+              <MetadataToken>100663313</MetadataToken>
+              <Name>System.Void BLLUnitTest.LotServiceTest::ChangeLotCategory_TryToChange_ShouldCallsOnce()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="76" ordinal="0" offset="0" sl="185" sc="9" el="185" ec="10" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="77" ordinal="1" offset="1" sl="186" sc="13" el="186" ec="170" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="78" ordinal="2" offset="156" sl="189" sc="13" el="189" ec="76" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="79" ordinal="3" offset="178" sl="192" sc="13" el="192" ec="78" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="80" ordinal="4" offset="299" sl="193" sc="9" el="193" ec="10" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="76" ordinal="0" offset="0" sl="185" sc="9" el="185" ec="10" bec="0" bev="0" fileid="1" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="0" crapScore="2" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="5" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
+              <MetadataToken>100663314</MetadataToken>
+              <Name>System.Void BLLUnitTest.LotServiceTest::GetAllLots_TryToGetSomeList_ShouldRepositoryCallOnce_ShouldReturnNotNullList()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="81" ordinal="0" offset="0" sl="197" sc="9" el="197" ec="10" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="82" ordinal="1" offset="1" sl="198" sc="13" el="198" ec="79" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="83" ordinal="2" offset="90" sl="201" sc="13" el="201" ec="55" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="84" ordinal="3" offset="107" sl="202" sc="13" el="202" ec="51" bec="0" bev="0" fileid="1" />
+                <SequencePoint vc="0" uspid="85" ordinal="4" offset="186" sl="203" sc="9" el="203" ec="10" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="81" ordinal="0" offset="0" sl="197" sc="9" el="197" ec="10" bec="0" bev="0" fileid="1" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="0" crapScore="2" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="0" />
+              <MetadataToken>100663315</MetadataToken>
+              <Name>System.Void BLLUnitTest.LotServiceTest::.ctor()</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="0" uspid="86" ordinal="0" offset="0" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="0" crapScore="2" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="1" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
+              <MetadataToken>100663316</MetadataToken>
+              <Name>System.Void BLLUnitTest.LotServiceTest::&lt;CreateLot_TryToCreateNullValue_ShouldThrow&gt;b__5_0()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="87" ordinal="0" offset="0" sl="45" sc="56" el="45" ec="82" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="87" ordinal="0" offset="0" sl="45" sc="56" el="45" ec="82" bec="0" bev="0" fileid="1" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="0" crapScore="2" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="1" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
+              <MetadataToken>100663317</MetadataToken>
+              <Name>System.Void BLLUnitTest.LotServiceTest::&lt;EditLot_TryToPutInEditNullElement_ShouldThrow&gt;b__9_0()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="88" ordinal="0" offset="0" sl="86" sc="56" el="86" ec="80" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="88" ordinal="0" offset="0" sl="86" sc="56" el="86" ec="80" bec="0" bev="0" fileid="1" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="0" crapScore="2" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="1" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
+              <MetadataToken>100663318</MetadataToken>
+              <Name>System.Void BLLUnitTest.LotServiceTest::&lt;DeleteLot_DeleteNullValue&gt;b__13_1()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="89" ordinal="0" offset="0" sl="129" sc="56" el="129" ec="93" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="89" ordinal="0" offset="0" sl="129" sc="56" el="129" ec="93" bec="0" bev="0" fileid="1" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="0" crapScore="2" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="1" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
+              <MetadataToken>100663319</MetadataToken>
+              <Name>System.Void BLLUnitTest.LotServiceTest::&lt;VarifyLot_TryToVarifyNullLot_ShouldThrow&gt;b__15_1()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="90" ordinal="0" offset="0" sl="150" sc="56" el="150" ec="93" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="90" ordinal="0" offset="0" sl="150" sc="56" el="150" ec="93" bec="0" bev="0" fileid="1" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="0" crapScore="2" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="1" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
+              <MetadataToken>100663320</MetadataToken>
+              <Name>System.Void BLLUnitTest.LotServiceTest::&lt;ChangeLotCategory_TryToChangeWithNullCategory_ShouldThrow&gt;b__17_1()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="91" ordinal="0" offset="0" sl="171" sc="56" el="171" ec="118" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="91" ordinal="0" offset="0" sl="171" sc="56" el="171" ec="118" bec="0" bev="0" fileid="1" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="0" crapScore="2" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="1" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
+              <MetadataToken>100663321</MetadataToken>
+              <Name>System.Void BLLUnitTest.LotServiceTest::&lt;ChangeLotCategory_TryToChangeWithNullLot_ShouldThrow&gt;b__18_1()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="92" ordinal="0" offset="0" sl="180" sc="56" el="180" ec="118" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="92" ordinal="0" offset="0" sl="180" sc="56" el="180" ec="118" bec="0" bev="0" fileid="1" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="1" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="1" visitedMethods="0" numMethods="1" />
+          <FullName>BLLUnitTest.LotServiceTest/&lt;&gt;c</FullName>
+          <Methods>
+            <Method visited="false" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="0" crapScore="2" isConstructor="true" isStatic="true" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="0" />
+              <MetadataToken>100663322</MetadataToken>
+              <Name>System.Void BLLUnitTest.LotServiceTest/&lt;&gt;c::.cctor()</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="0" uspid="93" ordinal="0" offset="0" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="0" crapScore="2" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="0" />
+              <MetadataToken>100663323</MetadataToken>
+              <Name>System.Void BLLUnitTest.LotServiceTest/&lt;&gt;c::.ctor()</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="0" uspid="94" ordinal="0" offset="0" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="0" crapScore="2" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="1" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
+              <MetadataToken>100663324</MetadataToken>
+              <Name>System.Void BLLUnitTest.LotServiceTest/&lt;&gt;c::&lt;.cctor&gt;b__3_0(AutoMapper.IMapperConfigurationExpression)</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="95" ordinal="0" offset="0" sl="25" sc="13" el="25" ec="63" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="95" ordinal="0" offset="0" sl="25" sc="13" el="25" ec="63" bec="0" bev="0" fileid="1" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="1" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="1" visitedMethods="0" numMethods="1" />
+          <FullName>BLLUnitTest.LotServiceTest/&lt;&gt;c__DisplayClass10_0</FullName>
+          <Methods>
+            <Method visited="false" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="0" crapScore="2" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="0" />
+              <MetadataToken>100663325</MetadataToken>
+              <Name>System.Void BLLUnitTest.LotServiceTest/&lt;&gt;c__DisplayClass10_0::.ctor()</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="0" uspid="96" ordinal="0" offset="0" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="0" crapScore="2" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="1" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
+              <MetadataToken>100663326</MetadataToken>
+              <Name>System.Void BLLUnitTest.LotServiceTest/&lt;&gt;c__DisplayClass10_0::&lt;EditLot_TryToEditNullElement_ShouldThrow&gt;b__1()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="97" ordinal="0" offset="0" sl="96" sc="56" el="96" ec="79" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="97" ordinal="0" offset="0" sl="96" sc="56" el="96" ec="79" bec="0" bev="0" fileid="1" />
+            </Method>
+          </Methods>
+        </Class>
+        <Class>
+          <Summary numSequencePoints="2" visitedSequencePoints="0" numBranchPoints="2" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="1" visitedMethods="0" numMethods="2" />
+          <FullName>BLLUnitTest.LotServiceTest/&lt;&gt;c__DisplayClass11_0</FullName>
+          <Methods>
+            <Method visited="false" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="0" crapScore="2" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="0" visitedSequencePoints="0" numBranchPoints="0" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="0" />
+              <MetadataToken>100663327</MetadataToken>
+              <Name>System.Void BLLUnitTest.LotServiceTest/&lt;&gt;c__DisplayClass11_0::.ctor()</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="0" uspid="98" ordinal="0" offset="0" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="0" crapScore="2" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="1" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
+              <MetadataToken>100663328</MetadataToken>
+              <Name>System.Void BLLUnitTest.LotServiceTest/&lt;&gt;c__DisplayClass11_0::&lt;EditLot_TryToEditVerifiedLot_ShouldThrow&gt;b__1()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="99" ordinal="0" offset="0" sl="106" sc="51" el="106" ec="74" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="99" ordinal="0" offset="0" sl="106" sc="51" el="106" ec="74" bec="0" bev="0" fileid="1" />
+            </Method>
+            <Method visited="false" cyclomaticComplexity="1" nPathComplexity="0" sequenceCoverage="0" branchCoverage="0" crapScore="2" isConstructor="false" isStatic="false" isGetter="false" isSetter="false">
+              <Summary numSequencePoints="1" visitedSequencePoints="0" numBranchPoints="1" visitedBranchPoints="0" sequenceCoverage="0" branchCoverage="0" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="2" visitedClasses="0" numClasses="0" visitedMethods="0" numMethods="1" />
+              <MetadataToken>100663329</MetadataToken>
+              <Name>System.Void BLLUnitTest.LotServiceTest/&lt;&gt;c__DisplayClass11_0::&lt;EditLot_TryToEditVerifiedLot_ShouldThrow&gt;b__2()</Name>
+              <FileRef uid="1" />
+              <SequencePoints>
+                <SequencePoint vc="0" uspid="100" ordinal="0" offset="0" sl="107" sc="67" el="107" ec="90" bec="0" bev="0" fileid="1" />
+              </SequencePoints>
+              <BranchPoints />
+              <MethodPoint xsi:type="SequencePoint" vc="0" uspid="100" ordinal="0" offset="0" sl="107" sc="67" el="107" ec="90" bec="0" bev="0" fileid="1" />
+            </Method>
+          </Methods>
+        </Class>
+      </Classes>
+      <TrackedMethods>
+        <TrackedMethod uid="1" token="100663299" name="System.Void BLLUnitTest.LotServiceTest::CreateLot_TryToCreateNullValue_ShouldThrow()" strategy="NUnitTest" />
+        <TrackedMethod uid="2" token="100663300" name="System.Void BLLUnitTest.LotServiceTest::CreateLot_TryToCreateLot_ShouldRepositoryCreateOnce()" strategy="NUnitTest" />
+        <TrackedMethod uid="3" token="100663301" name="System.Void BLLUnitTest.LotServiceTest::GetLot_TryToGetNullValue_ShouldThrow()" strategy="NUnitTest" />
+        <TrackedMethod uid="4" token="100663302" name="System.Void BLLUnitTest.LotServiceTest::GetLot_TryToGetValue_ShouldReturnSomeValue()" strategy="NUnitTest" />
+        <TrackedMethod uid="5" token="100663303" name="System.Void BLLUnitTest.LotServiceTest::EditLot_TryToPutInEditNullElement_ShouldThrow()" strategy="NUnitTest" />
+        <TrackedMethod uid="6" token="100663304" name="System.Void BLLUnitTest.LotServiceTest::EditLot_TryToEditNullElement_ShouldThrow()" strategy="NUnitTest" />
+        <TrackedMethod uid="7" token="100663305" name="System.Void BLLUnitTest.LotServiceTest::EditLot_TryToEditVerifiedLot_ShouldThrow()" strategy="NUnitTest" />
+        <TrackedMethod uid="8" token="100663306" name="System.Void BLLUnitTest.LotServiceTest::EditLot_EditLot_ShoudRepositoryEditOnce()" strategy="NUnitTest" />
+        <TrackedMethod uid="9" token="100663307" name="System.Void BLLUnitTest.LotServiceTest::DeleteLot_DeleteNullValue()" strategy="NUnitTest" />
+        <TrackedMethod uid="10" token="100663308" name="System.Void BLLUnitTest.LotServiceTest::DeleteLot_DeleteRepositoryShouldCallsOnce()" strategy="NUnitTest" />
+        <TrackedMethod uid="11" token="100663309" name="System.Void BLLUnitTest.LotServiceTest::VarifyLot_TryToVarifyNullLot_ShouldThrow()" strategy="NUnitTest" />
+        <TrackedMethod uid="12" token="100663310" name="System.Void BLLUnitTest.LotServiceTest::VarifyLot_TryToVirifySomeLot_ShouldCallOnce()" strategy="NUnitTest" />
+        <TrackedMethod uid="13" token="100663311" name="System.Void BLLUnitTest.LotServiceTest::ChangeLotCategory_TryToChangeWithNullCategory_ShouldThrow()" strategy="NUnitTest" />
+        <TrackedMethod uid="14" token="100663312" name="System.Void BLLUnitTest.LotServiceTest::ChangeLotCategory_TryToChangeWithNullLot_ShouldThrow()" strategy="NUnitTest" />
+        <TrackedMethod uid="15" token="100663313" name="System.Void BLLUnitTest.LotServiceTest::ChangeLotCategory_TryToChange_ShouldCallsOnce()" strategy="NUnitTest" />
+        <TrackedMethod uid="16" token="100663314" name="System.Void BLLUnitTest.LotServiceTest::GetAllLots_TryToGetSomeList_ShouldRepositoryCallOnce_ShouldReturnNotNullList()" strategy="NUnitTest" />
+      </TrackedMethods>
+    </Module>
+  </Modules>
+</CoverageSession>

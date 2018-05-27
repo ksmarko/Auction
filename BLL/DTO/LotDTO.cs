@@ -11,12 +11,11 @@ namespace BLL.DTO
         public double Price { get; set; }
         public int TradeDuration { get; set; }
         public bool IsVerified { get; set; }
-        public ICollection<CategoryDTO> Categories { get; set; }
+        public CategoryDTO Category { get; set; }
         public UserDTO User { get; set; }
 
         public LotDTO()
         {
-            Categories = new List<CategoryDTO>();
             IsVerified = false;
         }
 
