@@ -61,7 +61,8 @@ namespace BLL.Services
                 Description = entity.Description,
                 Img = entity.Img,
                 TradeDuration = entity.TradeDuration,
-                User = Database.Users.Get(entity.User.Id)
+                User = Database.Users.Get(entity.User.Id),
+                Category = entity.Category == null ? Database.Categories.Get(1) : Database.Categories.Get(entity.Category.Id)
             };
             
             newLot.Category = Database.Categories.Get(1);

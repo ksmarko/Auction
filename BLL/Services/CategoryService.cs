@@ -27,6 +27,9 @@ namespace BLL.Services
         {
             var temp = Database.Categories.Get(entity.Id);
 
+            if (temp == null)
+                throw new ArgumentNullException();
+
             temp.Name = entity.Name;
 
             Database.Categories.Update(temp);
@@ -49,7 +52,10 @@ namespace BLL.Services
 
         public void CreateCategory(CategoryDTO entity)
         {
-            Database.Categories.Create(Mapper.Map<CategoryDTO, Category>(entity));
+            if (entity == null)
+                throw new ArgumentNullException();
+
+            Database.Categories.Create(new Category { Name = entity.Name});
             Database.Save();
         }
 
