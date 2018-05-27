@@ -9,6 +9,7 @@ using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using BLL.Exceptions;
 
 namespace BLLUnitTest.Service
 {
@@ -177,16 +178,6 @@ namespace BLLUnitTest.Service
         }
 
         [Test]
-        public void GetUserActiveTrade_TryToGetNonExistentUserTradeFromAll_ShouldThrowException()
-        {
-            //arrange
-            uow.Setup(x => x.Users.Get(It.IsAny<string>())).Returns<User>(null);
-
-            //act & assert
-            Assert.Throws<ArgumentNullException>(() => tradeService.GetUserActiveTrades(It.IsAny<string>()));
-        }
-
-        [Test]
         public void GetUserLoseTrade_TryToGetNonExistentUserTradeFromAll_ShouldThrowException()
         {
             //arrange
@@ -194,24 +185,6 @@ namespace BLLUnitTest.Service
             
             //act & assert
             Assert.Throws<ArgumentNullException>(() => tradeService.GetUserLoseTrades(It.IsAny<string>()));
-        }
-
-       
-        [Test]
-        public void GetUserActiveTrade_TryToGetActiveTrades()
-        {
-            //arrange
-            var allTrades = new List<Trade> { new Trade {TradeEnd = DateTime.Now.AddDays(-1) },
-            new Trade { TradeEnd = DateTime.Now.AddDays(3)},
-            new Trade { TradeEnd = DateTime.Now.AddDays(5)}};
-            var user = new User { Trades = allTrades};
-            uow.Setup(x => x.Users.Get(It.IsAny<string>())).Returns(user);
-
-            //act
-            List<TradeDTO> list = tradeService.GetUserActiveTrades(It.IsAny<string>()) as List<TradeDTO>;
-
-            //assert
-            Assert.AreEqual(list.Count, 2);
         }
 
         [Test]

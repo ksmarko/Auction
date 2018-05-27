@@ -3,7 +3,7 @@ using BLL.DTO;
 using BLL.Interfaces;
 using DAL.Entities;
 using DAL.Interfaces;
-using BLL.Infrastructure;
+using BLL.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;

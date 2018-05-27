@@ -17,3 +17,4 @@ namespace BLL.Infrastructure
             cfg.CreateMap<ApplicationUser, UserDTO>();
         }
     }
+}

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BLL.Infrastructure
+namespace BLL.Exceptions
 {
     public class AuctionException : Exception
     {
