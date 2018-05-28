@@ -25,6 +25,9 @@ namespace BLL.Services
 
         public void EditCategory(CategoryDTO entity)
         {
+            if (entity == null)
+                throw new ArgumentNullException();
+
             var temp = Database.Categories.Get(entity.Id);
 
             if (temp == null)
@@ -45,6 +48,10 @@ namespace BLL.Services
 
             if (category == null)
                 throw new ArgumentNullException();
+
+            if (category.Lots != null)
+                foreach (var el in category.Lots)
+                    el.Category = Database.Categories.Get(1);
 
             Database.Categories.Delete(category.Id);
             Database.Save();
