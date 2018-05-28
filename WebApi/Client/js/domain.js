@@ -201,7 +201,7 @@ function AddLot() {
         Description: $('#lot-descr').val(),
         Price: $('#lot-price').val(),
         TradeDuration: $('#trade-duration').val(),
-        Category: $('#cat0').val()
+        CategoryId: $('#cat0').val()
     };
 
     $.ajax({

@@ -16,11 +16,13 @@ namespace WebApi.Controllers
     {
         readonly ILotService lotService;
         readonly IUserManager userManager;
+        readonly ICategoryService categoryService;
 
-        public LotsController(ILotService lotService, IUserManager userManager)
+        public LotsController(ILotService lotService, IUserManager userManager, ICategoryService categoryService)
         {
             this.lotService = lotService;
             this.userManager = userManager;
+            this.categoryService = categoryService;
         }
 
         [HttpPost]
@@ -31,17 +33,8 @@ namespace WebApi.Controllers
             var user = userManager.GetUserByName(User.Identity.Name);
             var lot = Mapper.Map<LotModel, LotDTO>(model);
 
-            byte[] array = null;
-
-            if (model.File != null)
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    model.File.InputStream.CopyTo(ms);
-                    array = ms.GetBuffer();
-                }
-
+            lot.Category = categoryService.GetCategory(model.CategoryId);
             lot.User = user;
-            lot.Img = array;
             lotService.CreateLot(lot);
 
             return Ok("Lot created");

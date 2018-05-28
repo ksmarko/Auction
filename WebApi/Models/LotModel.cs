@@ -11,11 +11,11 @@ namespace WebApi.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public byte[] Img { get; set; }
-        public HttpPostedFileBase File { get; set; }
         public double Price { get; set; }
         public int TradeDuration { get; set; }
         public string Creator { get; set; }
         public bool IsVerified { get; set; }
         public string Category { get; set; }
+        public int CategoryId { get; set; }
     }
 }
