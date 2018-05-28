@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using BLL.DTO;
+using Auction.BLL.DTO;
 using Auction.WEB.Models;
 
 namespace Auction.WEB.App_Start
@@ -25,7 +25,7 @@ namespace Auction.WEB.App_Start
         {
             Mapper.Initialize(cfg =>
             {
-                BLL.Infrastructure.AutoMapperConfig.Configure(cfg);
+                Auction.BLL.Infrastructure.AutoMapperConfig.Configure(cfg);
                 AutoMapperConfig.Configure(cfg);
             });
         }

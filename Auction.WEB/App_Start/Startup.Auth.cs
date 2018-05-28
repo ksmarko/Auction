@@ -5,7 +5,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
 using Auction.WEB.Providers;
-using BLL.Interfaces;
+using Auction.BLL.Interfaces;
 
 namespace Auction.WEB
 {

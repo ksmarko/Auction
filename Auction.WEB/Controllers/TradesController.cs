@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using BLL.DTO;
-using BLL.Interfaces;
+using Auction.BLL.DTO;
+using Auction.BLL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

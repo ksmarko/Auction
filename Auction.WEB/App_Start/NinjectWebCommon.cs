@@ -6,9 +6,9 @@ namespace Auction.WEB.App_Start
     using System;
     using System.Web;
     using System.Web.Http;
-    using BLL.Infrastructure;
-    using BLL.Interfaces;
-    using BLL.Services;
+    using Auction.BLL.Infrastructure;
+    using Auction.BLL.Interfaces;
+    using Auction.BLL.Services;
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
     using Ninject;

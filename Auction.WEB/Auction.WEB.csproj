@@ -293,9 +293,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BLL\BLL.csproj">
+    <ProjectReference Include="..\Auction.BLL\Auction.BLL.csproj">
       <Project>{be23a40b-2bb6-40cc-aaa5-cf154792bbec}</Project>
-      <Name>BLL</Name>
+      <Name>Auction.BLL</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
