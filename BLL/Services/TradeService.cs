@@ -104,7 +104,7 @@ namespace BLL.Services
             if (user == null)
                 throw new ArgumentNullException();
 
-            var list = user.Trades.Where(x => DateTime.Now.CompareTo(x.TradeEnd) >= 0 && x.LastRateUserId == user.Id);
+            var list = user.Trades.Where(x => DateTime.Now.CompareTo(x.TradeEnd) >= 0 && x.LastRateUserId != user.Id);
 
             return Mapper.Map<IEnumerable<Trade>, List<TradeDTO>>(list);
         }
@@ -116,7 +116,7 @@ namespace BLL.Services
             if (user == null)
                 throw new ArgumentNullException();
 
-            var list = user.Trades.Where(x => DateTime.Now.CompareTo(x.TradeEnd) >= 0 && x.LastRateUserId != user.Id);
+            var list = user.Trades.Where(x => DateTime.Now.CompareTo(x.TradeEnd) >= 0 && x.LastRateUserId == user.Id);
 
             return Mapper.Map<IEnumerable<Trade>, List<TradeDTO>>(list);
         }

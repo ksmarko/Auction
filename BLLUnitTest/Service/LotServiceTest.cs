@@ -57,8 +57,7 @@ namespace BLLUnitTest.Service
             var lot = new LotDTO { Name = It.IsAny<string>(), Price = It.IsAny<double>(), TradeDuration = It.IsAny<int>(), User =null };
             uow.Setup(x => x.Users.Get(It.IsAny<string>())).Returns<User>(null);
 
-            var ex = Assert.Throws<AuctionException>(() => lotService.CreateLot(lot));
-            Assert.AreEqual(ex.Message, "Lot must have owner");
+            Assert.Throws<ArgumentNullException>(() => lotService.CreateLot(lot));            
         }
 
         [Test]
