@@ -231,7 +231,7 @@ function GetUserRole() {
                 text += "<li><a href='users.html'> Управление пользователями</a ></li><li style='list-style: none; display: inline'><div class='arrow'></div></li>";
             }
             if (data == "moderator" || data == "admin") {
-                text += "<li><a href='#'> Управление лотами</a></li><li style='list-style: none; display: inline'><div class='arrow'></div></li>";
+                text += "<li><a href='lotsmanagement.html'> Управление лотами</a></li><li style='list-style: none; display: inline'><div class='arrow'></div></li>";
             }
 
             text += "<li><a href='purchase.html'> Мой кабинет</a></li><li style='list-style: none; display: inline'><div class='arrow'></div></li>";
@@ -318,6 +318,67 @@ function GetRoles() {
             });
 
             $(".user-role").html(text);
+        },
+        fail: function (data) {
+            alert(data);
+        }
+    });
+}
+
+function GetNonverifiedLots() {
+    var tokenKey = "tokenInfo";
+
+    $.ajax({
+        type: 'GET',
+        url: "http://localhost:49351/api/lots",
+        contentType: 'application/json; charset=utf-8',
+        beforeSend: function (xhr) {
+            var token = sessionStorage.getItem(tokenKey);
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        },
+        success: function (data) {
+            var text = "";
+
+            $.each(data, function (key, item) {
+                if (!$(item)[0].IsVerified) {
+                    text = AddLotFullContent(text, $(item)[0].Id, $(item)[0].Name, $(item)[0].Price, $(item)[0].Description, $(item)[0].Category);
+                }
+            });
+
+            $("#content-lots-mng").html(text);
+        },
+        fail: function (data) {
+            alert(data);
+        }
+    });
+}
+
+function AddLotFullContent(text, id, name, price, description, category) {
+    text += "<div class='search_lot' style='background: transparent url(" + "img/nophoto.png" + "); background-repeat: no-repeat; margin-left: 30px'>" +
+        "<div class='search_lot_title' style=''><a href='#' title=" + name + ">" + name + "<\/a><\/div>" +
+        "<div class='search_lot_price'><b>" + price + "<\/b>грн.<\/div>" +
+        "<div style='margin-left: 215px; margin-top: 50px;'>" + 'Category: ' + category + "<\/b><\/div>" +
+        "<div style='margin-left: 215px; margin-top: 20px; width: 700px;'>" + description + "<\/b><\/div>" +
+        "<input onclick='VerifyLot(" + id + ")' style='margin-left: 1000px; margin-top: 20px;' class='green_button' type='submit' value='Verify'>" + 
+        "<\/div><br/><hr><br/>";
+
+    return text;
+}
+
+function VerifyLot(id) {
+    var tokenKey = "tokenInfo";
+
+    $.ajax({
+        type: 'PUT',
+        url: "http://localhost:49351/api/lots/" + id + "/verify",
+        contentType: 'application/json; charset=utf-8',
+        beforeSend: function (xhr) {
+            var token = sessionStorage.getItem(tokenKey);
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        },
+        success: function (data) {
+            alert(data);
+            GetNonverifiedLots();
         },
         fail: function (data) {
             alert(data);
