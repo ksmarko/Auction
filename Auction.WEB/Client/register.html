@@ -4,7 +4,7 @@
     <meta content="width=device-width" name="viewport">
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
     <meta charset="utf-8">
-    <title>Регистрация</title>
+    <title>Sign In</title>
     <link href="favicon.ico" rel="icon">
     <link href="css/style.css" media="screen" rel="stylesheet" title="" type="text/css">
     <link href="css/portable_style.css" media="screen" rel="stylesheet" title="" type="text/css">
@@ -18,13 +18,13 @@
             <div class="menu fullsize">
                 <ul>
                     <li>
-                        <a href="login.html">Войти</a>
+                        <a href="login.html">Log In</a>
                     </li>
                     <li style="list-style: none; display: inline">
                         <div class="arrow"></div>
                     </li>
                     <li>
-                        <a href="register.html">Регистрация</a>
+                        <a href="register.html">Sign In</a>
                     </li>
                 </ul>
             </div>
@@ -33,13 +33,13 @@
     <div class="ddmenu" id="ddm">
         <ul>
             <li>
-                <a href="login.html">Войти</a>
+                <a href="login.html">Log In</a>
             </li>
             <li style="list-style: none; display: inline">
                 <div class="arrow"></div>
             </li>
             <li>
-                <a href="register.html">Регистрация</a>
+                <a href="register.html">Sign In</a>
             </li>
             <li style="list-style: none; display: inline">
                 <hr style="margin-top:10px;margin-bottom:10px;border:0; border-top: #FFF dashed 1px;">
@@ -55,35 +55,32 @@
         <div class="bodywrapper">
             <br>
             <div class="departments" id="categories">
-                <h2 style="text-shadow: 1px 1px 1px Firebrick">Регистрация</h2>
+                <h2 style="text-shadow: 1px 1px 1px Firebrick">Sign In</h2>
             </div>
             <div id="fullsize_description">
                 <form enctype="multipart/form-data" id="aform" method="post" name="mylot">
-                    <b>Укажите Email:</b><br>
+                    <b>Email:</b><br>
                     <br>
                     <input id="user_email" name="email" onchange="check_email()" required="" style="width:75%;max-width:450px;" type="text" value=""><br>
                     <div id='ech_error' style="color:red;font-weight:600;display:none">
-                        Неправильный адрес email
+                        Invalid email
                     </div><br>
-                    <b>Придумайте пароль:</b><br>
+                    <b>Password:</b><br>
                     <br>
-                    <input class="pass" id="pass" name="pass" onchange="check_pass()" required="" style="width:75%;max-width:450px;margin-left: 50px;" type="password" value=""> <a href="#?" onclick="showPass()" style="position:relative;right:60px;color:gray;"><small>показать</small></a>
-                    <div id='pchv_error' style="color:red;font-weight:600;display:none">
-                        Придумайте другой пароль, введенный пароль слишком прост и ненадежен. Также убедитесь, что пароль не содержит логин или email
-                    </div>
+                    <input class="pass" id="pass" name="pass" onchange="check_pass()" required="" style="width:75%;max-width:450px;margin-left: 50px;" type="password" value=""> <a href="#?" onclick="showPass()" style="position:relative;right:60px;color:gray;"><small>show</small></a>
                     <div id='pch_error' style="color:red;font-weight:600;display:none">
-                        Пароль должен иметь длину от 6 символов и состоять из букв и цифр
+                        Password must be at least 6 letters and contains digits and latin symbols
                     </div><br>
                     <br>
-                    <b>Повторите пароль:</b><br>
+                    <b>Confirm password:</b><br>
                     <br>
-                    <input class="pass" id='pass2' name="pass2" onchange="check_pass2()" required="" style="width:75%;max-width:450px;margin-left: 50px;" type="password" value=""> <a href="#?" onclick="showPass()" style="position:relative;right:60px;color:gray;"><small>показать</small></a><br>
+                    <input class="pass" id='pass2' name="pass2" onchange="check_pass2()" required="" style="width:75%;max-width:450px;margin-left: 50px;" type="password" value=""> <a href="#?" onclick="showPass()" style="position:relative;right:60px;color:gray;"><small>show</small></a><br>
                     <div id='ppch_error' style="color:red;font-weight:600;display:none">
-                        Введенные пароли не совпадают
+                        Passwords are different
                     </div><br>
                     <br>
                     <div id="noauth">
-                        <input class="green_button" id="submit" style="width:180px" type="submit" value="Отправить"><br>
+                        <input class="green_button" id="submit" style="width:180px" type="submit" value="Sign In"><br>
                     </div><br>
                 </form>
             </div>
@@ -108,7 +105,7 @@
                     data: JSON.stringify(data)
                 }).success(function (data) {
 
-                    alert("Регистрация пройдена");
+                    alert("Success");
                     location.href = 'login.html';
 
                     }).fail(function (data) {

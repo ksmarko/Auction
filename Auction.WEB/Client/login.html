@@ -4,7 +4,7 @@
     <meta content="width=device-width" name="viewport">
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
     <meta charset="utf-8">
-    <title>Авторизация</title>
+    <title>Log In</title>
     <link href="favicon.ico" rel="icon">
     <link href="css/style.css" media="screen" rel="stylesheet" title="" type="text/css">
     <link href="css/portable_style.css" media="screen" rel="stylesheet" title="" type="text/css">
@@ -18,13 +18,13 @@
             <div class="menu fullsize">
                 <ul>
                     <li>
-                        <a href="login.html">Войти</a>
+                        <a href="login.html">Log In</a>
                     </li>
                     <li style="list-style: none; display: inline">
                         <div class="arrow"></div>
                     </li>
                     <li>
-                        <a href="register.html">Регистрация</a>
+                        <a href="register.html">Sign In</a>
                     </li>
                 </ul>
             </div>
@@ -33,13 +33,13 @@
     <div class="ddmenu" id="ddm">
         <ul>
             <li>
-                <a href="login.html">Войти</a>
+                <a href="login.html">Log In</a>
             </li>
             <li style="list-style: none; display: inline">
                 <div class="arrow"></div>
             </li>
             <li>
-                <a href="register.html">Регистрация</a>
+                <a href="register.html">Sign In</a>
             </li>
             <li style="list-style: none; display: inline">
                 <hr style="margin-top:10px;margin-bottom:10px;border:0; border-top: #FFF dashed 1px;">
@@ -54,19 +54,19 @@
             <div class="bodywrapper">
                <br>
                 <div class="departments" id="categories">
-                    <h2>Авторизация</h2>
+                    <h2>Login</h2>
                 </div>
                 <div id="fullsize_description">
                     <b>
                         <font color="gray">
-                            Если вы еще не зарегистрированы воспользуйтесь <a href="register.html">страницей регистрации</a><br>
+                            Do not have an account?<a href="register.html">Sign In</a><br>
                             <br>
                         </font>
                     </b>
                     <form enctype="multipart/form-data" id="aform" method="post" name="mylot">
                         <b>
                             <font color="gray">
-                                <span>Логин:</span><br>
+                                <span>Email:</span><br>
                                 <br>
                                 <input id="emailLogin" name="user_login" size="60" style="width:75%;max-width:450px;" type="text" value=""><br>
                                 <br>
@@ -75,14 +75,14 @@
                         <div id="pass" style="">
                             <b>
                                 <font color="gray">
-                                    <span>Пароль:</span><br>
+                                    <span>Password:</span><br>
                                     <br>
-                                    <input class="pass" id="passwordLogin" name="user_password" style="width:75%;max-width:450px;margin-right: -54px;" type="password" value=""><a href="#" onclick="showPass()" style="position:relative;right: 18px;color:gray;"><small>показать</small></a><br>
+                                    <input class="pass" id="passwordLogin" name="user_password" style="width:75%;max-width:450px;margin-right: -54px;" type="password" value=""><a href="#" onclick="showPass()" style="position:relative;right: 18px;color:gray;"><small>show</small></a><br>
                                     <br>
                                 </font>
                             </b>
                         </div>
-                        <input id="submitLogin" class="green_button" name="addlot" style="width:180px" type="submit" value="Отправить"><br>
+                        <input id="submitLogin" class="green_button" name="addlot" style="width:180px" type="submit" value="Log In"><br>
                         <b><br></b>
                     </form>
                 </div>
@@ -110,7 +110,7 @@
                     sessionStorage.setItem(tokenKey, data.access_token);
                     console.log(data.access_token);
                 }).fail(function (data) {
-                    alert('При логине возникла ошибка');
+                    alert('Error');
                 });
             });
         })

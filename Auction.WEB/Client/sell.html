@@ -4,7 +4,7 @@
     <meta content="width=device-width" name="viewport">
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
     <meta charset="utf-8">
-    <title>Мои продажи</title>
+    <title>My sellings</title>
     <link href="favicon.ico" rel="icon">
     <link href="css/style.css" media="screen" rel="stylesheet" title="" type="text/css">
     <link href="css/portable_style.css" media="screen" rel="stylesheet" title="" type="text/css">
@@ -19,13 +19,13 @@
             <div class="menu fullsize">
                 <ul>
                     <li>
-                        <a href="purchase.html">Мой кабинет</a>
+                        <a href="purchase.html">My profile</a>
                     </li>
                     <li style="list-style: none; display: inline">
                         <div class="arrow"></div>
                     </li>
                     <li>
-                        <a onclick='Logout()' href="index.html">Выход</a>
+                        <a onclick='Logout()' href="index.html">Log Out</a>
                     </li>
                 </ul>
             </div>
@@ -34,13 +34,13 @@
     <div class="ddmenu" id="ddm">
         <ul>
             <li>
-                <a href="purchase.html">Мой кабине</a>
+                <a href="purchase.html">My profile</a>
             </li>
             <li style="list-style: none; display: inline">
                 <div class="arrow"></div>
             </li>
             <li>
-                <a href="index.html">Выход</a>
+                <a href="index.html">Log Out</a>
             </li>
             <li style="list-style: none; display: inline">
                 <hr style="margin-top:10px;margin-bottom:10px;border:0; border-top: #FFF dashed 1px;">
@@ -51,28 +51,25 @@
         <a href="index.html">
             <div class="skylogo"></div>
         </a>
-        <div class="search_form">
-            <input class="top_search" id="search-lots" name="search" placeholder="Что будем искать?" type="text" value=""> <input onclick="SearchLots()" type="submit">
-        </div>
         <div class="departments" id="categories">
-            <h2>Выставление лота</h2>
+            <h2>Add lot</h2>
         </div>
         <div id="description">
             <br>
-                <input name="s" type="hidden" value=""> Название лота:<br style="line-height:27px;">
+                <input name="s" type="hidden" value=""> Name:<br style="line-height:27px;">
                 <input maxlength="128" id="lot-name" name="name" style="width:800px;" type="text" value=""><br>
                 <br>
                 <br>
-                Категория:<br>
+                Category:<br>
                 <select id="cat0" name="cat0" size="11" style="width: 300px"></select>
                 <br>
                 <br>
-                Цена:<br style="line-height:27px;">
-                <input id="lot-price" name="price" style="width:80px;" type="text" value=""> &nbsp;<font color="gray">грн.</font><br>
+                Price:<br style="line-height:27px;">
+                <input id="lot-price" name="price" style="width:80px;" type="text" value=""> &nbsp;<font color="gray">uan</font><br>
                 <br>
                 <br>
-                Длительность торгов:<br style="line-height:27px;">
-                <input id="trade-duration" name="duration" style="width:80px;" type="text" value=""> &nbsp;<font color="gray">дн.</font><br>
+                Trade duration:<br style="line-height:27px;">
+                <input id="trade-duration" name="duration" style="width:80px;" type="text" value=""> &nbsp;<font color="gray">days</font><br>
                 <br>
                 <br>
                 <!--Фотографии:<br style="line-height:27px;">
@@ -87,10 +84,10 @@
         </div>
         <ul id="sortable" style="padding-top:50px;"></ul>
     </div>-->
-                Описание лота<br>
+                Description<br>
                 <textarea class="tinymce" id="lot-descr" name="elm1" style="width:1160px; max-width: 1160px; height:450px;border:1px solid #d0d0d0;background-color:#fcfcfc;border-radius:4px;padding: 5px;"></textarea><br>
                 <br>
-                <input onclick="AddLot()" class="green_button" name="preview" type="submit" value="Выставить лот"><br>
+                <input onclick="AddLot()" class="green_button" name="preview" type="submit" value="Create"><br>
                 <br>
         </div>
         <br>

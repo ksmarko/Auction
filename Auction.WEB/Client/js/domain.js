@@ -1,26 +1,26 @@
 ﻿function GetActiveTrades() {
     SendRequest("http://localhost:49351/api/profile/trades/active");
-    $('#content-header').text("Действующие");
+    $('#content-header').text("Active");
 }
 
 function GetWinLots() {
     SendRequest("http://localhost:49351/api/profile/trades/win");
-    $('#content-header').text("Выиграшные");
+    $('#content-header').text("Acquired");
 }
 
 function GetLoseLots() {
     SendRequest("http://localhost:49351/api/profile/trades/lose");
-    $('#content-header').text("Завершенные");
+    $('#content-header').text("Closed");
 }
 
 function GetActiveLots() {
     SendRequest("http://localhost:49351/api/profile/lots/active");
-    $('#content-header').text("В продаже");
+    $('#content-header').text("On sale");
 }
 
 function GetMyLots() {
     SendRequest("http://localhost:49351/api/profile/lots");
-    $('#content-header').text("Мои лоты");
+    $('#content-header').text("My lots");
 }
 
 function SendRequest(url) {
@@ -114,9 +114,8 @@ function SearchLots() {
 function AddLotContent(text, id, name, price) {
     text += "<div class='search_lot' style='background: transparent url(" + "img/nophoto.png" + "); background-repeat: no-repeat; margin-left: 30px'>" +
         "<div class='search_lot_title' style='' onclick='GetLot(" + id + ")'><a href='#' title=" + name + ">" + name + "<\/a><\/div>" +
-        "<div class='search_lot_timetoend'><span><strong><\/strong><span class='toend'>До окончания: <\/span><strong>4 дн.<\/strong><\/span><\/div>" +
-        "<div class='search_lot_price'><b>" + price + "<\/b>грн.<\/div>" +
-        "<div class='search_lot_buynow'>купить сейчас<\/div>"/* + "<button onclick='RemoveLot(" + id + ")'>Remove</button>"*/ + "<\/div ><br/><hr><br/>";
+        "<div class='search_lot_price'><b>" + price + "<\/b>uan<\/div>"
+        /*"<div class='search_lot_buynow'>Buy now<\/div>" + "<button onclick='RemoveLot(" + id + ")'>Remove</button>"*/ + "<\/div ><br/><hr><br/>";
 
     return text;
 }
@@ -124,8 +123,8 @@ function AddLotContent(text, id, name, price) {
 function AddTradeContent(text, id, name, price, days) {
     text += "<div class='search_lot' style='background: transparent url(" + "img/nophoto.png" + "); background-repeat: no-repeat; margin-left: 30px'>" +
         "<div class='search_lot_title' style='' onclick='GetLot(" + id + ")'><a href='#' title=" + name + ">" + name + "<\/a><\/div>" +
-        "<div class='search_lot_timetoend'><span><strong><\/strong><span class='toend'>До окончания: <\/span><strong>" + days + " дн.<\/strong><\/span><\/div>" +
-        "<div class='search_lot_price'><b>" + price + "<\/b> грн.<\/div>" +
+        "<div class='search_lot_timetoend'><span><strong><\/strong><span class='toend'>Days left: <\/span><strong>" + days + "<\/strong><\/span><\/div>" +
+        "<div class='search_lot_price'><b>" + price + "<\/b> uan<\/div>" +
         "<\/div ><br/><hr><br/>";
 
     return text;
@@ -238,14 +237,14 @@ function GetUserRole() {
             var text = "<ul>";
 
             if (data == "admin") {
-                text += "<li><a href='users.html'> Управление пользователями</a ></li><li style='list-style: none; display: inline'><div class='arrow'></div></li>";
+                text += "<li><a href='users.html'> Users management</a ></li><li style='list-style: none; display: inline'><div class='arrow'></div></li>";
             }
             if (data == "moderator" || data == "admin") {
-                text += "<li><a href='lotsmanagement.html'> Управление лотами</a></li><li style='list-style: none; display: inline'><div class='arrow'></div></li>";
+                text += "<li><a href='lotsmanagement.html'> Lots management</a></li><li style='list-style: none; display: inline'><div class='arrow'></div></li>";
             }
 
-            text += "<li><a href='purchase.html'> Мой кабинет</a></li><li style='list-style: none; display: inline'><div class='arrow'></div></li>";
-            text += "<li><a onclick='Logout()' href='login.html'> Выход</a></li></ul>";
+            text += "<li><a href='purchase.html'> My profile</a></li><li style='list-style: none; display: inline'><div class='arrow'></div></li>";
+            text += "<li><a onclick='Logout()' href='login.html'> Log Out</a></li></ul>";
 
             $("#menu-btns").html(text);
         },
@@ -414,13 +413,13 @@ function Authorize() {
     var text = "<ul>";
     if (sessionStorage.getItem("tokenInfo")) {
 
-        text += "<li><a href='purchase.html'> Мой кабинет</a></li><li style='list-style: none; display: inline'><div class='arrow'></div></li>";
-        text += "<li><a onclick='Logout()' href='index.html'> Выход</a></li></ul>";
+        text += "<li><a href='purchase.html'> My profile</a></li><li style='list-style: none; display: inline'><div class='arrow'></div></li>";
+        text += "<li><a onclick='Logout()' href='index.html'> Log Out</a></li></ul>";
 
     }
     else {
-        text += "<li><a href='login.html'> Войти</a></li><li style='list-style: none; display: inline'><div class='arrow'></div></li>";
-        text += "<li><a href='register.html'> Регистрация</a></li></ul>";
+        text += "<li><a href='login.html'> Log In</a></li><li style='list-style: none; display: inline'><div class='arrow'></div></li>";
+        text += "<li><a href='register.html'> Sign In</a></li></ul>";
     }
     $("#menu-btns-main").html(text);
 }
