@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -7,7 +8,10 @@ namespace WebApi.Models
 {
     public class EditRoleModel
     {
+        [Required]
         public string UserId { get; set; }
+
+        [Required]
         public string Role { get; set; }
     }
 }

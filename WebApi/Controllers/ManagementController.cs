@@ -1,17 +1,13 @@
 ﻿using AutoMapper;
 using BLL.DTO;
 using BLL.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Http;
 using WebApi.Models;
 
 namespace WebApi.Controllers
 {
-    [Authorize(Roles = "admin")]
     public class ManagementController : ApiController
     {
         readonly IUserManager userManager;
@@ -29,6 +25,7 @@ namespace WebApi.Controllers
 
         [HttpGet]
         [Route("api/users")]
+        [Authorize(Roles = "admin")]
         public IEnumerable<UserModel> Users()
         {
             var users = Mapper.Map<IEnumerable<UserDTO>, IEnumerable<UserModel>>(userManager.GetUsers());
@@ -38,6 +35,7 @@ namespace WebApi.Controllers
 
         [HttpGet]
         [Route("api/roles")]
+        [Authorize(Roles = "admin")]
         public IEnumerable<string> GetRoles()
         {
             return userManager.GetRoles();
@@ -45,15 +43,24 @@ namespace WebApi.Controllers
 
         [HttpPost]
         [Route("api/users/edit")]
-        public async Task EditRoles(EditRoleModel model)
+        [Authorize(Roles = "admin")]
+        public async Task<IHttpActionResult> EditRoles(EditRoleModel model)
         {
+            if (!ModelState.IsValid)
+                return BadRequest("Invalid data");
+
             await userManager.EditRole(model.UserId, model.Role);
+            return Ok("Role edited");
         }
 
         [HttpPost]
         [Route("api/categories/create")]
+        [Authorize(Roles = "admin, moderator")]
         public IHttpActionResult AddCategory(CategoryModel model)
         {
+            if (!ModelState.IsValid)
+                return BadRequest("Invalid data");
+
             var category = Mapper.Map<CategoryModel, CategoryDTO>(model);
             categoryService.CreateCategory(category);
 
@@ -62,15 +69,19 @@ namespace WebApi.Controllers
 
         [HttpPost]
         [Route("api/categories/edit")]
+        [Authorize(Roles = "admin, moderator")]
         public IHttpActionResult EditCategory(CategoryModel model)
         {
-            categoryService.EditCategory(Mapper.Map<CategoryModel, CategoryDTO>(model));
+            if (!ModelState.IsValid)
+                return BadRequest("Invalid data");
 
+            categoryService.EditCategory(Mapper.Map<CategoryModel, CategoryDTO>(model));
             return Ok("Category edited");
         }
 
         [HttpDelete]
         [Route("api/categories/{id}")]
+        [Authorize(Roles = "admin, moderator")]
         public IHttpActionResult DeleteCategory(int id)
         {
             var category = categoryService.GetCategory(id);

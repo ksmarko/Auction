@@ -1,14 +1,9 @@
 ﻿using BLL.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using WebApi.Models;
 using System.Web.Http;
 using AutoMapper;
 using BLL.DTO;
-using System.IO;
 
 namespace WebApi.Controllers
 {
@@ -30,6 +25,9 @@ namespace WebApi.Controllers
         [Route("api/lots/create")]
         public IHttpActionResult AddLot(LotModel model)
         {
+            if (!ModelState.IsValid)
+                return BadRequest("Invalid data");
+
             var user = userManager.GetUserByName(User.Identity.Name);
             var lot = Mapper.Map<LotModel, LotDTO>(model);
 
@@ -45,6 +43,9 @@ namespace WebApi.Controllers
         [Route("api/lots/edit")]
         public IHttpActionResult EditLot(LotModel model)
         {
+            if (!ModelState.IsValid)
+                return BadRequest("Invalid data");
+
             lotService.EditLot(Mapper.Map<LotModel, LotDTO>(model));
             var lot = lotService.GetLot(model.Id);
 
@@ -94,8 +95,10 @@ namespace WebApi.Controllers
         [Route("api/lots/change")]
         public IHttpActionResult ChangeCategory(ChangeCategoryModel model)
         {
-            lotService.ChangeLotCategory(model.LotId, model.CategoryId);
+            if (!ModelState.IsValid)
+                return BadRequest();
 
+            lotService.ChangeLotCategory(model.LotId, model.CategoryId);
             return Ok("Category changed");
         }
     }

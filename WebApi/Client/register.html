@@ -111,9 +111,8 @@
                     alert("Регистрация пройдена");
                     location.href = 'login.html';
 
-                }).fail(function (data) {
-
-                    alert("В процесе регистрации возникла ошибка" + data.val());
+                    }).fail(function (data) {
+                        alert($(data)[0].responseJSON.Message);
                 });
             });
         })

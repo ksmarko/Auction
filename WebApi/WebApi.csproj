@@ -214,7 +214,6 @@
     <Compile Include="App_Start\AutoMapperConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
@@ -258,7 +257,6 @@
     </Compile>
     <Compile Include="Models\RateModel.cs" />
     <Compile Include="Models\RegisterBindingModel.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Models\ChangeCategoryModel.cs" />
     <Compile Include="Models\EditRoleModel.cs" />
