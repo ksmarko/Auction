@@ -9,10 +9,20 @@ using BLL.Exceptions;
 
 namespace BLL.Services
 {
+    /// <summary>
+    /// Service for work with lots
+    /// </summary>
     public class LotService : ILotService
     {
+        /// <summary>
+        /// Represents domain database
+        /// </summary>
         IUnitOfWork Database { get; set; }
 
+        /// <summary>
+        /// Creates service
+        /// </summary>
+        /// <param name="uow">UnitOfWork</param>
         public LotService(IUnitOfWork uow)
         {
             Database = uow;
@@ -23,6 +33,12 @@ namespace BLL.Services
             Database.Dispose();
         }
 
+        /// <summary>
+        /// Change lot name or/and descripyion, imeg, trade duration
+        /// </summary>
+        /// <param name="entity">Category with new data</param>
+        /// <exception cref="ArgumentNullException">When lot not found</exception>
+        /// <exception cref="AuctionException">When trade start</exception>
         public void EditLot(LotDTO entity)
         {
             if(entity == null)
@@ -45,6 +61,11 @@ namespace BLL.Services
             Database.Save();
         }
 
+        /// <summary>
+        /// Create lot
+        /// </summary>
+        /// <param name="entity">New lot</param>
+        /// <exception cref="ArgumentNullException">When input entity is null or lot have now owner(user)</exception>
         public void CreateLot(LotDTO entity)
         {
             if (entity == null || entity.User == null)
@@ -65,6 +86,11 @@ namespace BLL.Services
             Database.Save();
         }
 
+        /// <summary>
+        /// Remove lot
+        /// </summary>
+        /// <param name="id">Lot Id</param>
+        /// <exception cref="ArgumentNullException">If lot not found</exception>
         public void RemoveLot(int id)
         {
             Lot lot = Database.Lots.Get(id);
@@ -76,6 +102,12 @@ namespace BLL.Services
             Database.Save();
         }
 
+        /// <summary>
+        /// Change lot category
+        /// </summary>
+        /// <param name="lotId">Lot Id</param>
+        /// <param name="categoryId">Category Id</param>
+        /// <exception cref="ArgumentNullException">When lot or/and category not found</exception>
         public void ChangeLotCategory(int lotId, int categoryId)
         {
             Lot lot = Database.Lots.Get(lotId);
@@ -90,21 +122,39 @@ namespace BLL.Services
             Database.Save();
         }
 
+        /// <summary>
+        /// Get lots list
+        /// </summary>
+        /// <returns>Returns list of lots</returns>
         public IEnumerable<LotDTO> GetAllLots()
         {
             return Mapper.Map<IEnumerable<Lot>, IEnumerable<LotDTO>>(Database.Lots.GetAll());
         }
-
+        
+        /// <summary>
+        /// Get lots from category
+        /// </summary>
+        /// <param name="categoryId">Category Id</param>
+        /// <returns>Return list of lots in category</returns>
         public IEnumerable<LotDTO> GetLotsForCategory(int categoryId)
         {
             return Mapper.Map<IEnumerable<Lot>, IEnumerable<LotDTO>>(Database.Lots.Find(x => x.CategoryId == categoryId));
         }
 
+        /// <summary>
+        /// Get lot
+        /// </summary>
+        /// <param name="id">Lot Id</param>
         public LotDTO GetLot(int id)
         {
             return Mapper.Map<Lot, LotDTO>(Database.Lots.Get(id));
         }
 
+        /// <summary>
+        /// Varify lot
+        /// </summary>
+        /// <param name="id">Lot Id</param>
+        /// <exception cref="ArgumentNullException">When lot not found</exception>
         public void VerifyLot(int id)
         {
             Lot lot = Database.Lots.Get(id);
