@@ -230,7 +230,7 @@ function GetUserRole() {
             if (data == "admin") {
                 text += "<li><a href='users.html'> Управление пользователями</a ></li><li style='list-style: none; display: inline'><div class='arrow'></div></li>";
             }
-            if (data == "manager" || data == "admin") {
+            if (data == "moderator" || data == "admin") {
                 text += "<li><a href='#'> Управление лотами</a></li><li style='list-style: none; display: inline'><div class='arrow'></div></li>";
             }
 
