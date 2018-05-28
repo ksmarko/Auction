@@ -10,10 +10,20 @@ using System.Linq;
 
 namespace BLL.Services
 {
+    /// <summary>
+    /// Service for work with trades
+    /// </summary>
     public class TradeService : ITradeService
     {
+        /// <summary>
+        /// Represents domain database
+        /// </summary>
         IUnitOfWork Database { get; set; }
 
+        /// <summary>
+        /// Creates service
+        /// </summary>
+        /// <param name="uow">UnitOfWork</param>
         public TradeService(IUnitOfWork uow)
         {
             Database = uow;
@@ -24,6 +34,12 @@ namespace BLL.Services
             Database.Dispose();
         }
 
+        /// <summary>
+        /// Starts trade
+        /// </summary>
+        /// <param name="lotId">Lot Id</param>
+        /// <exception cref="ArgumentNullException">When lot not found</exception>
+        /// <exception cref="AuctionException">When trade with this lot has alredy began or lot is not verified</exception>
         public void StartTrade(int lotId)
         {
             Lot lot = Database.Lots.Get(lotId);
@@ -47,6 +63,14 @@ namespace BLL.Services
             Database.Save();
         }
 
+        /// <summary>
+        /// Rates for lot
+        /// </summary>
+        /// <param name="tradeId">Trade Id</param>
+        /// <param name="userId">New User Id</param>
+        /// <param name="price">New Price</param>
+        /// <exception cref="ArgumentNullException">When trade not found</exception>
+        /// <exception cref="AuctionException">When owner try to rate his lot, when trade is over or when new price is smaller then previous</exception>
         public void Rate(int tradeId, string userId, double price)
         {
             Trade trade = Database.Trades.Get(tradeId);
@@ -81,22 +105,40 @@ namespace BLL.Services
             Database.Trades.Update(trade);
             Database.Save();
         }
-
+        
+        /// <summary>
+        /// Gets all trades
+        /// </summary>
+        /// <returns>Returns list of trades</returns>
         public IEnumerable<TradeDTO> GetAllTrades()
         {
             return Mapper.Map<IEnumerable<Trade>, List<TradeDTO>>(Database.Trades.GetAll());
         }
 
+        /// <summary>
+        /// Gets trade by Id
+        /// </summary>
+        /// <param name="id">Trade Id</param>
+        /// <returns></returns>
         public TradeDTO GetTrade(int id)
         {
             return Mapper.Map<Trade, TradeDTO>(Database.Trades.Get(id));
         }
 
+        /// <summary>
+        /// Gets trade by lot
+        /// </summary>
+        /// <param name="id">Lot Id</param>
         public TradeDTO GetTradeByLot(int id)
         {
             return Mapper.Map<Trade, TradeDTO>(Database.Trades.Find(x => x.LotId == id).FirstOrDefault());
         }
 
+        /// <summary>
+        /// Gets all trades that user has lose
+        /// </summary>
+        /// <param name="userId">User Id</param>
+        /// <returns>Returns list of trades</returns>
         public IEnumerable<TradeDTO> GetUserLoseTrades(string userId)
         {
             var user = Database.Users.Get(userId);
@@ -109,6 +151,11 @@ namespace BLL.Services
             return Mapper.Map<IEnumerable<Trade>, List<TradeDTO>>(list);
         }
 
+        /// <summary>
+        /// Gets all trades that user has won
+        /// </summary>
+        /// <param name="userId">User Id</param>
+        /// <returns>Returns list of trades</returns>
         public IEnumerable<TradeDTO> GetUserWinTrades(string userId)
         {
             var user = Database.Users.Get(userId);
