@@ -112,7 +112,7 @@ function SearchLots() {
 }
 
 function AddLotContent(text, id, name, price) {
-    text += "<div class='search_lot' style='background: transparent url(" + "img/nophoto.png" + "); background-repeat: no-repeat'>" +
+    text += "<div class='search_lot' style='background: transparent url(" + "img/nophoto.png" + "); background-repeat: no-repeat; margin-left: 30px'>" +
         "<div class='search_lot_title' style='' onclick='GetLot(" + id + ")'><a href='#' title=" + name + ">" + name + "<\/a><\/div>" +
         "<div class='search_lot_timetoend'><span><strong><\/strong><span class='toend'>До окончания: <\/span><strong>4 дн.<\/strong><\/span><\/div>" +
         "<div class='search_lot_price'><b>" + price + "<\/b>грн.<\/div>" +
@@ -228,7 +228,7 @@ function GetUserRole() {
             var text = "<ul>";
 
             if (data == "admin") {
-                text += "<li><a href='#'> Управление пользователями</a ></li><li style='list-style: none; display: inline'><div class='arrow'></div></li>";
+                text += "<li><a href='users.html'> Управление пользователями</a ></li><li style='list-style: none; display: inline'><div class='arrow'></div></li>";
             }
             if (data == "manager" || data == "admin") {
                 text += "<li><a href='#'> Управление лотами</a></li><li style='list-style: none; display: inline'><div class='arrow'></div></li>";
@@ -238,6 +238,86 @@ function GetUserRole() {
             text += "<li><a href='index.html'> Выход</a></li></ul>";
 
             $("#menu-btns").html(text);
+        },
+        fail: function (data) {
+            alert(data);
+        }
+    });
+}
+
+function FillUsers() {
+    var tokenKey = "tokenInfo";
+
+    $.ajax({
+        type: 'GET',
+        url: "http://localhost:49351/api/users",
+        contentType: 'application/json; charset=utf-8',
+        beforeSend: function (xhr) {
+            var token = sessionStorage.getItem(tokenKey);
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        },
+        success: function (data) {
+            var text = "<table class='table'><tr><th>E-mail</th><th>Role</th><th>Set role</th><th></th></tr>";
+
+            $.each(data, function (key, item) {
+                text += "<tr><td>" + $(item)[0].Name + "</td><td>" + $(item)[0].Role + "</td><form method=POST><td><select class='form-control user-role' id=" + $(item)[0].Id + ">";
+                text += "</select></td><td><button type='submit' onclick='EditRoles(" + '"' + $(item)[0].Id + '"' + ")' class='btn btn-success'>Save</button></td></form></tr>";
+            });
+
+            text += "</table>";
+            $("#content-users").html(text);
+            GetRoles();
+        },
+        fail: function (data) {
+            alert(data);
+        }
+    });
+}
+
+function EditRoles(id) {
+    var tokenKey = "tokenInfo";
+    var data = {
+        UserId: id,
+        Role: $("#" + id).val()
+    };
+
+    $.ajax({
+        type: 'POST',
+        url: "http://localhost:49351/api/users/edit",
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify(data),
+        beforeSend: function (xhr) {
+            var token = sessionStorage.getItem(tokenKey);
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        },
+        success: function (data) {
+            FillUsers();
+        },
+        fail: function (data) {
+            alert(data);
+        }
+    });
+}
+
+function GetRoles() {
+    var tokenKey = "tokenInfo";
+
+    $.ajax({
+        type: 'GET',
+        url: "http://localhost:49351/api/roles",
+        contentType: 'application/json; charset=utf-8',
+        beforeSend: function (xhr) {
+            var token = sessionStorage.getItem(tokenKey);
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        },
+        success: function (data) {
+            var text = "";
+
+            $.each(data, function (key, item) {
+                text += "<option>" + item + "</option>";
+            });
+
+            $(".user-role").html(text);
         },
         fail: function (data) {
             alert(data);
