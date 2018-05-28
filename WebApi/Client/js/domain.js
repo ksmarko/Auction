@@ -341,7 +341,7 @@ function GetNonverifiedLots() {
 
             $.each(data, function (key, item) {
                 if (!$(item)[0].IsVerified) {
-                    text = AddLotFullContent(text, $(item)[0].Id, $(item)[0].Name, $(item)[0].Price, $(item)[0].Description, $(item)[0].Category);
+                    text = AddLotFullContent(text, $(item)[0].Id, $(item)[0].Name, $(item)[0].Price, $(item)[0].Description, $(item)[0].Category, $(item)[0].Creator);
                 }
             });
 
@@ -353,13 +353,14 @@ function GetNonverifiedLots() {
     });
 }
 
-function AddLotFullContent(text, id, name, price, description, category) {
+function AddLotFullContent(text, id, name, price, description, category, user) {
     text += "<div class='search_lot' style='background: transparent url(" + "img/nophoto.png" + "); background-repeat: no-repeat; margin-left: 30px'>" +
         "<div class='search_lot_title' style=''><a href='#' title=" + name + ">" + name + "<\/a><\/div>" +
         "<div class='search_lot_price'><b>" + price + "<\/b>грн.<\/div>" +
         "<div style='margin-left: 215px; margin-top: 50px;'>" + 'Category: ' + category + "<\/b><\/div>" +
+        "<div style='margin-left: 215px; margin-top: 20px;'>" + 'Creator: ' + user.substring(0, user.indexOf("@")) + "<\/b><\/div>" +
         "<div style='margin-left: 215px; margin-top: 20px; width: 700px;'>" + description + "<\/b><\/div>" +
-        "<input onclick='VerifyLot(" + id + ")' style='margin-left: 1000px; margin-top: 20px;' class='green_button' type='submit' value='Verify'>" + 
+        "<input onclick='VerifyLot(" + id + ")' style='margin-left: 1000px; margin-top: 0px;' class='green_button' type='submit' value='Verify and start'>" + 
         "<\/div><br/><hr><br/>";
 
     return text;
