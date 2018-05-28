@@ -34,11 +34,11 @@ namespace BLL.Services
         }
 
         /// <summary>
-        /// Change lot name or/and descripyion, imeg, trade duration
+        /// Changes lot data
         /// </summary>
-        /// <param name="entity">Category with new data</param>
+        /// <param name="entity">Lot with new data</param>
         /// <exception cref="ArgumentNullException">When lot not found</exception>
-        /// <exception cref="AuctionException">When trade start</exception>
+        /// <exception cref="AuctionException">When trade started</exception>
         public void EditLot(LotDTO entity)
         {
             if(entity == null)
@@ -62,10 +62,10 @@ namespace BLL.Services
         }
 
         /// <summary>
-        /// Create lot
+        /// Creates lot
         /// </summary>
         /// <param name="entity">New lot</param>
-        /// <exception cref="ArgumentNullException">When input entity is null or lot have now owner(user)</exception>
+        /// <exception cref="ArgumentNullException">When input entity is null or lot haven't owner(user)</exception>
         public void CreateLot(LotDTO entity)
         {
             if (entity == null || entity.User == null)
@@ -87,10 +87,10 @@ namespace BLL.Services
         }
 
         /// <summary>
-        /// Remove lot
+        /// Removes lot
         /// </summary>
         /// <param name="id">Lot Id</param>
-        /// <exception cref="ArgumentNullException">If lot not found</exception>
+        /// <exception cref="ArgumentNullException">When lot not found</exception>
         public void RemoveLot(int id)
         {
             Lot lot = Database.Lots.Get(id);
@@ -103,7 +103,7 @@ namespace BLL.Services
         }
 
         /// <summary>
-        /// Change lot category
+        /// Changes lot category
         /// </summary>
         /// <param name="lotId">Lot Id</param>
         /// <param name="categoryId">Category Id</param>
@@ -123,7 +123,7 @@ namespace BLL.Services
         }
 
         /// <summary>
-        /// Get lots list
+        /// Gets lots list
         /// </summary>
         /// <returns>Returns list of lots</returns>
         public IEnumerable<LotDTO> GetAllLots()
@@ -132,17 +132,17 @@ namespace BLL.Services
         }
         
         /// <summary>
-        /// Get lots from category
+        /// Gets lots from category
         /// </summary>
         /// <param name="categoryId">Category Id</param>
-        /// <returns>Return list of lots in category</returns>
+        /// <returns>Returns list of lots in category</returns>
         public IEnumerable<LotDTO> GetLotsForCategory(int categoryId)
         {
             return Mapper.Map<IEnumerable<Lot>, IEnumerable<LotDTO>>(Database.Lots.Find(x => x.CategoryId == categoryId));
         }
 
         /// <summary>
-        /// Get lot
+        /// Gets lot by id
         /// </summary>
         /// <param name="id">Lot Id</param>
         public LotDTO GetLot(int id)
@@ -151,7 +151,7 @@ namespace BLL.Services
         }
 
         /// <summary>
-        /// Varify lot
+        /// Varifies lot
         /// </summary>
         /// <param name="id">Lot Id</param>
         /// <exception cref="ArgumentNullException">When lot not found</exception>

@@ -35,11 +35,11 @@ namespace BLL.Services
         }
 
         /// <summary>
-        /// Stert trade
+        /// Starts trade
         /// </summary>
         /// <param name="lotId">Lot Id</param>
         /// <exception cref="ArgumentNullException">When lot not found</exception>
-        /// <exception cref="AuctionException">When trde with this lot has alredy began or lot not verify</exception>
+        /// <exception cref="AuctionException">When trade with this lot has alredy began or lot is not verified</exception>
         public void StartTrade(int lotId)
         {
             Lot lot = Database.Lots.Get(lotId);
@@ -64,13 +64,13 @@ namespace BLL.Services
         }
 
         /// <summary>
-        /// Rate lot
+        /// Rates for lot
         /// </summary>
         /// <param name="tradeId">Trade Id</param>
         /// <param name="userId">New User Id</param>
         /// <param name="price">New Price</param>
-        /// <exception cref="ArgumentNullException">When trade nit found</exception>
-        /// <exception cref="AuctionException">When owner try to rate his lot or when trade is over or when new price smaller then old</exception>
+        /// <exception cref="ArgumentNullException">When trade not found</exception>
+        /// <exception cref="AuctionException">When owner try to rate his lot, when trade is over or when new price is smaller then previous</exception>
         public void Rate(int tradeId, string userId, double price)
         {
             Trade trade = Database.Trades.Get(tradeId);
@@ -107,16 +107,16 @@ namespace BLL.Services
         }
         
         /// <summary>
-        /// Get ol trade
+        /// Gets all trades
         /// </summary>
-        /// <returns>Return list of trades</returns>
+        /// <returns>Returns list of trades</returns>
         public IEnumerable<TradeDTO> GetAllTrades()
         {
             return Mapper.Map<IEnumerable<Trade>, List<TradeDTO>>(Database.Trades.GetAll());
         }
 
         /// <summary>
-        /// Get trade by Id
+        /// Gets trade by Id
         /// </summary>
         /// <param name="id">Trade Id</param>
         /// <returns></returns>
@@ -126,7 +126,7 @@ namespace BLL.Services
         }
 
         /// <summary>
-        /// Get trade by lot
+        /// Gets trade by lot
         /// </summary>
         /// <param name="id">Lot Id</param>
         public TradeDTO GetTradeByLot(int id)
@@ -135,10 +135,10 @@ namespace BLL.Services
         }
 
         /// <summary>
-        /// Get all trade that user has win
+        /// Gets all trades that user has lose
         /// </summary>
         /// <param name="userId">User Id</param>
-        /// <returns>List of trade</returns>
+        /// <returns>Returns list of trades</returns>
         public IEnumerable<TradeDTO> GetUserLoseTrades(string userId)
         {
             var user = Database.Users.Get(userId);
@@ -152,10 +152,10 @@ namespace BLL.Services
         }
 
         /// <summary>
-        /// Get all trade that user has lose
+        /// Gets all trades that user has won
         /// </summary>
         /// <param name="userId">User Id</param>
-        /// <returns>List of trade</returns>
+        /// <returns>Returns list of trades</returns>
         public IEnumerable<TradeDTO> GetUserWinTrades(string userId)
         {
             var user = Database.Users.Get(userId);

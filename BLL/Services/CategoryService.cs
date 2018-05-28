@@ -34,7 +34,7 @@ namespace BLL.Services
         }
 
         /// <summary>
-        /// Change category name
+        /// Changes category name
         /// </summary>
         /// <param name="entity">Category with new data</param>
         /// <exception cref="ArgumentNullException">When category not found</exception>
@@ -55,7 +55,7 @@ namespace BLL.Services
         }
 
         /// <summary>
-        /// Remove category all lots in category get default category
+        /// Removes category
         /// </summary>
         /// <param name="id">Category Id</param>
         /// <exception cref="AuctionException">When try to delete default category</exception>
@@ -78,10 +78,10 @@ namespace BLL.Services
         }
 
         /// <summary>
-        /// Creates new album
+        /// Creates new category
         /// </summary>
-        /// <param name="entity">Album</param>
-        /// <exception cref="ArgumentNullException">When input entity is null</exception>
+        /// <param name="entity">Category</param>
+        /// <exception cref="ArgumentNullException"></exception>
         public void CreateCategory(CategoryDTO entity)
         {
             if (entity == null)
@@ -92,9 +92,9 @@ namespace BLL.Services
         }
 
         /// <summary>
-        /// Get all categories
+        /// Gets all categories
         /// </summary>
-        /// <returns>Returns list of category</returns>
+        /// <returns>Returns list of categories</returns>
         public IEnumerable<CategoryDTO> GetAllCategories()
         {
             return Mapper.Map<IEnumerable<Category>, List<CategoryDTO>>(Database.Categories.GetAll());
