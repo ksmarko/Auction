@@ -17,12 +17,14 @@ namespace WebApi.Controllers
         readonly IUserManager userManager;
         readonly ICategoryService categoryService;
         readonly ITradeService tradeService;
+        readonly ILotService lotService;
 
-        public ManagementController(IUserManager userManager, ICategoryService categoryService, ITradeService tradeService)
+        public ManagementController(IUserManager userManager, ICategoryService categoryService, ITradeService tradeService, ILotService lotService)
         {
             this.userManager = userManager;
             this.categoryService = categoryService;
             this.tradeService = tradeService;
+            this.lotService = lotService;
         }
 
         [HttpGet]
@@ -75,6 +77,17 @@ namespace WebApi.Controllers
             categoryService.RemoveCategory(id);
 
             return Ok($"Category {category.Name} removed\nId = {category.Id}");
+        }
+
+        [HttpPut]
+        [Authorize(Roles = "admin, moderator")]
+        [Route("api/lots/{id}/verify")]
+        public IHttpActionResult VerifyLot(int id)
+        {
+            lotService.VerifyLot(id);
+            tradeService.StartTrade(id);
+
+            return Ok("Lot verified. Trade started");
         }
     }
 }

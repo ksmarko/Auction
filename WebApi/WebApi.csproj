@@ -303,6 +303,8 @@
     <Content Include="Client\js\ug-theme-carouseleccb.js" />
     <Content Include="Client\js\ug-theme-defaulteccb.js" />
     <Content Include="Client\js\unitegallery.js" />
+    <Content Include="Client\lotsmanagement.html" />
+    <Content Include="Client\users.html" />
     <Content Include="Client\login.html" />
     <Content Include="Client\lot.html" />
     <Content Include="Client\onsale.html" />

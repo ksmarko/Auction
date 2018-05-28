@@ -96,16 +96,6 @@ namespace WebApi.Controllers
             return Mapper.Map<IEnumerable<LotDTO>, IEnumerable<LotModel>>(lots);
         }
 
-        [HttpPut]
-        [Authorize(Roles="admin, moderator")]
-        [Route("api/lots/{id}/verify")]
-        public IHttpActionResult VerifyLot(int id)
-        {
-            lotService.VerifyLot(id);
-
-            return Ok("Lot verified");
-        }
-
         [HttpPost]
         [Authorize]
         [Route("api/lots/change")]
