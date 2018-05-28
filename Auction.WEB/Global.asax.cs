@@ -15,12 +15,7 @@ namespace Auction.WEB
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             GlobalConfiguration.Configuration.Formatters.XmlFormatter.SupportedMediaTypes.Add(new System.Net.Http.Headers.MediaTypeHeaderValue("multipart/form-data"));
-
-            Mapper.Initialize(cfg =>
-            {
-                BLL.Infrastructure.AutoMapperConfig.Configure(cfg);
-                AutoMapperConfig.Configure(cfg);
-            });
+            AutoMapperConfig.Initialize();
         }
     }
 }

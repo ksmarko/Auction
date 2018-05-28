@@ -20,5 +20,14 @@ namespace Auction.WEB.App_Start
             cfg.CreateMap<TradeDTO, TradeModel>()
                 .ForMember(dst => dst.DaysLeft, map => map.MapFrom(src => src.TradeEnd.Subtract(src.TradeStart).Days));
         }
+
+        public static void Initialize()
+        {
+            Mapper.Initialize(cfg =>
+            {
+                BLL.Infrastructure.AutoMapperConfig.Configure(cfg);
+                AutoMapperConfig.Configure(cfg);
+            });
+        }
     }
 }
