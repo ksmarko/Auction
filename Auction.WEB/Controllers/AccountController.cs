@@ -2,8 +2,8 @@
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
-using BLL.DTO;
-using BLL.Interfaces;
+using Auction.BLL.DTO;
+using Auction.BLL.Interfaces;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Auction.WEB.Models;

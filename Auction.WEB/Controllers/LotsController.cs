@@ -1,9 +1,9 @@
-﻿using BLL.Interfaces;
+﻿using Auction.BLL.Interfaces;
 using System.Collections.Generic;
 using Auction.WEB.Models;
 using System.Web.Http;
 using AutoMapper;
-using BLL.DTO;
+using Auction.BLL.DTO;
 
 namespace Auction.WEB.Controllers
 {
