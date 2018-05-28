@@ -235,7 +235,7 @@ function GetUserRole() {
             }
 
             text += "<li><a href='purchase.html'> Мой кабинет</a></li><li style='list-style: none; display: inline'><div class='arrow'></div></li>";
-            text += "<li><a href='index.html'> Выход</a></li></ul>";
+            text += "<li><a onclick='Logout()' href='login.html'> Выход</a></li></ul>";
 
             $("#menu-btns").html(text);
         },
@@ -385,4 +385,87 @@ function VerifyLot(id) {
             alert(data);
         }
     });
+}
+
+function Logout() {
+    sessionStorage.removeItem("tokenInfo");
+    $.ajax({
+        type: 'POST',
+        url: "http://localhost:49351/api/Account/Logout",
+        contentType: 'application/json; charset=utf-8',
+        success: function (data) {
+        },
+        fail: function (data) {
+        }
+    });
+}
+
+function Authorize() {
+    var text = "<ul>";
+    if (sessionStorage.getItem("tokenInfo")) {
+
+        text += "<li><a href='purchase.html'> Мой кабинет</a></li><li style='list-style: none; display: inline'><div class='arrow'></div></li>";
+        text += "<li><a onclick='Logout()' href='index.html'> Выход</a></li></ul>";
+
+    }
+    else {
+        text += "<li><a href='login.html'> Войти</a></li><li style='list-style: none; display: inline'><div class='arrow'></div></li>";
+        text += "<li><a href='register.html'> Регистрация</a></li></ul>";
+    }
+    $("#menu-btns-main").html(text);
+}
+
+function showPass() {
+    var type = $('.pass').attr('type') == "text" ? "password" : 'text';
+    $('.pass').prop('type', type);
+}
+
+function passCheck() {
+    $.getJSON('check_account.html', { pass: $('#pass').val(), login: $('#user_login').val(), email: $('#user_email').val() }, function (list) {
+        var valid = ""
+        $.each(list, function (i) {
+            valid = this
+        });
+        if (valid == 0) {
+            $('#pass').css('border-bottom', '3px solid red')
+            $('#pchv_error').show()
+        } else {
+            $('#pass').css('border-bottom', '1px solid #d0d0d0')
+            $('#pchv_error').hide()
+        }
+    });
+};
+
+function check_email() {
+    if (!$('#user_email').val().match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/g)) {
+        $('#user_email').css('border-bottom', '3px solid red')
+        $('#ech_error').show()
+        return false;
+    } else {
+        $('#user_email').css('border-bottom', '1px solid #d0d0d0')
+        $('#ech_error').hide()
+        return true;
+    }
+}
+
+function check_pass() {
+    if (!$('#pass').val().match(/^(?=.*\d)(?=.*[a-zA-Z]).{6,32}$/g)) {
+        $('#pass').css('border-bottom', '3px solid red')
+        $('#pch_error').show()
+    } else {
+        $('#pass').css('border-bottom', '1px solid #d0d0d0')
+        $('#pch_error').hide()
+        passCheck()
+    }
+}
+
+function check_pass2() {
+    if ($('#pass2').val() != $('#pass').val()) {
+        $('#pass2').css('border-bottom', '3px solid red')
+        $('#ppch_error').show()
+    } else {
+        $('#pass2').css('border-bottom', '1px solid #d0d0d0')
+        $('#ppch_error').hide()
+        passCheck()
+    }
 }

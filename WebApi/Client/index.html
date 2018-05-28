@@ -15,18 +15,7 @@
 <body>
     <div class="top_nav">
         <div class="container">
-            <div class="menu fullsize">
-                <ul>
-                    <li>
-                        <a href="login.html">Войти</a>
-                    </li>
-                    <li style="list-style: none; display: inline">
-                        <div class="arrow"></div>
-                    </li>
-                    <li>
-                        <a href="register.html">Регистрация</a>
-                    </li>
-                </ul>
+            <div id="menu-btns-main" class="menu fullsize">
             </div>
         </div>
     </div>
@@ -177,26 +166,13 @@
             </div>
             <div class="rsearch">
                 <div id="description" style="border-radius:4px;">
-                    <div class="search_lot" style="background: transparent url('images/DDR2.jpg'); background-repeat:no-repeat">
-                        <div class="search_lot_title" style="">
-                            <a href="lot.html" title="DDR2 2GB 800 MHz (PC2-6400) разные производители">DDR2 2GB 800 MHz (PC2-6400) разные производители</a>
-                        </div>
-                        <div class="search_lot_timetoend">
-                            <span><strong></strong><span class="toend">До окончания:</span> <strong>4 дн.</strong></span>
-                        </div>
-                        <div class="search_lot_price">
-                            <b>155.00</b> грн.
-                        </div>
-                        <div class="search_lot_buynow">
-                            купить сейчас
-                        </div>
-                    </div>
                 </div>
             </div>
             <script type="text/javascript">
                 $(document).ready(function () {
+                    Authorize(),
                     GetMainLots(),
-                        GetMainCats()
+                    GetMainCats()
                 });
             </script>
         </div>
