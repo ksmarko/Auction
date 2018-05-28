@@ -73,8 +73,8 @@ namespace BLL.Services
         {
             var appUser = await DatabaseIdentity.UserManager.FindAsync(username, password);
 
-            //if (appUser == null)
-            //throw new AuthException("invalid_grant", "The user name or password is incorrect.");
+            if (appUser == null)
+                throw new UserNotFoundException("The user name or password is incorrect.");
 
             ClaimsIdentity oAuthIdentity = await DatabaseIdentity.UserManager.CreateIdentityAsync(appUser, OAuthDefaults.AuthenticationType);
             ClaimsIdentity cookiesIdentity = await DatabaseIdentity.UserManager.CreateIdentityAsync(appUser, CookieAuthenticationDefaults.AuthenticationType);
