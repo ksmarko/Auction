@@ -121,6 +121,16 @@ function AddLotContent(text, id, name, price) {
     return text;
 }
 
+function AddTradeContent(text, id, name, price, days) {
+    text += "<div class='search_lot' style='background: transparent url(" + "img/nophoto.png" + "); background-repeat: no-repeat; margin-left: 30px'>" +
+        "<div class='search_lot_title' style='' onclick='GetLot(" + id + ")'><a href='#' title=" + name + ">" + name + "<\/a><\/div>" +
+        "<div class='search_lot_timetoend'><span><strong><\/strong><span class='toend'>До окончания: <\/span><strong>" + days + " дн.<\/strong><\/span><\/div>" +
+        "<div class='search_lot_price'><b>" + price + "<\/b> грн.<\/div>" +
+        "<\/div ><br/><hr><br/>";
+
+    return text;
+}
+
 function RemoveLot(id) {
     var tokenKey = "tokenInfo";
 
@@ -142,7 +152,7 @@ function RemoveLot(id) {
 }
 
 function GetMainLots() {
-    $.getJSON("http://localhost:49351/api/lots")
+    $.getJSON("http://localhost:49351/api/trades")
         .done(function (data) {
             var text = "";
             if ($(data).length <= 0) {
@@ -155,7 +165,7 @@ function GetMainLots() {
                         return;
                     }
                     counter++;
-                    text = AddLotContent(text, $(item)[0].Id, $(item)[0].Name, $(item)[0].Price);
+                    text = AddTradeContent(text, $(item)[0].Lot.Id, $(item)[0].Lot.Name, $(item)[0].Lot.Price, $(item)[0].DaysLeft);
                 });
             }
             $("#description").html(text);
